@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PusulaPro & NavigoPro — Kariyer Değerlendirme</title>
+<style>
+:root {
+  --navy: #04162E;
+  --gold: #F6B45F;
+  --gold-light: #FDE9C4;
+  --white: #FAFAF8;
+  --grey: #8A8A8A;
+  --light: #F2F0EB;
+  --green: #2E7D32;
+  --red: #C62828;
+  --card-bg: #FFFFFF;
+  --shadow: 0 4px 24px rgba(4,22,46,0.10);
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
+background: var(–light);
+color: var(–navy);
+min-height: 100vh;
+}
+
+/* ── LANGUAGE SCREEN ── */
+#lang-screen {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background: var(–navy);
+padding: 24px;
+position: relative;
+overflow: hidden;
+}
+#lang-screen::before {
+content: ‘’;
+position: absolute;
+width: 600px; height: 600px;
+border-radius: 50%;
+background: radial-gradient(circle, rgba(246,180,95,0.12) 0%, transparent 70%);
+top: -100px; right: -100px;
+pointer-events: none;
+}
+.lang-logo {
+font-family: ‘Playfair Display’, serif;
+font-size: 2.2rem;
+font-weight: 900;
+color: var(–white);
+letter-spacing: -1px;
+margin-bottom: 8px;
+}
+.lang-logo span { color: var(–gold); }
+.lang-subtitle {
+font-size: 0.85rem;
+color: rgba(255,255,255,0.5);
+margin-bottom: 48px;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.lang-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.6rem;
+color: var(–white);
+margin-bottom: 8px;
+text-align: center;
+}
+.lang-desc {
+font-size: 0.9rem;
+color: rgba(255,255,255,0.6);
+margin-bottom: 40px;
+text-align: center;
+}
+.lang-buttons {
+display: flex;
+gap: 16px;
+flex-wrap: wrap;
+justify-content: center;
+margin-bottom: 48px;
+}
+.lang-btn {
+background: transparent;
+border: 1.5px solid rgba(246,180,95,0.4);
+color: var(–white);
+padding: 16px 32px;
+border-radius: 4px;
+cursor: pointer;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 1rem;
+font-weight: 500;
+transition: all 0.2s;
+min-width: 140px;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 4px;
+}
+.lang-btn:hover {
+background: var(–gold);
+border-color: var(–gold);
+color: var(–navy);
+transform: translateY(-2px);
+}
+.lang-btn .flag { font-size: 1.5rem; }
+.lang-btn .lname { font-size: 0.8rem; opacity: 0.7; }
+.lang-copyright {
+font-size: 0.72rem;
+color: rgba(255,255,255,0.3);
+text-align: center;
+line-height: 1.6;
+}
+
+/* ── INTRO SCREEN ── */
+#intro-screen {
+min-height: 100vh;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 32px 24px;
+background: var(–navy);
+}
+.intro-card {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(246,180,95,0.2);
+border-radius: 8px;
+padding: 40px;
+max-width: 600px;
+width: 100%;
+text-align: center;
+}
+.intro-badge {
+display: inline-block;
+background: var(–gold);
+color: var(–navy);
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+padding: 4px 12px;
+border-radius: 2px;
+margin-bottom: 20px;
+}
+.intro-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 2rem;
+color: var(–white);
+margin-bottom: 16px;
+line-height: 1.2;
+}
+.intro-text {
+font-size: 0.9rem;
+color: rgba(255,255,255,0.65);
+line-height: 1.7;
+margin-bottom: 28px;
+}
+.intro-stats {
+display: flex;
+justify-content: center;
+gap: 32px;
+margin-bottom: 32px;
+}
+.intro-stat { text-align: center; }
+.intro-stat .num {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.8rem;
+color: var(–gold);
+display: block;
+}
+.intro-stat .lbl {
+font-size: 0.75rem;
+color: rgba(255,255,255,0.4);
+}
+.start-btn {
+background: var(–gold);
+color: var(–navy);
+border: none;
+padding: 16px 40px;
+border-radius: 4px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 1rem;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.2s;
+letter-spacing: 0.5px;
+}
+.start-btn:hover {
+background: #e8a04a;
+transform: translateY(-1px);
+box-shadow: 0 8px 24px rgba(246,180,95,0.3);
+}
+
+/* ── QUIZ SCREEN ── */
+#quiz-screen {
+min-height: 100vh;
+padding: 0;
+display: flex;
+flex-direction: column;
+}
+.quiz-header {
+background: var(–navy);
+padding: 16px 24px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+.quiz-logo-sm {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.1rem;
+font-weight: 700;
+color: var(–white);
+}
+.quiz-logo-sm span { color: var(–gold); }
+.quiz-progress-info {
+font-size: 0.8rem;
+color: rgba(255,255,255,0.5);
+}
+.progress-bar-wrap {
+background: rgba(255,255,255,0.1);
+height: 3px;
+width: 100%;
+}
+.progress-bar-fill {
+height: 100%;
+background: var(–gold);
+transition: width 0.4s ease;
+}
+
+.quiz-body {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 40px 24px;
+max-width: 680px;
+margin: 0 auto;
+width: 100%;
+}
+
+.section-badge {
+display: inline-block;
+background: var(–gold-light);
+color: var(–navy);
+font-size: 0.7rem;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+padding: 4px 12px;
+border-radius: 2px;
+margin-bottom: 16px;
+}
+
+.question-num {
+font-size: 0.8rem;
+color: var(–grey);
+margin-bottom: 8px;
+}
+
+.question-text {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.3rem;
+color: var(–navy);
+line-height: 1.5;
+margin-bottom: 36px;
+text-align: center;
+min-height: 80px;
+}
+
+.scale-wrap {
+width: 100%;
+margin-bottom: 40px;
+}
+.scale-labels {
+display: flex;
+justify-content: space-between;
+margin-bottom: 12px;
+}
+.scale-lbl {
+font-size: 0.72rem;
+color: var(–grey);
+max-width: 100px;
+text-align: center;
+line-height: 1.3;
+}
+.scale-buttons {
+display: flex;
+gap: 10px;
+justify-content: center;
+}
+.scale-btn {
+width: 52px;
+height: 52px;
+border-radius: 50%;
+border: 2px solid #DDD;
+background: #FFFFFF;
+font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
+font-size: 1rem;
+font-weight: 700;
+color: #555555;
+cursor: pointer;
+transition: all 0.15s;
+display: flex;
+align-items: center;
+justify-content: center;
+-webkit-appearance: none;
+appearance: none;
+outline: none;
+text-decoration: none;
+}
+.scale-btn:hover {
+border-color: var(–gold);
+color: var(–navy);
+transform: scale(1.1);
+}
+.scale-btn.selected {
+background: var(–navy);
+border-color: var(–navy);
+color: var(–white);
+transform: scale(1.1);
+}
+.scale-btn[data-v=“5”].selected { background: var(–green); border-color: var(–green); }
+.scale-btn[data-v=“4”].selected { background: #558B2F; border-color: #558B2F; }
+.scale-btn[data-v=“3”].selected { background: var(–grey); border-color: var(–grey); }
+.scale-btn[data-v=“2”].selected { background: #E65100; border-color: #E65100; }
+.scale-btn[data-v=“1”].selected { background: var(–red); border-color: var(–red); }
+
+.quiz-nav {
+display: flex;
+gap: 12px;
+width: 100%;
+justify-content: center;
+}
+.nav-btn {
+padding: 12px 28px;
+border-radius: 4px;
+font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
+font-size: 0.9rem;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.15s;
+border: none;
+-webkit-appearance: none;
+appearance: none;
+}
+.nav-back {
+background: transparent;
+border: 1.5px solid #DDD;
+color: var(–grey);
+}
+.nav-back:hover { border-color: var(–navy); color: var(–navy); }
+.nav-next {
+background: var(–navy);
+color: var(–white);
+min-width: 120px;
+}
+.nav-next:hover { background: #0a2548; }
+.nav-next:disabled { background: #CCC; cursor: not-allowed; }
+
+/* ── RESULT SCREEN ── */
+#result-screen {
+min-height: 100vh;
+background: var(–light);
+padding: 0 0 60px;
+}
+.result-header {
+background: var(–navy);
+padding: 40px 24px;
+text-align: center;
+}
+.result-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 2rem;
+color: var(–white);
+margin-bottom: 8px;
+}
+.result-subtitle {
+font-size: 0.9rem;
+color: rgba(255,255,255,0.5);
+}
+.result-body {
+max-width: 700px;
+margin: 0 auto;
+padding: 32px 24px;
+}
+
+.result-card {
+background: var(–card-bg);
+border-radius: 8px;
+padding: 28px;
+margin-bottom: 20px;
+box-shadow: var(–shadow);
+}
+.result-card-title {
+font-size: 0.72rem;
+font-weight: 600;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(–gold);
+margin-bottom: 16px;
+}
+
+/* Radar chart */
+.radar-wrap {
+display: flex;
+justify-content: center;
+margin-bottom: 20px;
+}
+canvas#radarChart {
+max-width: 280px;
+max-height: 280px;
+}
+
+/* Score bars */
+.score-bars { display: flex; flex-direction: column; gap: 14px; }
+.score-row {}
+.score-label-row {
+display: flex;
+justify-content: space-between;
+margin-bottom: 6px;
+}
+.score-label { font-size: 0.85rem; font-weight: 600; color: var(–navy); }
+.score-val { font-size: 0.85rem; color: var(–grey); }
+.score-bar-bg {
+background: var(–light);
+border-radius: 2px;
+height: 8px;
+overflow: hidden;
+}
+.score-bar-fill {
+height: 100%;
+border-radius: 2px;
+background: var(–gold);
+transition: width 1s ease;
+}
+
+.profile-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.6rem;
+color: var(–navy);
+margin-bottom: 8px;
+}
+.profile-desc {
+font-size: 0.9rem;
+color: #444;
+line-height: 1.7;
+}
+
+.careers-list {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+.career-item {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 12px 16px;
+background: var(–light);
+border-radius: 4px;
+border-left: 3px solid var(–gold);
+}
+.career-icon { font-size: 1.2rem; }
+.career-name { font-size: 0.9rem; font-weight: 600; color: var(–navy); }
+.career-reason { font-size: 0.78rem; color: var(–grey); }
+
+.strengths-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+}
+.strength-box {
+padding: 14px;
+border-radius: 4px;
+background: var(–light);
+}
+.strength-box.green { border-left: 3px solid var(–green); }
+.strength-box.amber { border-left: 3px solid var(–gold); }
+.strength-tag {
+font-size: 0.68rem;
+font-weight: 600;
+letter-spacing: 1.5px;
+text-transform: uppercase;
+color: var(–grey);
+margin-bottom: 6px;
+}
+.strength-text { font-size: 0.85rem; color: var(–navy); line-height: 1.5; }
+
+.feedback-card {
+background: var(–navy);
+border-radius: 8px;
+padding: 28px;
+text-align: center;
+margin-bottom: 20px;
+}
+.feedback-title {
+font-family: ‘Playfair Display’, serif;
+font-size: 1.2rem;
+color: var(–white);
+margin-bottom: 8px;
+}
+.feedback-text {
+font-size: 0.85rem;
+color: rgba(255,255,255,0.6);
+margin-bottom: 20px;
+line-height: 1.6;
+}
+.feedback-btn {
+background: var(–gold);
+color: var(–navy);
+border: none;
+padding: 14px 32px;
+border-radius: 4px;
+font-family: ‘DM Sans’, sans-serif;
+font-size: 0.9rem;
+font-weight: 600;
+cursor: pointer;
+text-decoration: none;
+display: inline-block;
+transition: all 0.2s;
+}
+.feedback-btn:hover { background: #e8a04a; }
+
+.copyright-bar {
+text-align: center;
+padding: 20px;
+font-size: 0.72rem;
+color: var(–grey);
+line-height: 1.6;
+border-top: 1px solid #E0E0E0;
+margin-top: 20px;
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+@media (max-width: 480px) {
+.scale-buttons { gap: 6px; }
+.scale-btn { width: 44px; height: 44px; font-size: 0.9rem; }
+.strengths-grid { grid-template-columns: 1fr; }
+.intro-stats { gap: 20px; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- ══ LANGUAGE SELECTION ══ -->
+
+<div id="lang-screen">
+  <div class="lang-logo">Pusula<span>Pro</span> & Navigo<span>Pro</span></div>
+  <div class="lang-subtitle">PACDI Digital Navigation Ecosystem</div>
+  <div class="lang-title" id="ls-title">Dilinizi Seçin / Wählen Sie Ihre Sprache / Select Your Language</div>
+  <div class="lang-desc" id="ls-desc">100 soruluk kariyer değerlendirmesi · 100 Fragen · 100 Questions</div>
+  <div class="lang-buttons">
+    <button class="lang-btn" onclick="selectLang('tr')">
+      <span class="flag">🇹🇷</span>
+      <strong>Türkçe</strong>
+      <span class="lname">PusulaPro</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('de')">
+      <span class="flag">🇩🇪</span>
+      <strong>Deutsch</strong>
+      <span class="lname">NavigoPro</span>
+    </button>
+    <button class="lang-btn" onclick="selectLang('en')">
+      <span class="flag">🇬🇧</span>
+      <strong>English</strong>
+      <span class="lname">NavigoPro</span>
+    </button>
+  </div>
+  <div class="lang-copyright">
+    © 2026 PACDI — EasyGov.io | PusulaPro &amp; NavigoPro<br>
+    Bu değerlendirme aracı PACDI'ye aittir. İzinsiz kopyalanamaz, dağıtılamaz.<br>
+    TÜRKPATENT tescil başvurusu mevcut. · All rights reserved.
+  </div>
+</div>
+
+<!-- ══ INTRO SCREEN ══ -->
+
+<div id="intro-screen" class="hidden">
+  <div class="intro-card">
+    <div class="intro-badge" id="intro-badge">PusulaPro</div>
+    <div class="intro-title" id="intro-title">Kariyer Değerlendirmesi</div>
+    <div class="intro-text" id="intro-text">
+      Bu envanter sana özgü kariyer profilini ortaya çıkarmak için tasarlandı.
+      Doğru ya da yanlış cevap yoktur — içinden geleni işaretle.
+    </div>
+    <div class="intro-stats">
+      <div class="intro-stat">
+        <span class="num">100</span>
+        <span class="lbl" id="intro-q-lbl">Soru</span>
+      </div>
+      <div class="intro-stat">
+        <span class="num">4</span>
+        <span class="lbl" id="intro-cat-lbl">Kategori</span>
+      </div>
+      <div class="intro-stat">
+        <span class="num">~15</span>
+        <span class="lbl" id="intro-min-lbl">Dakika</span>
+      </div>
+    </div>
+    <button class="start-btn" onclick="startQuiz()" id="start-btn-txt">Başla →</button>
+  </div>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+
+<div id="quiz-screen" class="hidden">
+  <div class="quiz-header">
+    <div class="quiz-logo-sm" id="quiz-logo">Pusula<span>Pro</span></div>
+    <div class="quiz-progress-info" id="progress-info">1 / 100</div>
+  </div>
+  <div class="progress-bar-wrap">
+    <div class="progress-bar-fill" id="progress-fill" style="width:1%"></div>
+  </div>
+  <div class="quiz-body">
+    <div class="section-badge" id="section-badge">A — Karakter ve Onur</div>
+    <div class="question-num" id="q-num">Soru 1</div>
+    <div class="question-text" id="q-text">Soru yükleniyor...</div>
+    <div class="scale-wrap">
+      <div class="scale-labels">
+        <div class="scale-lbl" id="lbl-disagree">Hiç katılmıyorum</div>
+        <div class="scale-lbl" id="lbl-agree">Tamamen katılıyorum</div>
+      </div>
+      <div class="scale-buttons">
+        <button class="scale-btn" data-v="1" onclick="selectAnswer(1)">1</button>
+        <button class="scale-btn" data-v="2" onclick="selectAnswer(2)">2</button>
+        <button class="scale-btn" data-v="3" onclick="selectAnswer(3)">3</button>
+        <button class="scale-btn" data-v="4" onclick="selectAnswer(4)">4</button>
+        <button class="scale-btn" data-v="5" onclick="selectAnswer(5)">5</button>
+      </div>
+    </div>
+    <div class="quiz-nav">
+      <button class="nav-btn nav-back" onclick="prevQuestion()" id="btn-back">← Geri</button>
+      <button class="nav-btn nav-next" onclick="nextQuestion()" id="btn-next" disabled>İleri →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+
+<div id="result-screen" class="hidden">
+  <div class="result-header">
+    <div class="result-title" id="result-title">Kariyer Profil Raporun</div>
+    <div class="result-subtitle" id="result-subtitle">D-V-F-A & RIASEC Analizi</div>
+  </div>
+  <div class="result-body">
+
+```
+<!-- Profile -->
+<div class="result-card">
+  <div class="result-card-title" id="rc-profile-lbl">KARİYER PROFİLİN</div>
+  <div class="profile-title" id="profile-type">Vizyoner Lider</div>
+  <div class="profile-desc" id="profile-desc">Açıklama yükleniyor...</div>
+</div>
+
+<!-- Scores -->
+<div class="result-card">
+  <div class="result-card-title" id="rc-scores-lbl">D-V-F-A SKORLARI</div>
+  <div class="score-bars" id="score-bars"></div>
+</div>
+
+<!-- Radar -->
+<div class="result-card">
+  <div class="result-card-title" id="rc-radar-lbl">KATEGORİ ANALİZİ</div>
+  <div class="radar-wrap">
+    <canvas id="radarChart" width="280" height="280"></canvas>
+  </div>
+</div>
+
+<!-- Careers -->
+<div class="result-card">
+  <div class="result-card-title" id="rc-careers-lbl">ÖNERİLEN KARİYER ALANLARI</div>
+  <div class="careers-list" id="careers-list"></div>
+</div>
+
+<!-- Strengths -->
+<div class="result-card">
+  <div class="result-card-title" id="rc-strengths-lbl">GÜÇLÜ YÖN & GELİŞİM ALANI</div>
+  <div class="strengths-grid" id="strengths-grid"></div>
+</div>
+
+<!-- Feedback -->
+<div class="feedback-card">
+  <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
+  <div class="feedback-text" id="fb-text">
+    Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli.
+    Deneyiminizi birkaç kelimeyle paylaşır mısınız?
+  </div>
+  <a class="feedback-btn" id="fb-btn" href="mailto:info@pacdi.de?subject=PusulaPro%20Geri%20Bildirim">
+    Geri Bildirim Gönder ✉
+  </a>
+</div>
+
+<div class="copyright-bar">
+  © 2026 PACDI — EasyGov.io | PusulaPro &amp; NavigoPro<br>
+  Bu değerlendirme aracı PACDI'ye aittir. İzinsiz kopyalanamaz, dağıtılamaz.<br>
+  TÜRKPATENT tescil başvurusu mevcut. · pacdi.de · info@pacdi.de
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════════════════════
+const QUESTIONS = {
+tr: [
+  // A: Karakter ve Onur (1-25)
+  {s:'A',t:'Bir işin sonucunda büyük kazanç varsa bile etik değerlerinle çatışıyorsa vazgeçersin.'},
+  {s:'A',t:'Toplumda "onur" kavramı senin için profesyonel başarıdan önde gelir.'},
+  {s:'A',t:'Adaletsiz bir terfi süreci gördüğünde sessiz kalmak yerine hakkı savunursun.'},
+  {s:'A',t:'Çalışma hayatında maddi kazanç ne kadar cazip olursa olsun, kişisel değerlerinden ödün vermezsin.'},
+  {s:'A',t:'Bir ekipte zayıf karakterli birinin yükselmesi senin motivasyonunu ciddi etkiler.'},
+  {s:'A',t:'Yalan söyleyerek elde edilen bir başarı seni tatmin etmez.'},
+  {s:'A',t:'İş arkadaşına karşı dürüst olmak bazen zor olsa da bunu tercih edersin.'},
+  {s:'A',t:'Kendi hatanı kabul etmek, başkasını suçlamaktan daha doğal gelir sana.'},
+  {s:'A',t:'Güven duygusu, bir iş ilişkisinde maaştan daha belirleyicidir.'},
+  {s:'A',t:'Haksız bir eleştiriyle karşılaştığında sakin ve yapıcı bir tutum sergilersin.'},
+  {s:'A',t:'Başkasının hakkını korumak için kendi çıkarından vazgeçebilirsin.'},
+  {s:'A',t:'Bir yöneticinin yanlış kararını yüzüne söyleyebilirsin.'},
+  {s:'A',t:'Toplumsal baskı altında bile kendi değerlerinle çelişen kararlar almazsın.'},
+  {s:'A',t:'İş hayatında "herkes yapıyor" gerekçesi seni etik dışı davranışa yönlendirmez.'},
+  {s:'A',t:'Çalıştığın kurumun değerleri senin kişisel değerlerinle örtüşmek zorundadır.'},
+  {s:'A',t:'Bir müşteriyi ya da iş arkadaşını yanıltmak sana çok ağır gelir.'},
+  {s:'A',t:'Küçük de olsa bir haksızlığa uğradığında bunu dile getirirsin.'},
+  {s:'A',t:'Başarısızlığını kabul etmek seni güçsüz değil, güvenilir yapar.'},
+  {s:'A',t:'Bir karar alırken "bu doğru mu?" sorusunu "bu kazandırır mı?" sorusundan önce sorarsın.'},
+  {s:'A',t:'Ekipteki en sessiz kişinin fikrini de dinlemek senin için önemlidir.'},
+  {s:'A',t:'Şeffaflık, uzun vadede her zaman gizlilikten daha iyi sonuç verir.'},
+  {s:'A',t:'İş yerinde adalet olmadığında performansın doğrudan düşer.'},
+  {s:'A',t:'Kişisel çıkarını toplumsal faydanın önüne koymak sana yabancıdır.'},
+  {s:'A',t:'Bir hatayı örtbas etmek yerine açıkça paylaşmak tercihine uyar.'},
+  {s:'A',t:'Onurlu bir yaşam için daha az kazanmayı kabul edebilirsin.'},
+  // B: Bilişsel (26-50)
+  {s:'B',t:'Karmaşık bir problemi çözerken önce parçalara ayırırsın.'},
+  {s:'B',t:'Veri ve analiz sonuçları sezgilerinden daha kıymetlidir.'},
+  {s:'B',t:'Bir kriz anında hızlı ve isabetli karar verebilirsin.'},
+  {s:'B',t:'Sayısal verilerle çalışmak sana yük değil, bulmaca gibi gelir.'},
+  {s:'B',t:'Teknolojik değişimlere hızla uyum sağlarsın.'},
+  {s:'B',t:'Bir konuyu araştırırken birden fazla kaynağa başvurmak alışkanlığındır.'},
+  {s:'B',t:'Uzun vadeli sonuçları kısa vadeli kazançların önünde tutarsın.'},
+  {s:'B',t:'Bir plan yaparken olası riskleri önceden hesaplamak sana doğal gelir.'},
+  {s:'B',t:'Eleştirel düşünme becerin günlük hayatında da aktif olarak çalışır.'},
+  {s:'B',t:'Yeni bir aracı öğrenmek için rehber beklemeden kendi başına deneme yaparsın.'},
+  {s:'B',t:'Bir problemi çözerken süreci adım adım belgelemek için çaba harcarsın.'},
+  {s:'B',t:'Farklı disiplinlerden bilgileri bir araya getirerek yeni çözümler üretebilirsin.'},
+  {s:'B',t:'Belirsizlik içeren durumlarda mantıklı tahminler yaparak ilerlersin.'},
+  {s:'B',t:'Bir metni ya da raporu hızlıca okuyup ana fikri çıkarabilirsin.'},
+  {s:'B',t:'Hata yaptığında nedenini analiz etmek seni rahatsız etmez, aksine meraklandırır.'},
+  {s:'B',t:'Zaman baskısı altında bile sistemli düşünme alışkanlığını korursun.'},
+  {s:'B',t:'Karmaşık bir konuyu başkasına sade bir dille anlatabilirsin.'},
+  {s:'B',t:'İki seçenek arasında karar verirken avantaj-dezavantaj listesi yapmak işine yarar.'},
+  {s:'B',t:'Kalıpların dışında düşünmek sana zor değil, keyifli gelir.'},
+  {s:'B',t:'Bir konuyu öğrenmek için çoklu kaynak kullanmak senin için standart bir pratiktir.'},
+  {s:'B',t:'Geri bildirim aldığında bunu kişisel saldırı olarak değil, gelişim fırsatı olarak görürsün.'},
+  {s:'B',t:'Büyük hedefleri küçük adımlara bölmek senin güçlü yönlerindendir.'},
+  {s:'B',t:'Yeni bir yazılım ya da dijital araç öğrenmek seni heyecanlandırır.'},
+  {s:'B',t:'Bir konuda uzmanlaşmak için düzenli pratik yapma disiplinine sahipsin.'},
+  {s:'B',t:'Öğrendiğin bilgiyi uygulamaya koymadan önce zihinsel olarak test edersin.'},
+  // C: Mesleki Tutku (51-75)
+  {s:'C',t:'Hangi işi yaparken zamanın nasıl geçtiğini tamamen unutuyorsun — o işi yapıyorsun.'},
+  {s:'C',t:'Bir projeyi bitirdiğinde aldığın takdirden çok yarattığın fayda seni tatmin eder.'},
+  {s:'C',t:'Elindeki imkânlar sınırsız olsa yarın sabah yapmak istediğin iş aklına net gelir.'},
+  {s:'C',t:'Tek başına çalışmak seni bir ekipte çalışmaktan daha verimli kılar.'},
+  {s:'C',t:'Rutin işler yerine her gün farklı bir şeyler öğrendiğin işleri tercih edersin.'},
+  {s:'C',t:'İnsanlarla doğrudan iletişim kurduğun meslekler sana daha anlamlı gelir.'},
+  {s:'C',t:'Ürettiğin bir şeyin somut bir fayda yaratması seni motive eder.'},
+  {s:'C',t:'Bir alanda uzman olmak, her şeyi biraz bilmekten daha çekici gelir.'},
+  {s:'C',t:'Sanatsal veya yaratıcı üretim süreçleri seni heyecanlandırır.'},
+  {s:'C',t:'Teknik problemleri çözmek sana tatmin verici gelir.'},
+  {s:'C',t:'İnsanları yönlendirmek ve ilham vermek sana doğal gelir.'},
+  {s:'C',t:'Araştırma yapmak ve yeni bilgi keşfetmek seni mesleki olarak tatmin eder.'},
+  {s:'C',t:'Planlama ve organizasyon işleri sana karmaşık değil, düzenleyici gelir.'},
+  {s:'C',t:'Başkalarının gelişimine katkı sağlamak seni mesleki olarak tatmin eder.'},
+  {s:'C',t:'Girişimcilik ve yeni bir şey kurma fikri seni heyecanlandırır.'},
+  {s:'C',t:'Doğa, çevre ya da sürdürülebilirlik odaklı işler seni çeker.'},
+  {s:'C',t:'Sağlık ve insan refahıyla ilgili alanlarda çalışmayı anlamlı bulursun.'},
+  {s:'C',t:'Teknoloji geliştirmek veya yazılım üretmek ilgi alanların arasındadır.'},
+  {s:'C',t:'Eğitim ve bilgi aktarımı odaklı işler sana anlam verir.'},
+  {s:'C',t:'Finansal sistemler, ekonomi ve para yönetimi ilgini çeker.'},
+  {s:'C',t:'Hukuk, adalet ve haklar alanında çalışmak seni motive eder.'},
+  {s:'C',t:'Kamu hizmeti ve sosyal politika geliştirmek ilgi duyduğun alanlar arasındadır.'},
+  {s:'C',t:'Tasarım, görsel iletişim veya mimari alanlar seni çeker.'},
+  {s:'C',t:'Liderlik pozisyonları sorumluluk değil, fırsat gibi hissettirır.'},
+  {s:'C',t:'Mesleki tatminin için yaptığın işin toplumdaki yansımasını görmen gerekir.'},
+  // D: Sosyal Adalet (76-100)
+  {s:'D',t:'Hak etmediğini düşündüğün bir ödül sana verilse rahatsızlık duyarsın.'},
+  {s:'D',t:'Toplumsal fayda sağlamayan ama çok kazandıran bir meslek sana uygun değildir.'},
+  {s:'D',t:'Liyakat, tecrübeden önce gelir bir işe alımda.'},
+  {s:'D',t:'Toplumun dezavantajlı kesimlerine yönelik projeler seni mesleki olarak heyecanlandırır.'},
+  {s:'D',t:'Vergi ve sosyal güvenlik sistemi adil işlediğinde topluma katkı olarak görürsün.'},
+  {s:'D',t:'Fırsat eşitsizliğini azaltmak için aktif çaba sarf etmek senin sorumluluk alanındadır.'},
+  {s:'D',t:'Bir kurumun sosyal sorumluluğu sadece kar hedefiyle çelişmemelidir.'},
+  {s:'D',t:'Çalıştığın sektörün topluma katkısı senin için iş seçiminde belirleyicidir.'},
+  {s:'D',t:'Gençlere mentorluk yapmak ya da rehberlik etmek seni tatmin eder.'},
+  {s:'D',t:'Kendi başarını paylaşılabilir bir modele dönüştürmek istersin.'},
+  {s:'D',t:'Eşit fırsat olmadan performans değerlendirmesinin anlamlı olmadığına inanırsın.'},
+  {s:'D',t:'Bir sistemin adaletsiz işlediğini gördüğünde değiştirmek için adım atarsın.'},
+  {s:'D',t:'Toplumsal dönüşüm için bireysel sorumluluk kolektif eylemden önce gelir.'},
+  {s:'D',t:'İklim değişikliği ve çevre sorunları mesleki kararlarını etkiler.'},
+  {s:'D',t:'Engelli bireylerin iş hayatına entegrasyonu senin için öncelikli bir konudur.'},
+  {s:'D',t:'Göç ve entegrasyon süreçleri seni hem kişisel hem mesleki olarak ilgilendirir.'},
+  {s:'D',t:'Dijital uçurum (teknolojiye erişim eşitsizliği) çözülmesi gereken bir sorun olarak görürsün.'},
+  {s:'D',t:'Sağlık hizmetlerine erişimin bir hak olduğuna dair net görüşün var.'},
+  {s:'D',t:'Eğitim eşitsizliği senin kariyer vizyonunun bir parçasıdır.'},
+  {s:'D',t:'Yerel toplulukların güçlendirilmesi global sistemlerden daha önce gelir.'},
+  {s:'D',t:'Bir şirketin çalışan refahı hissedar getirisinden önce gelmeli.'},
+  {s:'D',t:'Kültürel miras ve kimlik koruma senin için mesleki bir değerdir.'},
+  {s:'D',t:'Sosyal girişimcilik geleneksel girişimcilikten daha anlamlı gelir sana.'},
+  {s:'D',t:'Gelir dağılımındaki adaletsizlik seni hem kişisel hem mesleki olarak rahatsız eder.'},
+  {s:'D',t:'Ölçülebilir toplumsal fayda yaratmak kariyerinin temel motivasyon kaynağıdır.'},
+],
+de: [
+  // A: Globale Anpassung & Werte (1-25)
+  {s:'A',t:'In einem multikulturellen Umfeld siehst du kulturelle Unterschiede als Bereicherung, nicht als Hindernis.'},
+  {s:'A',t:'Das Verständnis von Disziplin im europäischen Arbeitsmarkt passt zu deinem Arbeitsstil.'},
+  {s:'A',t:'Einen beruflichen Fehler zuzugeben und zu melden fällt dir nicht schwer.'},
+  {s:'A',t:'In Entscheidungsprozessen bevorzugst du kollektives Denken gegenüber Hierarchie.'},
+  {s:'A',t:'Die Arbeit mit Menschen aus verschiedenen Kulturen motiviert dich.'},
+  {s:'A',t:'Dich an die Arbeitskultur eines neuen Landes anzupassen fällt dir nicht schwer.'},
+  {s:'A',t:'Eine Sprachbarriere siehst du als überwindbare Herausforderung im Berufsleben.'},
+  {s:'A',t:'Die Einhaltung internationaler Arbeitsstandards hat für dich hohe Priorität.'},
+  {s:'A',t:'Deine eigene Kultur zu bewahren und gleichzeitig andere zu respektieren fühlt sich für dich natürlich an.'},
+  {s:'A',t:'Eine Karriere in einem fremden Land zu beginnen begeistert dich.'},
+  {s:'A',t:'Die Kommunikation in einem multikulturellen Team gehört zu deinen Stärken.'},
+  {s:'A',t:'Transparenz und Rechenschaftspflicht sind grundlegende Prinzipien deines Berufslebens.'},
+  {s:'A',t:'Flexible Arbeitszeiten und Regelungen helfen dir, dich besser anzupassen.'},
+  {s:'A',t:'Du glaubst, dass du die nötige Selbstdisziplin für eine internationale Karriere besitzt.'},
+  {s:'A',t:'Kulturelle Intelligenz zu entwickeln ist ein bewusstes Ziel von dir.'},
+  {s:'A',t:'Du engagierst dich aktiv für Geschlechtergleichstellung im Berufsleben.'},
+  {s:'A',t:'Professionelle Beziehungen mit Kollegen verschiedener Religionen und Überzeugungen fühlen sich für dich natürlich an.'},
+  {s:'A',t:'Du bist sensibel gegenüber den Schwierigkeiten von Minderheiten im Arbeitsleben.'},
+  {s:'A',t:'Globale Normen zu verfolgen und zu übernehmen ist für dich keine Option, sondern eine Notwendigkeit.'},
+  {s:'A',t:'Internationale Geschäftskontakte zu knüpfen begeistert dich.'},
+  {s:'A',t:'Du verfolgst aktiv Berufsmöglichkeiten in verschiedenen Regionen der Welt.'},
+  {s:'A',t:'Wenn in einem Meeting unterschiedliche Meinungen aufeinanderprallen, übernimmst du die Vermittlerrolle.'},
+  {s:'A',t:'Sich kultureller Vorurteile bewusst zu sein macht dich zu einem besseren Profi.'},
+  {s:'A',t:'Im Ausland zu leben oder zu arbeiten ist Teil deiner persönlichen Entwicklung.'},
+  {s:'A',t:'Eine internationale Vision steht im Mittelpunkt deiner Karriereziele.'},
+  // B: Leistung & Effizienz (26-50)
+  {s:'B',t:'Work-Life-Balance ist für dich kein Luxus, sondern ein grundlegendes Recht.'},
+  {s:'B',t:'Dich an flexible Arbeitszeiten anzupassen ist für dich kein Problem.'},
+  {s:'B',t:'Du bist selbstsicher in der professionellen Kommunikation auf Englisch oder Deutsch.'},
+  {s:'B',t:'Du nutzt digitale Tools und KI aktiv in deiner täglichen Arbeit.'},
+  {s:'B',t:'Du kannst deine Produktivität auch in einer Remote-Arbeitsumgebung aufrechterhalten.'},
+  {s:'B',t:'Zielorientiertes Arbeiten fühlt sich für dich natürlicher an als prozessorientiertes.'},
+  {s:'B',t:'Ein Projekt pünktlich und im Budget abzuliefern hat für dich höchste Priorität.'},
+  {s:'B',t:'Feedback zu erhalten stört dich nicht, sondern motiviert dich.'},
+  {s:'B',t:'Du evaluierst deine eigene Leistung regelmäßig.'},
+  {s:'B',t:'Sich auf eine Aufgabe zu konzentrieren ist für dich effektiver als Multitasking.'},
+  {s:'B',t:'Proaktiv zu handeln liefert für dich immer bessere Ergebnisse als abzuwarten.'},
+  {s:'B',t:'Du bist gut darin, dein eigenes Zeitmanagement zu planen und umzusetzen.'},
+  {s:'B',t:'Qualität steht bei der Abgabe einer Aufgabe ganz oben auf deiner Prioritätenliste.'},
+  {s:'B',t:'Du bist immer auf der Suche nach kontinuierlicher Verbesserung in Arbeitsprozessen.'},
+  {s:'B',t:'Du schreckt nicht davor zurück, digitale Projektmanagement-Tools zu nutzen.'},
+  {s:'B',t:'Auch unter Stress kannst du klar und konstruktiv kommunizieren.'},
+  {s:'B',t:'Du bist in der Lage, Konflikte im Team konstruktiv zu lösen.'},
+  {s:'B',t:'Du bist bereit, persönliche Ressourcen in deine berufliche Weiterentwicklung zu investieren.'},
+  {s:'B',t:'Du gibst dir Mühe, nicht unter die von dir gesetzten Standards zu fallen.'},
+  {s:'B',t:'Neue Verantwortlichkeiten zu übernehmen überfordert dich nicht, sondern stärkt dich.'},
+  {s:'B',t:'Du hast die Fähigkeit, ein Meeting effektiv zu leiten.'},
+  {s:'B',t:'In der schriftlichen Kommunikation klar und prägnant zu sein ist für dich ein professioneller Standard.'},
+  {s:'B',t:'Unter Druck bist du produktiver als in ruhigen Phasen.'},
+  {s:'B',t:'Eine persönliche Marke im Berufsleben aufzubauen ist ein bewusstes Ziel von dir.'},
+  {s:'B',t:'Kollegen zu mentoren oder zu unterstützen erfüllt dich.'},
+  // C: Innovation & Zukunftstrends (51-75)
+  {s:'C',t:'Du bist über die Berufe der Zukunft informiert (KI, grüne Energie usw.).'},
+  {s:'C',t:'Lebenslanges Lernen steht im Mittelpunkt deiner Karriereplanung.'},
+  {s:'C',t:'Du scheust dich nicht davor, in globalen Projekten mit Unsicherheit Risiken einzugehen.'},
+  {s:'C',t:'Die Integration von KI in das Berufsleben begeistert dich, nicht beunruhigt dich.'},
+  {s:'C',t:'Neue Technologien in Arbeitsprozesse einzubinden hat für dich Priorität.'},
+  {s:'C',t:'Das Startup-Ökosystem und die Startup-Kultur interessieren dich.'},
+  {s:'C',t:'Interdisziplinäres Arbeiten (technisch + sozial + kreativ) fühlt sich für dich natürlich an.'},
+  {s:'C',t:'Du bist dir bewusst, dass Automatisierung und Digitalisierung deine Branche transformieren werden.'},
+  {s:'C',t:'Du kannst für eine innovative Idee auch mit Bürokratie kämpfen.'},
+  {s:'C',t:'Grüne Wirtschaft und nachhaltige Geschäftsmodelle interessieren dich.'},
+  {s:'C',t:'Remote-Arbeit, Freelancing und die Gig Economy gehören zu deinen Karriereoptionen.'},
+  {s:'C',t:'Datenanalyse und digitale Kompetenz gehören zu deinen Stärken.'},
+  {s:'C',t:'Social Innovation (innovative Lösungen für gesellschaftliche Probleme) ist ein Bereich, der dich interessiert.'},
+  {s:'C',t:'Globale Trends zu verfolgen und in deine Arbeit einfließen zu lassen ist für dich eine Gewohnheit.'},
+  {s:'C',t:'Schnell einen Prototyp einer Idee zu erstellen und zu testen ist dein Ansatz.'},
+  {s:'C',t:'Aus Misserfolgen zu lernen stärkt dich in Innovationsprozessen.'},
+  {s:'C',t:'Prognosen über die Zukunft deiner Branche zu entwickeln interessiert dich.'},
+  {s:'C',t:'Du verfolgst Konzepte wie Blockchain, Metaverse oder Web3.'},
+  {s:'C',t:'Sich von verschiedenen Kulturen für Innovationen inspirieren zu lassen ist deine Methode.'},
+  {s:'C',t:'Lösungen zu entwickeln, die komplexe Systeme vereinfachen, erfüllt dich.'},
+  {s:'C',t:'In F&E- oder innovationsorientierten Bereichen zu arbeiten gehört zu deinen Karrierezielen.'},
+  {s:'C',t:'User-Centered Design (UX/UI) lässt sich in jedem Bereich der Arbeit anwenden.'},
+  {s:'C',t:'Alternativen zu bestehenden Systemen vorzuschlagen stört dich nicht, sondern motiviert dich.'},
+  {s:'C',t:'Du möchtest in digitalen Transformationsprojekten eine aktive Rolle übernehmen.'},
+  {s:'C',t:'Du investierst heute in die Entwicklung zukunftsorientierter Fähigkeiten.'},
+  // D: Sozialwohl & Ethik (76-100)
+  {s:'D',t:'Du siehst es als gesellschaftliche Verantwortung, einen Teil deines Einkommens in soziale Systeme einzuzahlen.'},
+  {s:'D',t:'Nachhaltigkeit und Umweltbewusstsein sind bei deiner Berufswahl entscheidend.'},
+  {s:'D',t:'Die ethischen Werte eines Unternehmens sind wichtiger als das angebotene Gehalt.'},
+  {s:'D',t:'Soziale Gerechtigkeit ist Teil deiner Karrieremotivation.'},
+  {s:'D',t:'Die Entwicklung von Richtlinien für benachteiligte Gruppen ist ein Bereich, der dich interessiert.'},
+  {s:'D',t:'Transparenz und Rechenschaftspflicht im Berufsleben sind eine ethische Notwendigkeit.'},
+  {s:'D',t:'CSR-Projekte (Corporate Social Responsibility) interessieren dich wirklich.'},
+  {s:'D',t:'Die Menschenrechtsbilanz des Unternehmens, für das du arbeitest, ist für dich ein entscheidender Faktor.'},
+  {s:'D',t:'Die Integration von Flüchtlingen und Migranten in das Berufsleben ist ein Bereich, der unterstützt werden sollte.'},
+  {s:'D',t:'Universeller Zugang zu Gesundheitsversorgung ist ein grundlegendes Menschenrecht.'},
+  {s:'D',t:'Digitale Ungleichheit zu reduzieren sollte globale Priorität haben.'},
+  {s:'D',t:'Diversity & Inclusion-Richtlinien sind umsetzbare Ziele am Arbeitsplatz.'},
+  {s:'D',t:'Geschlechtergerechtigkeit ist im Berufsleben nach wie vor ein ungelöstes Problem.'},
+  {s:'D',t:'Der Kampf gegen den Klimawandel ist eine Priorität, die auch individuelle Karrieren beeinflusst.'},
+  {s:'D',t:'Social Entrepreneurship ist eine starke Alternative zu traditionellen Geschäftsmodellen.'},
+  {s:'D',t:'Unternehmensweites Bewusstsein für Menschenhandel und moderne Sklaverei ist wichtig.'},
+  {s:'D',t:'Ungleicher Bildungszugang weltweit ist ein kritisches Problem, das gelöst werden muss.'},
+  {s:'D',t:'Armutsbekämpfungsprogramme können Karriereentscheidungen beeinflussen.'},
+  {s:'D',t:'Die Zusammenarbeit mit zivilgesellschaftlichen Organisationen schafft einen Mehrwert für die Karriere.'},
+  {s:'D',t:'Ethische Führung ist für dich ein untrennbarer Teil erfolgreicher Führung.'},
+  {s:'D',t:'Die Diversity-Politik eines Unternehmens beeinflusst deine Einstellungsentscheidung.'},
+  {s:'D',t:'Psychologische Sicherheit am Arbeitsplatz kommt vor Effizienz.'},
+  {s:'D',t:'Generationengerechtigkeit (Verantwortung gegenüber zukünftigen Generationen) ist Teil deiner beruflichen Vision.'},
+  {s:'D',t:'Auf globale Gesundheitskrisen vorbereitet zu sein ist eine unternehmerische Verantwortung.'},
+  {s:'D',t:'Ungerechtigkeit irgendwo auf der Welt bringt dich auch beruflich zum Handeln.'},
+],
+en: [
+  // A: Global Adaptability & Values (1-25)
+  {s:'A',t:'Working in a multicultural environment, you see cultural differences as an asset, not a barrier.'},
+  {s:'A',t:'The concept of professional discipline in the European job market fits your work style.'},
+  {s:'A',t:'Admitting and reporting a professional mistake is not difficult for you.'},
+  {s:'A',t:'In decision-making processes, you prefer collective reasoning over hierarchy.'},
+  {s:'A',t:'Working with people from different nationalities motivates you.'},
+  {s:'A',t:'Adapting to the work culture of a new country is not challenging for you.'},
+  {s:'A',t:'You see language barriers as surmountable challenges in professional life.'},
+  {s:'A',t:'Compliance with international work standards is a high priority for you.'},
+  {s:'A',t:'Preserving your own culture while respecting others feels natural to you.'},
+  {s:'A',t:'Starting a career in a foreign country excites you.'},
+  {s:'A',t:'Communication in a multicultural team is one of your strengths.'},
+  {s:'A',t:'Transparency and accountability are fundamental principles of your professional life.'},
+  {s:'A',t:'Flexible working hours and arrangements help you adapt better.'},
+  {s:'A',t:'You believe you have the self-discipline needed for an international career.'},
+  {s:'A',t:'Developing cultural intelligence is a conscious goal of yours.'},
+  {s:'A',t:'You actively engage in promoting gender equality in professional life.'},
+  {s:'A',t:'Building professional relationships with colleagues of different religions and beliefs feels natural to you.'},
+  {s:'A',t:'You are sensitive to the difficulties faced by minorities in the workplace.'},
+  {s:'A',t:'Following and adopting global norms is a necessity, not an option, for you.'},
+  {s:'A',t:'Building international business connections excites you.'},
+  {s:'A',t:'You actively follow job opportunities in different parts of the world.'},
+  {s:'A',t:'When different opinions clash in a meeting, you take on the mediator role.'},
+  {s:'A',t:'Being aware of cultural biases makes you a better professional.'},
+  {s:'A',t:'Living or working abroad is part of your personal development.'},
+  {s:'A',t:'Having an international vision is at the heart of your career goals.'},
+  // B: Performance & Efficiency (26-50)
+  {s:'B',t:'Work-life balance is a fundamental right, not a luxury, for you.'},
+  {s:'B',t:'Adapting to flexible working hours is not a problem for you.'},
+  {s:'B',t:'You are confident in professional communication in English or German.'},
+  {s:'B',t:'You actively use digital tools and AI in your daily work routine.'},
+  {s:'B',t:'You can maintain your productivity even in a remote work environment.'},
+  {s:'B',t:'Goal-oriented work feels more natural to you than process-oriented work.'},
+  {s:'B',t:'Delivering a project on time and within budget is your top priority.'},
+  {s:'B',t:'Receiving feedback does not bother you; it motivates you.'},
+  {s:'B',t:'You regularly evaluate your own performance.'},
+  {s:'B',t:'Focusing on one task at a time is more efficient for you than multitasking.'},
+  {s:'B',t:'Acting proactively always produces better results for you than waiting.'},
+  {s:'B',t:'You are good at planning and executing your own time management.'},
+  {s:'B',t:'Quality is at the top of your priority list when delivering a task.'},
+  {s:'B',t:'You are always looking for continuous improvement in work processes.'},
+  {s:'B',t:'You do not hesitate to use digital project management tools.'},
+  {s:'B',t:'You can communicate clearly and constructively even under stress.'},
+  {s:'B',t:'You have the ability to resolve conflicts within a team constructively.'},
+  {s:'B',t:'You are willing to invest personal resources in your professional development.'},
+  {s:'B',t:'You strive not to fall below the standards you have set for yourself.'},
+  {s:'B',t:'Taking on new responsibilities does not overwhelm you; it strengthens you.'},
+  {s:'B',t:'You have the ability to run a meeting effectively.'},
+  {s:'B',t:'Being clear and concise in written communication is a professional standard for you.'},
+  {s:'B',t:'You are more productive under pressure than during calm periods.'},
+  {s:'B',t:'Building a personal brand in professional life is a conscious goal of yours.'},
+  {s:'B',t:'Mentoring or supporting colleagues fulfills you.'},
+  // C: Innovation & Future Trends (51-75)
+  {s:'C',t:'You are knowledgeable about the professions of the future (AI, green energy, etc.).'},
+  {s:'C',t:'Lifelong learning is at the centre of your career plan.'},
+  {s:'C',t:'You do not shy away from taking risks in global projects involving uncertainty.'},
+  {s:'C',t:'The integration of AI into professional life excites rather than worries you.'},
+  {s:'C',t:'Incorporating new technologies into work processes is a priority for you.'},
+  {s:'C',t:'The entrepreneurship ecosystem and startup culture interest you.'},
+  {s:'C',t:'Interdisciplinary work (technical + social + creative) feels natural to you.'},
+  {s:'C',t:'You are aware that automation and digitalisation will transform your industry.'},
+  {s:'C',t:'You can fight bureaucracy for an innovative idea.'},
+  {s:'C',t:'Green economy and sustainable business models interest you.'},
+  {s:'C',t:'Remote work, freelancing and the gig economy are among your career options.'},
+  {s:'C',t:'Data analysis and digital literacy are among your strengths.'},
+  {s:'C',t:'Social innovation (innovative solutions to societal problems) is an area that interests you.'},
+  {s:'C',t:'Following global trends and incorporating them into your work is a habit of yours.'},
+  {s:'C',t:'Quickly creating and testing a prototype of an idea is your approach.'},
+  {s:'C',t:'Learning from failures strengthens you in innovation processes.'},
+  {s:'C',t:'Developing forecasts about the future of your industry interests you.'},
+  {s:'C',t:'You follow concepts such as blockchain, metaverse or Web3.'},
+  {s:'C',t:'Drawing inspiration from different cultures for innovation is your method.'},
+  {s:'C',t:'Developing solutions that simplify complex systems fulfills you.'},
+  {s:'C',t:'Working in R&D or innovation-focused areas is among your career goals.'},
+  {s:'C',t:'User-centred design (UX/UI) thinking can be applied in every area of work.'},
+  {s:'C',t:'Proposing alternatives to existing systems does not bother you; it motivates you.'},
+  {s:'C',t:'You want to take an active role in digital transformation projects.'},
+  {s:'C',t:'You invest today in developing future-oriented skills.'},
+  // D: Social Welfare & Ethics (76-100)
+  {s:'D',t:'You see contributing part of your income to social systems (tax/insurance) as a social responsibility.'},
+  {s:'D',t:'Sustainability and environmental awareness are decisive in your career choices.'},
+  {s:'D',t:'A company\'s ethical values are more important than the salary it offers.'},
+  {s:'D',t:'Social justice is part of your career motivation.'},
+  {s:'D',t:'Developing policies for disadvantaged groups is an area that interests you.'},
+  {s:'D',t:'Transparency and accountability in professional life are an ethical necessity.'},
+  {s:'D',t:'CSR (Corporate Social Responsibility) projects genuinely interest you.'},
+  {s:'D',t:'The human rights record of the company you work for is a determining factor for you.'},
+  {s:'D',t:'The integration of refugees and migrants into professional life is an area that should be supported.'},
+  {s:'D',t:'Universal access to healthcare is a fundamental human right.'},
+  {s:'D',t:'Reducing the digital divide should be a global priority.'},
+  {s:'D',t:'Diversity & Inclusion policies are achievable goals in the workplace.'},
+  {s:'D',t:'Gender equality in professional life is still an unresolved issue.'},
+  {s:'D',t:'The fight against climate change is a priority that also affects individual careers.'},
+  {s:'D',t:'Social entrepreneurship is a strong alternative to traditional business models.'},
+  {s:'D',t:'Corporate awareness of human trafficking and modern slavery is important.'},
+  {s:'D',t:'Unequal access to education globally is a critical problem that must be solved.'},
+  {s:'D',t:'Anti-poverty programmes can influence career decisions.'},
+  {s:'D',t:'Collaboration with civil society organisations creates value for a career.'},
+  {s:'D',t:'Ethical leadership is an inseparable part of successful leadership for you.'},
+  {s:'D',t:'A company\'s diversity policy influences your hiring decision.'},
+  {s:'D',t:'Psychological safety in the workplace comes before efficiency.'},
+  {s:'D',t:'Intergenerational justice (responsibility towards future generations) is part of your professional vision.'},
+  {s:'D',t:'Being prepared for global health crises is a corporate responsibility.'},
+  {s:'D',t:'Injustice anywhere in the world also moves you to act professionally.'},
+]
+};
+
+// ══ UI TEXT ══
+const UI = {
+tr: {
+  appName:'PusulaPro', badge:'PusulaPro — Kariyer Değerlendirmesi',
+  introTitle:'Kariyer Profil Envanteri', introText:'Bu envanter sana özgü kariyer profilini ortaya çıkarmak için tasarlandı. Doğru ya da yanlış cevap yoktur — içinden geleni işaretle.',
+  qLbl:'Soru', minLbl:'Dakika', catLbl:'Kategori',
+  startBtn:'Başla →', backBtn:'← Geri', nextBtn:'İleri →', finishBtn:'Raporu Gör →',
+  disagree:'Hiç katılmıyorum', agree:'Tamamen katılıyorum',
+  sections:{A:'A — Karakter ve Onur',B:'B — Bilişsel Yetkinlikler',C:'C — Mesleki Tutku',D:'D — Sosyal Adalet'},
+  resultTitle:'Kariyer Profil Raporun', resultSub:'D-V-F-A Analizi · PACDI PusulaPro',
+  rcProfile:'KARİYER PROFİLİN', rcScores:'D-V-F-A SKORLARI', rcRadar:'KATEGORİ ANALİZİ',
+  rcCareers:'ÖNERİLEN KARİYER ALANLARI', rcStrengths:'GÜÇLÜ YÖN & GELİŞİM ALANI',
+  scoreNames:{A:'Karakter & Onur',B:'Bilişsel Yetkinlik',C:'Mesleki Tutku',D:'Sosyal Adalet'},
+  fbTitle:'Geri Bildiriminizi Paylaşın',
+  fbText:'Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli. Deneyiminizi kısaca paylaşır mısınız?',
+  fbBtn:'Geri Bildirim Gönder ✉',
+  fbSubject:'PusulaPro%20Kariyer%20Degerlendirme%20Geri%20Bildirimi',
+  strengthLbl:'GÜÇLÜ YÖN', devLbl:'GELİŞİM ALANI',
+},
+de: {
+  appName:'NavigoPro', badge:'NavigoPro — Karrierebewertung',
+  introTitle:'Globales Karriere- & Integrationsinventar',
+  introText:'Dieses Inventar ist darauf ausgelegt, dein individuelles Karriereprofil zu enthüllen. Es gibt keine richtigen oder falschen Antworten — wähle, was sich für dich stimmig anfühlt.',
+  qLbl:'Frage', minLbl:'Minuten', catLbl:'Kategorien',
+  startBtn:'Starten →', backBtn:'← Zurück', nextBtn:'Weiter →', finishBtn:'Bericht anzeigen →',
+  disagree:'Stimme überhaupt nicht zu', agree:'Stimme vollständig zu',
+  sections:{A:'A — Globale Anpassung & Werte',B:'B — Leistung & Effizienz',C:'C — Innovation & Zukunft',D:'D — Sozialwohl & Ethik'},
+  resultTitle:'Dein Karriereprofil-Bericht', resultSub:'D-V-F-A Analyse · PACDI NavigoPro',
+  rcProfile:'DEIN KARRIEREPROFIL', rcScores:'D-V-F-A SCORES', rcRadar:'KATEGORIENANALYSE',
+  rcCareers:'EMPFOHLENE KARRIEREBEREICHE', rcStrengths:'STÄRKEN & ENTWICKLUNGSBEREICH',
+  scoreNames:{A:'Globale Anpassung',B:'Leistung & Effizienz',C:'Innovation & Zukunft',D:'Sozialwohl & Ethik'},
+  fbTitle:'Teile dein Feedback',
+  fbText:'Deine Gedanken zu dieser Bewertung sind sehr wertvoll für uns. Möchtest du deine Erfahrungen kurz teilen?',
+  fbBtn:'Feedback senden ✉',
+  fbSubject:'NavigoPro%20Karrierebewertung%20Feedback',
+  strengthLbl:'STÄRKE', devLbl:'ENTWICKLUNGSBEREICH',
+},
+en: {
+  appName:'NavigoPro', badge:'NavigoPro — Career Assessment',
+  introTitle:'Global Career & Integration Inventory',
+  introText:'This inventory is designed to reveal your unique career profile. There are no right or wrong answers — choose what feels true to you.',
+  qLbl:'Question', minLbl:'Minutes', catLbl:'Categories',
+  startBtn:'Start →', backBtn:'← Back', nextBtn:'Next →', finishBtn:'View Report →',
+  disagree:'Strongly disagree', agree:'Strongly agree',
+  sections:{A:'A — Global Adaptability & Values',B:'B — Performance & Efficiency',C:'C — Innovation & Future',D:'D — Social Welfare & Ethics'},
+  resultTitle:'Your Career Profile Report', resultSub:'D-V-F-A Analysis · PACDI NavigoPro',
+  rcProfile:'YOUR CAREER PROFILE', rcScores:'D-V-F-A SCORES', rcRadar:'CATEGORY ANALYSIS',
+  rcCareers:'RECOMMENDED CAREER AREAS', rcStrengths:'STRENGTHS & DEVELOPMENT AREA',
+  scoreNames:{A:'Global Adaptability',B:'Performance & Efficiency',C:'Innovation & Future',D:'Social Welfare & Ethics'},
+  fbTitle:'Share Your Feedback',
+  fbText:'Your thoughts on this assessment are very valuable to us. Would you like to briefly share your experience?',
+  fbBtn:'Send Feedback ✉',
+  fbSubject:'NavigoPro%20Career%20Assessment%20Feedback',
+  strengthLbl:'STRENGTH', devLbl:'DEVELOPMENT AREA',
+}
+};
+
+// ══ PROFILES ══
+const PROFILES = {
+tr:[
+  {min:0, name:'Dengeli Gezgin', desc:'Her kategoride dengeli bir profil sergiliyorsun. Çok yönlü yapın seni farklı alanlarda başarılı kılar. Kariyer yolunda esneklik en büyük avantajın.', careers:[{i:'🎯',n:'Proje Yöneticisi',r:'Çok yönlü yetkinliğin bu role mükemmel uyum sağlar'},{i:'📊',n:'Danışman',r:'Analitik ve sosyal dengen fark yaratır'},{i:'🌍',n:'Sosyal Girişimci',r:'Değer odaklı duruşun güçlü bir temel oluşturur'}], strength:'Esneklik ve adaptasyon yeteneği', dev:'Belirli bir alanda derinleşme'},
+  {min:300, name:'Etik Lider', desc:'Güçlü karakter değerlerin ve sosyal adalete duyarlılığın seni doğal bir lider yapıyor. İnsanları değerlerinle yönlendirme kapasiten olağanüstü. Güven inşa etmekte en iyilerdensin.', careers:[{i:'👥',n:'İnsan Kaynakları Direktörü',r:'Değer odaklı liderlik anlayışın idealdir'},{i:'⚖️',n:'Hukuk & Adalet Alanları',r:'Adalete olan bağlılığın güçlü bir temel'},{i:'🏛️',n:'Kamu Yönetimi',r:'Şeffaflık ve hesap verebilirlik ilkelerin'}], strength:'Güven inşa etme ve etik liderlik', dev:'Stratejik düşünmeyi güçlendirme'},
+  {min:350, name:'Analitik Vizyoner', desc:'Güçlü analitik zekânın yanı sıra uzun vadeli vizyon geliştirme becerin öne çıkıyor. Veri ile sezgiyi harmanlama konusunda nadiren rastlanan bir profil sergiliyorsun.', careers:[{i:'📈',n:'Stratejik Planlama Uzmanı',r:'Analitik ve vizyon becerilerinin mükemmel kesişimi'},{i:'🔬',n:'Araştırma & Geliştirme',r:'Merak ve sistematik yaklaşımın fark yaratır'},{i:'💡',n:'Ürün Geliştirme',r:'Veri + yaratıcılık kombinasyonun idealdir'}], strength:'Analitik düşünme ve vizyon geliştirme', dev:'Hızlı karar verme becerisi'},
+  {min:400, name:'Sosyal İnovatör', desc:'Yenilikçi düşünce yapın ve toplumsal fayda odaklı bakış açın seni sıradan bir profesyonelden ayırıyor. Hem sistemi hem insanı aynı anda düşünebiliyorsun.', careers:[{i:'🚀',n:'Sosyal Girişimci',r:'Değer + inovasyon kombinasyonun mükemmel'},{i:'🌱',n:'Sürdürülebilirlik Uzmanı',r:'Uzun vadeli düşünme ve etik çerçeven'},{i:'🎓',n:'Eğitim & Kalkınma',r:'Başkalarını geliştirme motivasyonun'}], strength:'Sosyal inovasyon ve sistem düşüncesi', dev:'Finansal okuryazarlık geliştirme'},
+],
+de:[
+  {min:0, name:'Ausgewogener Entdecker', desc:'Du zeigst in allen Kategorien ein ausgewogenes Profil. Deine Vielseitigkeit macht dich in verschiedenen Bereichen erfolgreich. Flexibilität ist dein größter Vorteil auf dem Karriereweg.', careers:[{i:'🎯',n:'Projektmanager',r:'Deine vielseitige Kompetenz passt perfekt zu dieser Rolle'},{i:'📊',n:'Berater',r:'Dein analytisches und soziales Gleichgewicht macht den Unterschied'},{i:'🌍',n:'Sozialunternehmer',r:'Deine werteorientierte Haltung bildet eine solide Grundlage'}], strength:'Flexibilität und Anpassungsfähigkeit', dev:'Vertiefung in einem bestimmten Bereich'},
+  {min:300, name:'Ethische Führungskraft', desc:'Deine starken Charakterwerte und deine Sensibilität für soziale Gerechtigkeit machen dich zu einer natürlichen Führungspersönlichkeit. Deine Fähigkeit, Menschen durch deine Werte zu führen, ist außergewöhnlich.', careers:[{i:'👥',n:'HR-Direktor',r:'Dein werteorientiertes Führungsverständnis ist ideal'},{i:'⚖️',n:'Recht & Justiz',r:'Dein Engagement für Gerechtigkeit bildet eine starke Grundlage'},{i:'🏛️',n:'Öffentliche Verwaltung',r:'Deine Prinzipien von Transparenz und Rechenschaftspflicht'}], strength:'Vertrauensaufbau und ethische Führung', dev:'Strategisches Denken stärken'},
+  {min:350, name:'Analytischer Visionär', desc:'Neben deiner starken analytischen Intelligenz sticht deine Fähigkeit hervor, langfristige Visionen zu entwickeln. Du zeigst ein selten anzutreffendes Profil bei der Kombination von Daten und Intuition.', careers:[{i:'📈',n:'Strategischer Planer',r:'Die perfekte Schnittmenge deiner analytischen und visionären Fähigkeiten'},{i:'🔬',n:'Forschung & Entwicklung',r:'Deine Neugier und dein systematischer Ansatz machen den Unterschied'},{i:'💡',n:'Produktentwicklung',r:'Deine Kombination aus Daten + Kreativität ist ideal'}], strength:'Analytisches Denken und Visionsentwicklung', dev:'Schnelle Entscheidungsfindung'},
+  {min:400, name:'Sozialer Innovator', desc:'Dein innovatives Denken und deine auf gesellschaftlichen Nutzen ausgerichtete Sichtweise heben dich von einem gewöhnlichen Profi ab. Du kannst gleichzeitig an das System und an die Menschen denken.', careers:[{i:'🚀',n:'Sozialunternehmer',r:'Deine Kombination aus Werten + Innovation ist perfekt'},{i:'🌱',n:'Nachhaltigkeitsexperte',r:'Dein langfristiges Denken und dein ethischer Rahmen'},{i:'🎓',n:'Bildung & Entwicklung',r:'Deine Motivation, andere zu entwickeln'}], strength:'Soziale Innovation und Systemdenken', dev:'Finanzielle Kompetenz entwickeln'},
+],
+en:[
+  {min:0, name:'Balanced Explorer', desc:'You demonstrate a balanced profile across all categories. Your versatility makes you successful in different areas. Flexibility is your greatest advantage on the career path.', careers:[{i:'🎯',n:'Project Manager',r:'Your versatile competence perfectly fits this role'},{i:'📊',n:'Consultant',r:'Your analytical and social balance makes the difference'},{i:'🌍',n:'Social Entrepreneur',r:'Your value-oriented stance forms a solid foundation'}], strength:'Flexibility and adaptability', dev:'Deepening expertise in a specific area'},
+  {min:300, name:'Ethical Leader', desc:'Your strong character values and sensitivity to social justice make you a natural leader. Your capacity to guide people through your values is extraordinary. You are among the best at building trust.', careers:[{i:'👥',n:'HR Director',r:'Your value-oriented leadership is ideal'},{i:'⚖️',n:'Law & Justice Fields',r:'Your commitment to justice forms a strong foundation'},{i:'🏛️',n:'Public Administration',r:'Your principles of transparency and accountability'}], strength:'Building trust and ethical leadership', dev:'Strengthening strategic thinking'},
+  {min:350, name:'Analytical Visionary', desc:'Alongside your strong analytical intelligence, your ability to develop long-term visions stands out. You demonstrate a rarely found profile in blending data with intuition.', careers:[{i:'📈',n:'Strategic Planning Expert',r:'The perfect intersection of your analytical and vision skills'},{i:'🔬',n:'Research & Development',r:'Your curiosity and systematic approach make the difference'},{i:'💡',n:'Product Development',r:'Your combination of data + creativity is ideal'}], strength:'Analytical thinking and vision development', dev:'Rapid decision-making skills'},
+  {min:400, name:'Social Innovator', desc:'Your innovative mindset and social-benefit-focused perspective set you apart from ordinary professionals. You can think about both the system and the people at the same time.', careers:[{i:'🚀',n:'Social Entrepreneur',r:'Your values + innovation combination is perfect'},{i:'🌱',n:'Sustainability Expert',r:'Your long-term thinking and ethical framework'},{i:'🎓',n:'Education & Development',r:'Your motivation to develop others'}], strength:'Social innovation and systems thinking', dev:'Developing financial literacy'},
+]
+};
+
+// ══════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════
+let lang = 'tr';
+let currentQ = 0;
+let answers = new Array(100).fill(null);
+const questions = () => QUESTIONS[lang];
+const ui = () => UI[lang];
+
+// ══════════════════════════════════════════════════════════
+// SCREENS
+// ══════════════════════════════════════════════════════════
+function show(id) {
+  ['lang-screen','intro-screen','quiz-screen','result-screen'].forEach(s=>{
+    document.getElementById(s).classList.add('hidden');
+  });
+  document.getElementById(id).classList.remove('hidden');
+  window.scrollTo(0,0);
+}
+
+function selectLang(l) {
+  lang = l;
+  const u = ui();
+  document.getElementById('intro-badge').textContent = u.badge;
+  document.getElementById('intro-title').textContent = u.introTitle;
+  document.getElementById('intro-text').textContent = u.introText;
+  document.getElementById('intro-q-lbl').textContent = u.qLbl;
+  document.getElementById('intro-cat-lbl').textContent = u.catLbl;
+  document.getElementById('intro-min-lbl').textContent = u.minLbl;
+  document.getElementById('start-btn-txt').textContent = u.startBtn;
+  show('intro-screen');
+}
+
+function startQuiz() {
+  currentQ = 0;
+  answers = new Array(100).fill(null);
+  renderQuestion();
+  show('quiz-screen');
+}
+
+// ══════════════════════════════════════════════════════════
+// QUIZ
+// ══════════════════════════════════════════════════════════
+function renderQuestion() {
+  const q = questions()[currentQ];
+  const u = ui();
+  const total = 100;
+  const pct = ((currentQ+1)/total*100).toFixed(1);
+
+  // Logo
+  const logo = document.getElementById('quiz-logo');
+  logo.innerHTML = u.appName === 'PusulaPro'
+    ? 'Pusula<span>Pro</span>'
+    : 'Navigo<span>Pro</span>';
+
+  document.getElementById('progress-info').textContent = `${currentQ+1} / ${total}`;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('section-badge').textContent = u.sections[q.s];
+  document.getElementById('q-num').textContent = `${u.qLbl} ${currentQ+1}`;
+  document.getElementById('q-text').textContent = q.t;
+  document.getElementById('lbl-disagree').textContent = u.disagree;
+  document.getElementById('lbl-agree').textContent = u.agree;
+
+  // Reset buttons
+  document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  if (answers[currentQ] !== null) {
+    document.querySelector(`.scale-btn[data-v="${answers[currentQ]}"]`)?.classList.add('selected');
+  }
+
+  const nextBtn = document.getElementById('btn-next');
+  const isLast = currentQ === total - 1;
+  nextBtn.textContent = isLast ? u.finishBtn : u.nextBtn;
+  nextBtn.disabled = answers[currentQ] === null;
+
+  document.getElementById('btn-back').textContent = u.backBtn;
+  document.getElementById('btn-back').style.visibility = currentQ === 0 ? 'hidden' : 'visible';
+}
+
+function selectAnswer(v) {
+  answers[currentQ] = v;
+  document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`.scale-btn[data-v="${v}"]`).classList.add('selected');
+  document.getElementById('btn-next').disabled = false;
+  // Auto-advance after 400ms
+  setTimeout(() => {
+    if (currentQ < 99) nextQuestion();
+    else showResults();
+  }, 400);
+}
+
+function nextQuestion() {
+  if (answers[currentQ] === null) return;
+  if (currentQ < 99) { currentQ++; renderQuestion(); }
+  else showResults();
+}
+
+function prevQuestion() {
+  if (currentQ > 0) { currentQ--; renderQuestion(); }
+}
+
+// ══════════════════════════════════════════════════════════
+// RESULTS
+// ══════════════════════════════════════════════════════════
+function calcScores() {
+  const cats = {A:[],B:[],C:[],D:[]};
+  questions().forEach((q,i) => {
+    if (answers[i] !== null) cats[q.s].push(answers[i]);
+  });
+  const avg = arr => arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : 0;
+  return {
+    A: avg(cats.A),
+    B: avg(cats.B),
+    C: avg(cats.C),
+    D: avg(cats.D),
+    total: (avg(cats.A)+avg(cats.B)+avg(cats.C)+avg(cats.D))/4*100
+  };
+}
+
+function getProfile(total) {
+  const profiles = PROFILES[lang];
+  let best = profiles[0];
+  for (const p of profiles) {
+    if (total >= p.min) best = p;
+  }
+  return best;
+}
+
+function showResults() {
+  const scores = calcScores();
+  const profile = getProfile(scores.total);
+  const u = ui();
+
+  document.getElementById('result-title').textContent = u.resultTitle;
+  document.getElementById('result-subtitle').textContent = u.resultSub;
+  document.getElementById('rc-profile-lbl').textContent = u.rcProfile;
+  document.getElementById('rc-scores-lbl').textContent = u.rcScores;
+  document.getElementById('rc-radar-lbl').textContent = u.rcRadar;
+  document.getElementById('rc-careers-lbl').textContent = u.rcCareers;
+  document.getElementById('rc-strengths-lbl').textContent = u.rcStrengths;
+  document.getElementById('profile-type').textContent = profile.name;
+  document.getElementById('profile-desc').textContent = profile.desc;
+  document.getElementById('fb-title').textContent = u.fbTitle;
+  document.getElementById('fb-text').textContent = u.fbText;
+  document.getElementById('fb-btn').textContent = u.fbBtn;
+  document.getElementById('fb-btn').href = `mailto:info@pacdi.de?subject=${u.fbSubject}`;
+
+  // Score bars
+  const barsEl = document.getElementById('score-bars');
+  barsEl.innerHTML = '';
+  ['A','B','C','D'].forEach(cat => {
+    const pct = Math.round(scores[cat] / 5 * 100);
+    const div = document.createElement('div');
+    div.className = 'score-row';
+    div.innerHTML = `
+      <div class="score-label-row">
+        <span class="score-label">${u.scoreNames[cat]}</span>
+        <span class="score-val">${scores[cat].toFixed(1)} / 5</span>
+      </div>
+      <div class="score-bar-bg">
+        <div class="score-bar-fill" style="width:0%" data-pct="${pct}"></div>
+      </div>`;
+    barsEl.appendChild(div);
+  });
+  setTimeout(() => {
+    document.querySelectorAll('.score-bar-fill').forEach(el => {
+      el.style.width = el.dataset.pct + '%';
+    });
+  }, 100);
+
+  // Careers
+  const careersEl = document.getElementById('careers-list');
+  careersEl.innerHTML = '';
+  profile.careers.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'career-item';
+    div.innerHTML = `<div class="career-icon">${c.i}</div>
+      <div><div class="career-name">${c.n}</div><div class="career-reason">${c.r}</div></div>`;
+    careersEl.appendChild(div);
+  });
+
+  // Strengths
+  const sg = document.getElementById('strengths-grid');
+  sg.innerHTML = `
+    <div class="strength-box green">
+      <div class="strength-tag">${u.strengthLbl}</div>
+      <div class="strength-text">${profile.strength}</div>
+    </div>
+    <div class="strength-box amber">
+      <div class="strength-tag">${u.devLbl}</div>
+      <div class="strength-text">${profile.dev}</div>
+    </div>`;
+
+  // Draw radar
+  drawRadar(scores);
+  show('result-screen');
+}
+
+// ══════════════════════════════════════════════════════════
+// RADAR CHART
+// ══════════════════════════════════════════════════════════
+function drawRadar(scores) {
+  const canvas = document.getElementById('radarChart');
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const cx = W/2, cy = H/2;
+  const r = Math.min(W,H)/2 - 30;
+  const cats = ['A','B','C','D'];
+  const vals = cats.map(c => scores[c]/5);
+  const angles = cats.map((_,i) => (i/cats.length)*2*Math.PI - Math.PI/2);
+  const u = ui();
+  const labels = cats.map(c => u.scoreNames[c].split(' ')[0]);
+
+  ctx.clearRect(0,0,W,H);
+
+  // Grid
+  for (let level=1; level<=5; level++) {
+    ctx.beginPath();
+    angles.forEach((a,i) => {
+      const x = cx + r*(level/5)*Math.cos(a);
+      const y = cy + r*(level/5)*Math.sin(a);
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle = level===5 ? '#DDD' : '#EEE';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  }
+
+  // Axes
+  angles.forEach(a => {
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+r*Math.cos(a), cy+r*Math.sin(a));
+    ctx.strokeStyle = '#DDD';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+
+  // Data
+  ctx.beginPath();
+  vals.forEach((v,i) => {
+    const x = cx + r*v*Math.cos(angles[i]);
+    const y = cy + r*v*Math.sin(angles[i]);
+    if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+  });
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(246,180,95,0.25)';
+  ctx.fill();
+  ctx.strokeStyle = '#F6B45F';
+  ctx.lineWidth = 2.5;
+  ctx.stroke();
+
+  // Points
+  vals.forEach((v,i) => {
+    const x = cx + r*v*Math.cos(angles[i]);
+    const y = cy + r*v*Math.sin(angles[i]);
+    ctx.beginPath();
+    ctx.arc(x,y,5,0,2*Math.PI);
+    ctx.fillStyle = '#04162E';
+    ctx.fill();
+  });
+
+  // Labels
+  ctx.font = 'bold 11px DM Sans, sans-serif';
+  ctx.fillStyle = '#04162E';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  angles.forEach((a,i) => {
+    const lx = cx + (r+18)*Math.cos(a);
+    const ly = cy + (r+18)*Math.sin(a);
+    ctx.fillText(labels[i], lx, ly);
+  });
+}
+</script>
+
+</body>
+</html>
