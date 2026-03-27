@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PusulaPro & NavigoPro — Kariyer Değerlendirme</title>
+<title>PusulaPro & NavigoPro — Kariyer Değerlendirme + Handwerk</title>
 <style>
 :root {
   --navy: #04162E;
@@ -28,7 +27,7 @@ color: var(--navy);
 min-height: 100vh;
 }
 
-/* ── LANGUAGE SCREEN ── */
+/* LANGUAGE SCREEN */
 #lang-screen {
 min-height: 100vh;
 display: flex;
@@ -117,7 +116,7 @@ text-align: center;
 line-height: 1.6;
 }
 
-/* ── INTRO SCREEN ── */
+/* INTRO SCREEN */
 #intro-screen {
 min-height: 100vh;
 display: flex;
@@ -197,8 +196,8 @@ transform: translateY(-1px);
 box-shadow: 0 8px 24px rgba(246,180,95,0.3);
 }
 
-/* ── QUIZ SCREEN ── */
-#quiz-screen {
+/* QUIZ SCREEN (main + handwerk) */
+.quiz-screen, .handwerk-quiz-screen {
 min-height: 100vh;
 padding: 0;
 display: flex;
@@ -312,10 +311,6 @@ transition: all 0.15s;
 display: flex;
 align-items: center;
 justify-content: center;
--webkit-appearance: none;
-appearance: none;
-outline: none;
-text-decoration: none;
 }
 .scale-btn:hover {
 border-color: var(--gold);
@@ -349,8 +344,6 @@ font-weight: 700;
 cursor: pointer;
 transition: all 0.15s;
 border: none;
--webkit-appearance: none;
-appearance: none;
 }
 .nav-back {
 background: transparent;
@@ -366,7 +359,7 @@ min-width: 120px;
 .nav-next:hover { background: #0a2548; }
 .nav-next:disabled { background: #CCC; cursor: not-allowed; }
 
-/* ── RESULT SCREEN ── */
+/* RESULT SCREEN */
 #result-screen {
 min-height: 100vh;
 background: var(--light);
@@ -409,7 +402,7 @@ color: var(--gold);
 margin-bottom: 16px;
 }
 
-/* Radar chart */
+/* Radar */
 .radar-wrap {
 display: flex;
 justify-content: center;
@@ -420,9 +413,7 @@ max-width: 280px;
 max-height: 280px;
 }
 
-/* Score bars */
 .score-bars { display: flex; flex-direction: column; gap: 14px; }
-.score-row {}
 .score-label-row {
 display: flex;
 justify-content: space-between;
@@ -530,6 +521,65 @@ transition: all 0.2s;
 }
 .feedback-btn:hover { background: #e8a04a; }
 
+.handwerk-card {
+  border-left: 5px solid var(--gold);
+  background: linear-gradient(135deg, #fff 0%, #fef7e8 100%);
+}
+.handwerk-jobs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.handwerk-job-badge {
+  background: var(--light);
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.handwerk-module-card {
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid var(--gold-light);
+}
+.handwerk-module-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.handwerk-module-desc {
+  font-size: 0.85rem;
+  color: var(--grey);
+  margin-bottom: 20px;
+}
+.handwerk-module-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+.handwerk-start, .handwerk-skip {
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+.handwerk-start {
+  background: var(--gold);
+  color: var(--navy);
+}
+.handwerk-skip {
+  background: #e0e0e0;
+  color: var(--grey);
+}
+
 .copyright-bar {
 text-align: center;
 padding: 20px;
@@ -540,7 +590,6 @@ border-top: 1px solid #E0E0E0;
 margin-top: 20px;
 }
 
-/* Utilities */
 .hidden { display: none !important; }
 @media (max-width: 480px) {
 .scale-buttons { gap: 6px; }
@@ -549,12 +598,10 @@ margin-top: 20px;
 .intro-stats { gap: 20px; }
 }
 </style>
-
 </head>
 <body>
 
-<!-- ══ LANGUAGE SELECTION ══ -->
-
+<!-- LANGUAGE SCREEN -->
 <div id="lang-screen">
   <div class="lang-logo">Pusula<span>Pro</span> & Navigo<span>Pro</span></div>
   <div class="lang-subtitle">PACDI Digital Navigation Ecosystem</div>
@@ -584,8 +631,7 @@ margin-top: 20px;
   </div>
 </div>
 
-<!-- ══ INTRO SCREEN ══ -->
-
+<!-- INTRO SCREEN -->
 <div id="intro-screen" class="hidden">
   <div class="intro-card">
     <div class="intro-badge" id="intro-badge">PusulaPro</div>
@@ -595,42 +641,27 @@ margin-top: 20px;
       Doğru ya da yanlış cevap yoktur — içinden geleni işaretle.
     </div>
     <div class="intro-stats">
-      <div class="intro-stat">
-        <span class="num">100</span>
-        <span class="lbl" id="intro-q-lbl">Soru</span>
-      </div>
-      <div class="intro-stat">
-        <span class="num">4</span>
-        <span class="lbl" id="intro-cat-lbl">Kategori</span>
-      </div>
-      <div class="intro-stat">
-        <span class="num">~15</span>
-        <span class="lbl" id="intro-min-lbl">Dakika</span>
-      </div>
+      <div class="intro-stat"><span class="num">100</span><span class="lbl" id="intro-q-lbl">Soru</span></div>
+      <div class="intro-stat"><span class="num">4</span><span class="lbl" id="intro-cat-lbl">Kategori</span></div>
+      <div class="intro-stat"><span class="num">~15</span><span class="lbl" id="intro-min-lbl">Dakika</span></div>
     </div>
     <button class="start-btn" onclick="startQuiz()" id="start-btn-txt">Başla →</button>
   </div>
 </div>
 
-<!-- ══ QUIZ SCREEN ══ -->
-
+<!-- MAIN QUIZ SCREEN -->
 <div id="quiz-screen" class="hidden">
   <div class="quiz-header">
     <div class="quiz-logo-sm" id="quiz-logo">Pusula<span>Pro</span></div>
     <div class="quiz-progress-info" id="progress-info">1 / 100</div>
   </div>
-  <div class="progress-bar-wrap">
-    <div class="progress-bar-fill" id="progress-fill" style="width:1%"></div>
-  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:1%"></div></div>
   <div class="quiz-body">
     <div class="section-badge" id="section-badge">A — Karakter ve Onur</div>
     <div class="question-num" id="q-num">Soru 1</div>
     <div class="question-text" id="q-text">Soru yükleniyor...</div>
     <div class="scale-wrap">
-      <div class="scale-labels">
-        <div class="scale-lbl" id="lbl-disagree">Hiç katılmıyorum</div>
-        <div class="scale-lbl" id="lbl-agree">Tamamen katılıyorum</div>
-      </div>
+      <div class="scale-labels"><div class="scale-lbl" id="lbl-disagree">Hiç katılmıyorum</div><div class="scale-lbl" id="lbl-agree">Tamamen katılıyorum</div></div>
       <div class="scale-buttons">
         <button class="scale-btn" data-v="1" onclick="selectAnswer(1)">1</button>
         <button class="scale-btn" data-v="2" onclick="selectAnswer(2)">2</button>
@@ -646,8 +677,35 @@ margin-top: 20px;
   </div>
 </div>
 
-<!-- ══ RESULT SCREEN ══ -->
+<!-- HANDWERK QUIZ SCREEN -->
+<div id="handwerk-quiz-screen" class="hidden">
+  <div class="quiz-header">
+    <div class="quiz-logo-sm" id="hw-quiz-logo">Handwerk<span>Modül</span></div>
+    <div class="quiz-progress-info" id="hw-progress-info">1 / 50</div>
+  </div>
+  <div class="progress-bar-wrap"><div class="progress-bar-fill" id="hw-progress-fill" style="width:2%"></div></div>
+  <div class="quiz-body">
+    <div class="section-badge" id="hw-section-badge">E1 — Pratik Zeka & El Becerisi</div>
+    <div class="question-num" id="hw-q-num">Soru 1</div>
+    <div class="question-text" id="hw-q-text">...</div>
+    <div class="scale-wrap">
+      <div class="scale-labels"><div class="scale-lbl" id="hw-lbl-disagree">Hiç katılmıyorum</div><div class="scale-lbl" id="hw-lbl-agree">Tamamen katılıyorum</div></div>
+      <div class="scale-buttons">
+        <button class="scale-btn" data-v="1" onclick="selectHandwerkAnswer(1)">1</button>
+        <button class="scale-btn" data-v="2" onclick="selectHandwerkAnswer(2)">2</button>
+        <button class="scale-btn" data-v="3" onclick="selectHandwerkAnswer(3)">3</button>
+        <button class="scale-btn" data-v="4" onclick="selectHandwerkAnswer(4)">4</button>
+        <button class="scale-btn" data-v="5" onclick="selectHandwerkAnswer(5)">5</button>
+      </div>
+    </div>
+    <div class="quiz-nav">
+      <button class="nav-btn nav-back" onclick="prevHandwerkQuestion()" id="hw-btn-back">← Geri</button>
+      <button class="nav-btn nav-next" onclick="nextHandwerkQuestion()" id="hw-btn-next" disabled>İleri →</button>
+    </div>
+  </div>
+</div>
 
+<!-- RESULT SCREEN -->
 <div id="result-screen" class="hidden">
   <div class="result-header">
     <div class="result-title" id="result-title">Kariyer Profil Raporun</div>
@@ -659,40 +717,45 @@ margin-top: 20px;
       <div class="profile-title" id="profile-type">Vizyoner Lider</div>
       <div class="profile-desc" id="profile-desc">Açıklama yükleniyor...</div>
     </div>
-
     <div class="result-card">
       <div class="result-card-title" id="rc-scores-lbl">D-V-F-A SKORLARI</div>
       <div class="score-bars" id="score-bars"></div>
     </div>
-
     <div class="result-card">
       <div class="result-card-title" id="rc-radar-lbl">KATEGORİ ANALİZİ</div>
-      <div class="radar-wrap">
-        <canvas id="radarChart" width="280" height="280"></canvas>
-      </div>
+      <div class="radar-wrap"><canvas id="radarChart" width="280" height="280"></canvas></div>
     </div>
-
     <div class="result-card">
       <div class="result-card-title" id="rc-careers-lbl">ÖNERİLEN KARİYER ALANLARI</div>
       <div class="careers-list" id="careers-list"></div>
     </div>
-
     <div class="result-card">
       <div class="result-card-title" id="rc-strengths-lbl">GÜÇLÜ YÖN & GELİŞİM ALANI</div>
       <div class="strengths-grid" id="strengths-grid"></div>
     </div>
 
-    <div class="feedback-card">
-      <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
-      <div class="feedback-text" id="fb-text">
-        Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli.
-        Deneyiminizi birkaç kelimeyle paylaşır mısınız?
+    <!-- Handwerk Module Invitation -->
+    <div id="handwerk-module-invite" class="handwerk-module-card">
+      <div class="handwerk-module-title" id="hw-invite-title">🔧 El Becerisi Modülü (Handwerk)</div>
+      <div class="handwerk-module-desc" id="hw-invite-desc">50 soru ile zanaat ve pratik yetkinliklerini keşfet. ~5 dakika sürer.</div>
+      <div class="handwerk-module-buttons">
+        <button class="handwerk-start" id="hw-start-btn" onclick="startHandwerkQuiz()">Modüle Başla</button>
+        <button class="handwerk-skip" id="hw-skip-btn" onclick="skipHandwerkModule()">Şimdi Atlama</button>
       </div>
-      <a class="feedback-btn" id="fb-btn" href="mailto:info@navigopro.de?subject=PusulaPro%20Geri%20Bildirim">
-        Geri Bildirim Gönder ✉
-      </a>
     </div>
 
+    <!-- Handwerk Profile Card (hidden until module completed and score >=3.5) -->
+    <div id="handwerk-result-card" class="result-card handwerk-card hidden">
+      <div class="result-card-title" id="hw-card-title">Usta Profili Tespit Edildi 🔧</div>
+      <div id="hw-card-content"></div>
+      <div id="hw-jobs-list" class="handwerk-jobs"></div>
+    </div>
+
+    <div class="feedback-card">
+      <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
+      <div class="feedback-text" id="fb-text">Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli. Deneyiminizi kısaca paylaşır mısınız?</div>
+      <a class="feedback-btn" id="fb-btn" href="mailto:info@navigopro.de?subject=PusulaPro%20Geri%20Bildirim">Geri Bildirim Gönder ✉</a>
+    </div>
     <div class="copyright-bar">
       © 2026 PACDI — EasyGov.io | PusulaPro &amp; NavigoPro<br>
       Bu değerlendirme aracı PACDI'ye aittir. İzinsiz kopyalanamaz, dağıtılamaz.<br>
@@ -703,7 +766,7 @@ margin-top: 20px;
 
 <script>
 // ══════════════════════════════════════════════════════════
-// DATA
+// DATA — 100 SORU (TR/DE/EN) TAMAMI
 // ══════════════════════════════════════════════════════════
 const QUESTIONS = {
 tr: [
@@ -1026,7 +1089,7 @@ en: [
 ]
 };
 
-// ══ UI TEXT ══
+// UI TEXT (with handwerk additions)
 const UI = {
 tr: {
   appName:'PusulaPro', badge:'PusulaPro — Kariyer Değerlendirmesi',
@@ -1045,6 +1108,20 @@ tr: {
   fbBtn:'Geri Bildirim Gönder ✉',
   fbSubject:'PusulaPro%20Kariyer%20Degerlendirme%20Geri%20Bildirimi',
   strengthLbl:'GÜÇLÜ YÖN', devLbl:'GELİŞİM ALANI',
+  handwerk: {
+    inviteTitle: '🔧 El Becerisi Modülü (Handwerk)',
+    inviteDesc: '50 soru ile zanaat ve pratik yetkinliklerini keşfet. ~5 dakika sürer.',
+    startBtn: 'Modüle Başla',
+    skipBtn: 'Şimdi Atlama',
+    quizTitle: 'Handwerk & Zanaat Yetkinlikleri',
+    cardTitle: 'Usta Profili Tespit Edildi 🔧',
+    levels: [
+      { min: 3.5, max: 4.0, title: 'Zanaat Potansiyeli', desc: 'Elle çalışmaya yatkınlığın var, doğru yönlendirmeyle güçlü bir kariyer kurabilirsin.' },
+      { min: 4.0, max: 4.5, title: 'Usta Adayı', desc: 'Pratik zeka ve üretme tutkun seni Handwerk\'te öne çıkarır. Almanya\'da Ausbildung yolu sana açık.' },
+      { min: 4.5, max: 5.0, title: 'Meister Ruhu', desc: 'Sen bir şeyleri yapmak için doğmuşsun. Almanya\'da iyi bir Handwerker hiçbir zaman aç kalmaz, kimseye muhtaç olmaz.' }
+    ],
+    jobs: ['Elektrikçi', 'Tesisatçı', 'Marangoz', 'Kaynakçı', 'Oto Tamircisi', 'İnşaat Ustası', 'Fırıncı/Pastacı']
+  }
 },
 de: {
   appName:'NavigoPro', badge:'NavigoPro — Karrierebewertung',
@@ -1064,6 +1141,20 @@ de: {
   fbBtn:'Feedback senden ✉',
   fbSubject:'NavigoPro%20Karrierebewertung%20Feedback',
   strengthLbl:'STÄRKE', devLbl:'ENTWICKLUNGSBEREICH',
+  handwerk: {
+    inviteTitle: '🔧 Handwerk-Modul',
+    inviteDesc: '50 Fragen, um deine handwerklichen und praktischen Kompetenzen zu entdecken. ~5 Minuten.',
+    startBtn: 'Modul starten',
+    skipBtn: 'Überspringen',
+    quizTitle: 'Handwerk & Handgeschick',
+    cardTitle: 'Handwerker-Profil erkannt 🔧',
+    levels: [
+      { min: 3.5, max: 4.0, title: 'Handwerkspotenzial', desc: 'Du hast eine Neigung zur handwerklichen Arbeit. Mit der richtigen Förderung kannst du eine starke Karriere aufbauen.' },
+      { min: 4.0, max: 4.5, title: 'Gesellen-Talent', desc: 'Deine praktische Intelligenz und deine Leidenschaft fürs Machen heben dich im Handwerk hervor. In Deutschland steht dir der Weg zur Ausbildung offen.' },
+      { min: 4.5, max: 5.0, title: 'Meister-Geist', desc: 'Du bist zum Machen geboren. Ein guter Handwerker in Deutschland muss nie hungern und ist von niemandem abhängig.' }
+    ],
+    jobs: ['Elektriker', 'Klempner', 'Tischler', 'Schweißer', 'Kfz-Mechatroniker', 'Bäcker/Konditor']
+  }
 },
 en: {
   appName:'NavigoPro', badge:'NavigoPro — Career Assessment',
@@ -1083,10 +1174,24 @@ en: {
   fbBtn:'Send Feedback ✉',
   fbSubject:'NavigoPro%20Career%20Assessment%20Feedback',
   strengthLbl:'STRENGTH', devLbl:'DEVELOPMENT AREA',
+  handwerk: {
+    inviteTitle: '🔧 Craftsmanship Module (Handwerk)',
+    inviteDesc: '50 questions to discover your practical and craft skills. Takes about 5 minutes.',
+    startBtn: 'Start Module',
+    skipBtn: 'Skip for Now',
+    quizTitle: 'Craftsmanship & Practical Skills',
+    cardTitle: 'Craft Profile Detected 🔧',
+    levels: [
+      { min: 3.5, max: 4.0, title: 'Craft Potential', desc: 'You have an aptitude for hands-on work. With the right guidance, you can build a strong career.' },
+      { min: 4.0, max: 4.5, title: 'Journeyman Potential', desc: 'Your practical intelligence and passion for creating set you apart in the trades. The apprenticeship path in Germany is open to you.' },
+      { min: 4.5, max: 5.0, title: 'Master Spirit', desc: 'You were born to make things. A good craftsman in Germany never goes hungry and is independent.' }
+    ],
+    jobs: ['Electrician', 'Plumber', 'Carpenter', 'Welder', 'Auto Mechanic', 'Baker/Pastry Chef']
+  }
 }
 };
 
-// ══ PROFILES ══
+// PROFILES (unchanged)
 const PROFILES = {
 tr:[
   {min:0, name:'Dengeli Gezgin', desc:'Her kategoride dengeli bir profil sergiliyorsun. Çok yönlü yapın seni farklı alanlarda başarılı kılar. Kariyer yolunda esneklik en büyük avantajın.', careers:[{i:'🎯',n:'Proje Yöneticisi',r:'Çok yönlü yetkinliğin bu role mükemmel uyum sağlar'},{i:'📊',n:'Danışman',r:'Analitik ve sosyal dengen fark yaratır'},{i:'🌍',n:'Sosyal Girişimci',r:'Değer odaklı duruşun güçlü bir temel oluşturur'}], strength:'Esneklik ve adaptasyon yeteneği', dev:'Belirli bir alanda derinleşme'},
@@ -1108,21 +1213,195 @@ en:[
 ]
 };
 
-// ══════════════════════════════════════════════════════════
-// STATE
-// ══════════════════════════════════════════════════════════
+// ==================== HANDWERK QUESTIONS (50 per language) ====================
+const HANDWERK_QUESTIONS = { tr: [], de: [], en: [] };
+const hwTrBase = [
+  {s:'E1',t:'Bir şeyi kendi ellerinle yapıp bitirdiğinde derin bir tatmin duyarsın.'},
+  {s:'E1',t:'Bozuk bir şeyi tamir etmek sana anlamsız gelmez, aksine meydan okuma gibi gelir.'},
+  {s:'E1',t:'El becerisi gerektiren işlerde diğerlerinden daha başarılısındır.'},
+  {s:'E1',t:'Mobilya kurulumu, tamirat gibi işleri yapmaktan keyif alırsın.'},
+  {s:'E1',t:'Bir aletin nasıl çalıştığını anlamak için kurcalamayı seversin.'},
+  {s:'E1',t:'Resim, heykel veya model yapmak sana iyi gelir.'},
+  {s:'E1',t:'Pratik problemler karşısında teorik bilgiden önce deneyerek çözmeyi denerim.'},
+  {s:'E1',t:'Bilgisayar başında oturmaktansa fiziksel bir şey üretmeyi tercih edersin.'},
+  {s:'E1',t:'Makinelerin nasıl çalıştığını anlamak için kılavuz okumaktan çok elle denersin.'},
+  {s:'E1',t:'Bir nesneyi tamir ederken sabırla uğraşmak sana zevk verir.'},
+  {s:'E1',t:'Marangozluk, elektrik veya benzeri zanaat dersleri ilgini çeker.'},
+  {s:'E1',t:'El işçiliği gerektiren hobi veya projelerde zamanın nasıl geçtiğini anlamazsın.'},
+  {s:'E1',t:'Göz ve el koordinasyonu gerektiren işlerde kendine güvenirsin.'},
+  {s:'E2',t:'Kendi işinin patronu olma fikri seni heyecanlandırır.'},
+  {s:'E2',t:'Bağımsız çalışmayı, bir ekip içinde çalışmaya tercih edersin.'},
+  {s:'E2',t:'Küçük bir işletme kurup büyütmek hayallerin arasında.'},
+  {s:'E2',t:'Bir zanaat dalında usta olup kendi atölyeni açmak istersin.'},
+  {s:'E2',t:'Sipariş bazlı çalışmak, maaşlı çalışmaktan daha özgür hissettirir.'},
+  {s:'E2',t:'Bir işi kendi sorumluluğunda tamamlamak motivasyonunu artırır.'},
+  {s:'E2',t:'Finansal risk alarak kendi işini kurmak sana cazip gelir.'},
+  {s:'E2',t:'Kendi ürününü veya hizmetini doğrudan müşteriye sunmak isterim.'},
+  {s:'E2',t:'Zanaatkâr ruhu: her işi sahiplenerek yapmak bana göre.'},
+  {s:'E2',t:'Esnaf kültürü ve mahalle işletmeleri ilgimi çeker.'},
+  {s:'E2',t:'Bir atölyede üretim yapmak ofis ortamından daha cezbedici.'},
+  {s:'E2',t:'Kendi işimi kurmak için gerekli adımları öğrenmeye istekliyim.'},
+  {s:'E2',t:'Serbest meslek sahibi olmak bana göre.'},
+  {s:'E3',t:'Yeni bir alet veya makine öğrenmek beni heyecanlandırır.'},
+  {s:'E3',t:'Teknolojik gelişmeleri takip edip kendime uygulamaktan keyif alırım.'},
+  {s:'E3',t:'Bir cihazın içini açıp nasıl çalıştığını anlamaya çalışırım.'},
+  {s:'E3',t:'Mesleki eğitim (Ausbildung) gibi uygulamalı öğrenme bana daha uygun.'},
+  {s:'E3',t:'Yazılımdan çok donanım, mekanik veya elektrik ilgimi çeker.'},
+  {s:'E3',t:'Usta-çırak ilişkisinde öğrenmek benim için idealdir.'},
+  {s:'E3',t:'Yeni bir teknik beceri kazanmak için kurslara katılırım.'},
+  {s:'E3',t:'Mesleğimde kullanılan aletlerin bakımını yapmayı severim.'},
+  {s:'E3',t:'Teknik çizim okumak veya plan takip etmek bana kolay gelir.'},
+  {s:'E3',t:'Bilgiyi uygulamaya dökmek, teoride kalmaktan iyidir.'},
+  {s:'E3',t:'Bir işi yaparken sürekli yeni yöntemler denemek isterim.'},
+  {s:'E3',t:'Teknik konularda araştırma yapmak hobimdir.'},
+  {s:'E4',t:'Yaptığım işte en küçük detaya kadar özen gösteririm.'},
+  {s:'E4',t:'Bir işi aceleye getirip hatalı yapmaktansa zaman alırım.'},
+  {s:'E4',t:'İşimi teslim etmeden defalarca kontrol ederim.'},
+  {s:'E4',t:'Kalite benim için hızdan daha önemlidir.'},
+  {s:'E4',t:'Bir ürünün son halinin kusursuz olması beni tatmin eder.'},
+  {s:'E4',t:'Malzeme seçiminde en kalitelisini tercih ederim.'},
+  {s:'E4',t:'Bir işi yarım bırakmaktansa zamanında bitirmek için sabırla çalışırım.'},
+  {s:'E4',t:'Başkalarının işimdeki titizliğimi takdir etmesi hoşuma gider.'},
+  {s:'E4',t:'İşimde mükemmeliyetçi olduğum söylenir.'},
+  {s:'E4',t:'Kullandığım aletleri temiz ve düzenli tutarım.'},
+  {s:'E4',t:'Bir ürünün dayanıklılığı için ekstra çaba harcarım.'},
+  {s:'E4',t:'Detaylara takılmak beni yavaşlatır ama sonuç daha iyi olur.'},
+  {s:'E4',t:'İşimi gururla imzalayabileceğim kalitede yapmak isterim.'}
+];
+HANDWERK_QUESTIONS.tr = hwTrBase;
+
+// German and English translations (simplified for brevity but complete in final code)
+HANDWERK_QUESTIONS.de = hwTrBase.map(q => {
+  const translations = {
+    'Bir şeyi kendi ellerinle yapıp bitirdiğinde derin bir tatmin duyarsın.': 'Wenn du etwas mit deinen eigenen Händen fertigstellst, empfindest du tiefe Befriedigung.',
+    'Bozuk bir şeyi tamir etmek sana anlamsız gelmez, aksine meydan okuma gibi gelir.': 'Kaputte Dinge zu reparieren ist für dich keine Sinnlosigkeit, sondern eine Herausforderung.',
+    'El becerisi gerektiren işlerde diğerlerinden daha başarılısındır.': 'Bei handwerklichen Tätigkeiten bist du anderen überlegen.',
+    'Mobilya kurulumu, tamirat gibi işleri yapmaktan keyif alırsın.': 'Du machst gerne Möbelmontage oder Reparaturen.',
+    'Bir aletin nasıl çalıştığını anlamak için kurcalamayı seversin.': 'Du liebst es, Geräte auseinanderzunehmen, um zu verstehen, wie sie funktionieren.',
+    'Resim, heykel veya model yapmak sana iyi gelir.': 'Malen, Bildhauerei oder Modellbau tun dir gut.',
+    'Pratik problemler karşısında teorik bilgiden önce deneyerek çözmeyi denerim.': 'Bei praktischen Problemen versuchst du es zuerst durch Ausprobieren, statt Theorie.',
+    'Bilgisayar başında oturmaktansa fiziksel bir şey üretmeyi tercih edersin.': 'Du arbeitest lieber mit deinen Händen, als stundenlang vor dem Computer zu sitzen.',
+    'Makinelerin nasıl çalıştığını anlamak için kılavuz okumaktan çok elle denersin.': 'Um Maschinen zu verstehen, probierst du lieber selbst als Handbücher zu lesen.',
+    'Bir nesneyi tamir ederken sabırla uğraşmak sana zevk verir.': 'Geduldig an einer Reparatur zu arbeiten macht dir Freude.',
+    'Marangozluk, elektrik veya benzeri zanaat dersleri ilgini çeker.': 'Handwerkskurse wie Tischlerei oder Elektrotechnik interessieren dich.',
+    'El işçiliği gerektiren hobi veya projelerde zamanın nasıl geçtiğini anlamazsın.': 'Bei handwerklichen Projekten vergisst du die Zeit.',
+    'Göz ve el koordinasyonu gerektiren işlerde kendine güvenirsin.': 'Du vertraust auf deine Hand-Auge-Koordination bei feinmotorischen Aufgaben.',
+    'Kendi işinin patronu olma fikri seni heyecanlandırır.': 'Die Idee, dein eigener Chef zu sein, begeistert dich.',
+    'Bağımsız çalışmayı, bir ekip içinde çalışmaya tercih edersin.': 'Selbstständiges Arbeiten ist dir lieber als Teamarbeit.',
+    'Küçük bir işletme kurup büyütmek hayallerin arasında.': 'Ein eigenes kleines Unternehmen aufzubauen ist einer deiner Träume.',
+    'Bir zanaat dalında usta olup kendi atölyeni açmak istersin.': 'Du möchtest in einem Handwerk Meister werden und deine eigene Werkstatt eröffnen.',
+    'Sipariş bazlı çalışmak, maaşlı çalışmaktan daha özgür hissettirir.': 'Auftragsarbeit fühlt sich freier an als Festanstellung.',
+    'Bir işi kendi sorumluluğunda tamamlamak motivasyonunu artırır.': 'Eigenverantwortlich eine Aufgabe zu erledigen motiviert dich.',
+    'Finansal risk alarak kendi işini kurmak sana cazip gelir.': 'Finanzielle Risiken für die eigene Selbstständigkeit einzugehen reizt dich.',
+    'Kendi ürününü veya hizmetini doğrudan müşteriye sunmak isterim.': 'Dein eigenes Produkt oder deine Dienstleistung direkt anzubieten ist dein Wunsch.',
+    'Zanaatkâr ruhu: her işi sahiplenerek yapmak bana göre.': 'Handwerker-Mentalität: Jeden Auftrag mit Leidenschaft zu erledigen.',
+    'Esnaf kültürü ve mahalle işletmeleri ilgimi çeker.': 'Die Kultur des Kleinunternehmers und der Laden vor Ort interessiert dich.',
+    'Bir atölyede üretim yapmak ofis ortamından daha cezbedici.': 'Eine Werkstatt ist für dich attraktiver als ein Büro.',
+    'Kendi işimi kurmak için gerekli adımları öğrenmeye istekliyim.': 'Du bist bereit, die Schritte zur Unternehmensgründung zu lernen.',
+    'Serbest meslek sahibi olmak bana göre.': 'Selbstständigkeit ist genau dein Weg.',
+    'Yeni bir alet veya makine öğrenmek beni heyecanlandırır.': 'Neue Werkzeuge oder Maschinen zu lernen begeistert dich.',
+    'Teknolojik gelişmeleri takip edip kendime uygulamaktan keyif alırım.': 'Du verfolgst technische Entwicklungen und setzt sie gerne ein.',
+    'Bir cihazın içini açıp nasıl çalıştığını anlamaya çalışırım.': 'Du nimmst Geräte auseinander, um ihre Funktionsweise zu verstehen.',
+    'Mesleki eğitim (Ausbildung) gibi uygulamalı öğrenme bana daha uygun.': 'Praktische Ausbildung (Ausbildung) liegt dir mehr als Theorie.',
+    'Yazılımdan çok donanım, mekanik veya elektrik ilgimi çeker.': 'Hardware, Mechanik oder Elektronik interessieren dich mehr als Software.',
+    'Usta-çırak ilişkisinde öğrenmek benim için idealdir.': 'Im Meister-Lehrling-Verhältnis zu lernen ist ideal für dich.',
+    'Yeni bir teknik beceri kazanmak için kurslara katılırım.': 'Du besuchst Kurse, um neue handwerkliche Fähigkeiten zu erwerben.',
+    'Mesleğimde kullanılan aletlerin bakımını yapmayı severim.': 'Die Pflege von Werkzeugen in deinem Beruf macht dir Spaß.',
+    'Teknik çizim okumak veya plan takip etmek bana kolay gelir.': 'Technische Zeichnungen zu lesen oder Pläne zu verfolgen fällt dir leicht.',
+    'Bilgiyi uygulamaya dökmek, teoride kalmaktan iyidir.': 'Wissen in die Praxis umzusetzen ist besser als nur Theorie.',
+    'Bir işi yaparken sürekli yeni yöntemler denemek isterim.': 'Bei der Arbeit probierst du gerne neue Methoden aus.',
+    'Teknik konularda araştırma yapmak hobimdir.': 'Technische Recherche ist dein Hobby.',
+    'Yaptığım işte en küçük detaya kadar özen gösteririm.': 'Bei deiner Arbeit achtest du auf jedes Detail.',
+    'Bir işi aceleye getirip hatalı yapmaktansa zaman alırım.': 'Du nimmst dir lieber Zeit, als eine Arbeit schlampig zu erledigen.',
+    'İşimi teslim etmeden defalarca kontrol ederim.': 'Vor der Abgabe kontrollierst du deine Arbeit mehrfach.',
+    'Kalite benim için hızdan daha önemlidir.': 'Qualität ist dir wichtiger als Schnelligkeit.',
+    'Bir ürünün son halinin kusursuz olması beni tatmin eder.': 'Ein makelloses Endergebnis befriedigt dich.',
+    'Malzeme seçiminde en kalitelisini tercih ederim.': 'Bei Materialien wählst du stets die beste Qualität.',
+    'Bir işi yarım bırakmaktansa zamanında bitirmek için sabırla çalışırım.': 'Eine Arbeit nicht fertigzustellen ist keine Option; du bleibst geduldig dran.',
+    'Başkalarının işimdeki titizliğimi takdir etmesi hoşuma gider.': 'Es freut dich, wenn andere deine Sorgfalt schätzen.',
+    'İşimde mükemmeliyetçi olduğum söylenir.': 'Man sagt dir nach, dass du perfektionistisch arbeitest.',
+    'Kullandığım aletleri temiz ve düzenli tutarım.': 'Du hältst deine Werkzeuge sauber und ordentlich.',
+    'Bir ürünün dayanıklılığı için ekstra çaba harcarım.': 'Für die Langlebigkeit eines Produkts gibst du extra Mühe.',
+    'Detaylara takılmak beni yavaşlatır ama sonuç daha iyi olur.': 'Detailverliebt zu sein verlangsamt dich, aber das Ergebnis ist besser.',
+    'İşimi gururla imzalayabileceğim kalitede yapmak isterim.': 'Du willst deine Arbeit mit Stolz unterschreiben können.'
+  };
+  return { s: q.s, t: translations[q.t] || q.t };
+});
+HANDWERK_QUESTIONS.en = hwTrBase.map(q => {
+  const translations = {
+    'Bir şeyi kendi ellerinle yapıp bitirdiğinde derin bir tatmin duyarsın.': 'Completing something with your own hands gives you deep satisfaction.',
+    'Bozuk bir şeyi tamir etmek sana anlamsız gelmez, aksine meydan okuma gibi gelir.': 'Fixing broken things feels like a challenge, not a waste of time.',
+    'El becerisi gerektiren işlerde diğerlerinden daha başarılısındır.': 'You are better than others at tasks requiring manual dexterity.',
+    'Mobilya kurulumu, tamirat gibi işleri yapmaktan keyif alırsın.': 'You enjoy assembling furniture or doing repairs.',
+    'Bir aletin nasıl çalıştığını anlamak için kurcalamayı seversin.': 'You like to tinker with tools to understand how they work.',
+    'Resim, heykel veya model yapmak sana iyi gelir.': 'Painting, sculpting, or model making feels good to you.',
+    'Pratik problemler karşısında teorik bilgiden önce deneyerek çözmeyi denerim.': 'When facing a practical problem, you try hands-on before theory.',
+    'Bilgisayar başında oturmaktansa fiziksel bir şey üretmeyi tercih edersin.': 'You prefer creating something physical over sitting at a computer.',
+    'Makinelerin nasıl çalıştığını anlamak için kılavuz okumaktan çok elle denersin.': 'To understand machines, you experiment rather than read manuals.',
+    'Bir nesneyi tamir ederken sabırla uğraşmak sana zevk verir.': 'Patiently working on a repair gives you pleasure.',
+    'Marangozluk, elektrik veya benzeri zanaat dersleri ilgini çeker.': 'Craft courses like carpentry or electrical work interest you.',
+    'El işçiliği gerektiren hobi veya projelerde zamanın nasıl geçtiğini anlamazsın.': 'Time flies when you are working on a hands-on project.',
+    'Göz ve el koordinasyonu gerektiren işlerde kendine güvenirsin.': 'You trust your hand-eye coordination for fine tasks.',
+    'Kendi işinin patronu olma fikri seni heyecanlandırır.': 'The idea of being your own boss excites you.',
+    'Bağımsız çalışmayı, bir ekip içinde çalışmaya tercih edersin.': 'You prefer working independently over working in a team.',
+    'Küçük bir işletme kurup büyütmek hayallerin arasında.': 'Starting and growing a small business is one of your dreams.',
+    'Bir zanaat dalında usta olup kendi atölyeni açmak istersin.': 'You want to become a master in a craft and open your own workshop.',
+    'Sipariş bazlı çalışmak, maaşlı çalışmaktan daha özgür hissettirir.': 'Working on a contract basis feels more freeing than being an employee.',
+    'Bir işi kendi sorumluluğunda tamamlamak motivasyonunu artırır.': 'Completing a task on your own responsibility boosts your motivation.',
+    'Finansal risk alarak kendi işini kurmak sana cazip gelir.': 'Taking financial risks to start your own business appeals to you.',
+    'Kendi ürününü veya hizmetini doğrudan müşteriye sunmak isterim.': 'You want to offer your product or service directly to customers.',
+    'Zanaatkâr ruhu: her işi sahiplenerek yapmak bana göre.': 'Craftsman spirit: you take ownership of every job.',
+    'Esnaf kültürü ve mahalle işletmeleri ilgimi çeker.': 'The culture of local entrepreneurship interests you.',
+    'Bir atölyede üretim yapmak ofis ortamından daha cezbedici.': 'A workshop setting is more attractive than an office.',
+    'Kendi işimi kurmak için gerekli adımları öğrenmeye istekliyim.': 'You are willing to learn the steps needed to start a business.',
+    'Serbest meslek sahibi olmak bana göre.': 'Self-employment suits you.',
+    'Yeni bir alet veya makine öğrenmek beni heyecanlandırır.': 'Learning a new tool or machine excites you.',
+    'Teknolojik gelişmeleri takip edip kendime uygulamaktan keyif alırım.': 'You follow technological developments and apply them.',
+    'Bir cihazın içini açıp nasıl çalıştığını anlamaya çalışırım.': 'You open up devices to understand how they work.',
+    'Mesleki eğitim (Ausbildung) gibi uygulamalı öğrenme bana daha uygun.': 'Practical training (apprenticeship) suits you better than theory.',
+    'Yazılımdan çok donanım, mekanik veya elektrik ilgimi çeker.': 'Hardware, mechanics, or electronics interest you more than software.',
+    'Usta-çırak ilişkisinde öğrenmek benim için idealdir.': 'Learning in a master-apprentice relationship is ideal for you.',
+    'Yeni bir teknik beceri kazanmak için kurslara katılırım.': 'You take courses to gain new technical skills.',
+    'Mesleğimde kullanılan aletlerin bakımını yapmayı severim.': 'Maintaining the tools used in your profession gives you pleasure.',
+    'Teknik çizim okumak veya plan takip etmek bana kolay gelir.': 'Reading technical drawings or following plans is easy for you.',
+    'Bilgiyi uygulamaya dökmek, teoride kalmaktan iyidir.': 'Putting knowledge into practice is better than just theory.',
+    'Bir işi yaparken sürekli yeni yöntemler denemek isterim.': 'You enjoy trying new methods while working.',
+    'Teknik konularda araştırma yapmak hobimdir.': 'Doing technical research is a hobby of yours.',
+    'Yaptığım işte en küçük detaya kadar özen gösteririm.': 'You pay attention to every detail in your work.',
+    'Bir işi aceleye getirip hatalı yapmaktansa zaman alırım.': 'You take your time rather than rushing and making mistakes.',
+    'İşimi teslim etmeden defalarca kontrol ederim.': 'You check your work multiple times before delivery.',
+    'Kalite benim için hızdan daha önemlidir.': 'Quality matters more to you than speed.',
+    'Bir ürünün son halinin kusursuz olması beni tatmin eder.': 'A flawless final result satisfies you.',
+    'Malzeme seçiminde en kalitelisini tercih ederim.': 'You always choose the best quality materials.',
+    'Bir işi yarım bırakmaktansa zamanında bitirmek için sabırla çalışırım.': 'You patiently work until a task is finished properly.',
+    'Başkalarının işimdeki titizliğimi takdir etmesi hoşuma gider.': 'You appreciate when others acknowledge your thoroughness.',
+    'İşimde mükemmeliyetçi olduğum söylenir.': 'People say you are a perfectionist.',
+    'Kullandığım aletleri temiz ve düzenli tutarım.': 'You keep your tools clean and organized.',
+    'Bir ürünün dayanıklılığı için ekstra çaba harcarım.': 'You go the extra mile to ensure durability.',
+    'Detaylara takılmak beni yavaşlatır ama sonuç daha iyi olur.': 'Being detail-oriented may slow you down but improves the result.',
+    'İşimi gururla imzalayabileceğim kalitede yapmak isterim.': 'You want to be able to sign your work with pride.'
+  };
+  return { s: q.s, t: translations[q.t] || q.t };
+});
+
+// ==================== GLOBAL STATE ====================
 let lang = 'tr';
 let currentQ = 0;
 let answers = new Array(100).fill(null);
-let isProcessing = false; // for double-click prevention
+let isProcessing = false;
+
+let hwAnswers = new Array(50).fill(null);
+let hwCurrent = 0;
+let hwScore = null;
+let hwCompleted = false;
+let hwSkipped = false;
+
 const questions = () => QUESTIONS[lang];
 const ui = () => UI[lang];
 
-// ══════════════════════════════════════════════════════════
-// SCREENS
-// ══════════════════════════════════════════════════════════
+// ==================== SCREEN HANDLING ====================
 function show(id) {
-  ['lang-screen','intro-screen','quiz-screen','result-screen'].forEach(s=>{
+  ['lang-screen','intro-screen','quiz-screen','handwerk-quiz-screen','result-screen'].forEach(s=>{
     document.getElementById(s).classList.add('hidden');
   });
   document.getElementById(id).classList.remove('hidden');
@@ -1139,6 +1418,12 @@ function selectLang(l) {
   document.getElementById('intro-cat-lbl').textContent = u.catLbl;
   document.getElementById('intro-min-lbl').textContent = u.minLbl;
   document.getElementById('start-btn-txt').textContent = u.startBtn;
+  // handwerk invite texts
+  document.getElementById('hw-invite-title').textContent = u.handwerk.inviteTitle;
+  document.getElementById('hw-invite-desc').textContent = u.handwerk.inviteDesc;
+  document.getElementById('hw-start-btn').textContent = u.handwerk.startBtn;
+  document.getElementById('hw-skip-btn').textContent = u.handwerk.skipBtn;
+  document.getElementById('hw-card-title').textContent = u.handwerk.cardTitle;
   show('intro-screen');
 }
 
@@ -1149,20 +1434,15 @@ function startQuiz() {
   show('quiz-screen');
 }
 
-// ══════════════════════════════════════════════════════════
-// QUIZ
-// ══════════════════════════════════════════════════════════
+// ==================== MAIN QUIZ ====================
 function renderQuestion() {
   const q = questions()[currentQ];
   const u = ui();
   const total = 100;
   const pct = ((currentQ+1)/total*100).toFixed(1);
 
-  // Logo
   const logo = document.getElementById('quiz-logo');
-  logo.innerHTML = u.appName === 'PusulaPro'
-    ? 'Pusula<span>Pro</span>'
-    : 'Navigo<span>Pro</span>';
+  logo.innerHTML = u.appName === 'PusulaPro' ? 'Pusula<span>Pro</span>' : 'Navigo<span>Pro</span>';
 
   document.getElementById('progress-info').textContent = `${currentQ+1} / ${total}`;
   document.getElementById('progress-fill').style.width = pct + '%';
@@ -1172,14 +1452,12 @@ function renderQuestion() {
   document.getElementById('lbl-disagree').textContent = u.disagree;
   document.getElementById('lbl-agree').textContent = u.agree;
 
-  // Reset buttons selection
-  document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelectorAll('#quiz-screen .scale-btn').forEach(b => b.classList.remove('selected'));
   if (answers[currentQ] !== null) {
-    document.querySelector(`.scale-btn[data-v="${answers[currentQ]}"]`)?.classList.add('selected');
+    document.querySelector(`#quiz-screen .scale-btn[data-v="${answers[currentQ]}"]`)?.classList.add('selected');
   }
 
-  // Re-enable scale buttons (they might have been disabled temporarily)
-  document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = false);
+  document.querySelectorAll('#quiz-screen .scale-btn').forEach(btn => btn.disabled = false);
   isProcessing = false;
 
   const nextBtn = document.getElementById('btn-next');
@@ -1192,22 +1470,15 @@ function renderQuestion() {
 }
 
 function selectAnswer(v) {
-  if (isProcessing) return; // prevent double-click during processing
-  if (answers[currentQ] !== null) return; // already answered
-
+  if (isProcessing || answers[currentQ] !== null) return;
   isProcessing = true;
   answers[currentQ] = v;
-  // update UI
-  document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelector(`.scale-btn[data-v="${v}"]`).classList.add('selected');
-  // disable scale buttons temporarily to avoid repeated clicks
-  document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = true);
-  // enable next button
+  document.querySelectorAll('#quiz-screen .scale-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`#quiz-screen .scale-btn[data-v="${v}"]`).classList.add('selected');
+  document.querySelectorAll('#quiz-screen .scale-btn').forEach(btn => btn.disabled = true);
   document.getElementById('btn-next').disabled = false;
-
-  // re-enable scale buttons after a short delay (allow time for animation)
   setTimeout(() => {
-    document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = false);
+    document.querySelectorAll('#quiz-screen .scale-btn').forEach(btn => btn.disabled = false);
     isProcessing = false;
   }, 300);
 }
@@ -1229,9 +1500,104 @@ function prevQuestion() {
   }
 }
 
-// ══════════════════════════════════════════════════════════
-// RESULTS
-// ══════════════════════════════════════════════════════════
+// ==================== HANDWERK QUIZ ====================
+function startHandwerkQuiz() {
+  hwAnswers = new Array(50).fill(null);
+  hwCurrent = 0;
+  hwCompleted = false;
+  hwSkipped = false;
+  renderHandwerkQuestion();
+  show('handwerk-quiz-screen');
+}
+
+function renderHandwerkQuestion() {
+  const q = HANDWERK_QUESTIONS[lang][hwCurrent];
+  const u = ui();
+  const total = 50;
+  const pct = ((hwCurrent+1)/total*100).toFixed(1);
+  document.getElementById('hw-progress-info').textContent = `${hwCurrent+1} / ${total}`;
+  document.getElementById('hw-progress-fill').style.width = pct + '%';
+  let section = '';
+  if (q.s === 'E1') section = 'E1 — ' + (lang==='tr'?'Pratik Zeka & El Becerisi':lang==='de'?'Praktische Intelligenz & Handgeschick':'Practical Skills & Dexterity');
+  else if (q.s === 'E2') section = 'E2 — ' + (lang==='tr'?'Bağımsız Çalışma & Girişimcilik':lang==='de'?'Selbstständigkeit & Unternehmertum':'Independence & Entrepreneurship');
+  else if (q.s === 'E3') section = 'E3 — ' + (lang==='tr'?'Teknik Merak & Öğrenme':lang==='de'?'Technische Neugier & Lernen':'Technical Curiosity & Learning');
+  else section = 'E4 — ' + (lang==='tr'?'Kalite & Titizlik':lang==='de'?'Qualität & Sorgfalt':'Quality & Precision');
+  document.getElementById('hw-section-badge').textContent = section;
+  document.getElementById('hw-q-num').textContent = `${lang==='tr'?'Soru':lang==='de'?'Frage':'Question'} ${hwCurrent+1}`;
+  document.getElementById('hw-q-text').textContent = q.t;
+  document.getElementById('hw-lbl-disagree').textContent = u.disagree;
+  document.getElementById('hw-lbl-agree').textContent = u.agree;
+  document.querySelectorAll('#handwerk-quiz-screen .scale-btn').forEach(b => b.classList.remove('selected'));
+  if (hwAnswers[hwCurrent] !== null) {
+    document.querySelector(`#handwerk-quiz-screen .scale-btn[data-v="${hwAnswers[hwCurrent]}"]`).classList.add('selected');
+  }
+  const nextBtn = document.getElementById('hw-btn-next');
+  const isLast = hwCurrent === total-1;
+  nextBtn.textContent = isLast ? (lang==='tr'?'Bitir →':lang==='de'?'Abschließen →':'Finish →') : (lang==='tr'?'İleri →':lang==='de'?'Weiter →':'Next →');
+  nextBtn.disabled = hwAnswers[hwCurrent] === null;
+  document.getElementById('hw-btn-back').textContent = u.backBtn;
+  document.getElementById('hw-btn-back').style.visibility = hwCurrent === 0 ? 'hidden' : 'visible';
+}
+
+function selectHandwerkAnswer(v) {
+  if (hwAnswers[hwCurrent] !== null) return;
+  hwAnswers[hwCurrent] = v;
+  document.querySelectorAll('#handwerk-quiz-screen .scale-btn').forEach(b => b.classList.remove('selected'));
+  document.querySelector(`#handwerk-quiz-screen .scale-btn[data-v="${v}"]`).classList.add('selected');
+  document.getElementById('hw-btn-next').disabled = false;
+}
+
+function nextHandwerkQuestion() {
+  if (hwAnswers[hwCurrent] === null) return;
+  if (hwCurrent < 49) {
+    hwCurrent++;
+    renderHandwerkQuestion();
+  } else {
+    finishHandwerk();
+  }
+}
+
+function prevHandwerkQuestion() {
+  if (hwCurrent > 0) {
+    hwCurrent--;
+    renderHandwerkQuestion();
+  }
+}
+
+function finishHandwerk() {
+  hwScore = hwAnswers.reduce((a,b)=>a+b,0) / 50;
+  hwCompleted = true;
+  show('result-screen');
+  document.getElementById('handwerk-module-invite').style.display = 'none';
+  if (hwScore >= 3.5) showHandwerkCard();
+}
+
+function skipHandwerkModule() {
+  hwSkipped = true;
+  document.getElementById('handwerk-module-invite').style.display = 'none';
+}
+
+function showHandwerkCard() {
+  const u = ui();
+  const level = u.handwerk.levels.find(l => hwScore >= l.min && hwScore <= l.max);
+  if (!level) return;
+  const card = document.getElementById('handwerk-result-card');
+  const content = document.getElementById('hw-card-content');
+  content.innerHTML = `<div class="profile-title" style="font-size:1.3rem;">${level.title}</div>
+    <div class="profile-desc">${level.desc}</div>
+    <div style="margin-top:12px;"><strong>${lang==='tr'?'Handwerk Skoru':lang==='de'?'Handwerk-Score':'Craft Score'}:</strong> ${hwScore.toFixed(1)} / 5</div>`;
+  const jobsContainer = document.getElementById('hw-jobs-list');
+  jobsContainer.innerHTML = '';
+  u.handwerk.jobs.forEach(job => {
+    const badge = document.createElement('span');
+    badge.className = 'handwerk-job-badge';
+    badge.textContent = job;
+    jobsContainer.appendChild(badge);
+  });
+  card.classList.remove('hidden');
+}
+
+// ==================== RESULTS (main) ====================
 function calcScores() {
   const cats = {A:[],B:[],C:[],D:[]};
   questions().forEach((q,i) => {
@@ -1250,9 +1616,7 @@ function calcScores() {
 function getProfile(total) {
   const profiles = PROFILES[lang];
   let best = profiles[0];
-  for (const p of profiles) {
-    if (total >= p.min) best = p;
-  }
+  for (const p of profiles) if (total >= p.min) best = p;
   return best;
 }
 
@@ -1275,7 +1639,7 @@ function showResults() {
   document.getElementById('fb-btn').textContent = u.fbBtn;
   document.getElementById('fb-btn').href = `mailto:info@navigopro.de?subject=${u.fbSubject}`;
 
-  // Score bars
+  // score bars
   const barsEl = document.getElementById('score-bars');
   barsEl.innerHTML = '';
   ['A','B','C','D'].forEach(cat => {
@@ -1283,52 +1647,43 @@ function showResults() {
     const div = document.createElement('div');
     div.className = 'score-row';
     div.innerHTML = `
-      <div class="score-label-row">
-        <span class="score-label">${u.scoreNames[cat]}</span>
-        <span class="score-val">${scores[cat].toFixed(1)} / 5</span>
-      </div>
-      <div class="score-bar-bg">
-        <div class="score-bar-fill" style="width:0%" data-pct="${pct}"></div>
-      </div>`;
+      <div class="score-label-row"><span class="score-label">${u.scoreNames[cat]}</span><span class="score-val">${scores[cat].toFixed(1)} / 5</span></div>
+      <div class="score-bar-bg"><div class="score-bar-fill" style="width:0%" data-pct="${pct}"></div></div>`;
     barsEl.appendChild(div);
   });
   setTimeout(() => {
-    document.querySelectorAll('.score-bar-fill').forEach(el => {
-      el.style.width = el.dataset.pct + '%';
-    });
+    document.querySelectorAll('.score-bar-fill').forEach(el => el.style.width = el.dataset.pct + '%');
   }, 100);
 
-  // Careers
+  // careers
   const careersEl = document.getElementById('careers-list');
   careersEl.innerHTML = '';
   profile.careers.forEach(c => {
     const div = document.createElement('div');
     div.className = 'career-item';
-    div.innerHTML = `<div class="career-icon">${c.i}</div>
-      <div><div class="career-name">${c.n}</div><div class="career-reason">${c.r}</div></div>`;
+    div.innerHTML = `<div class="career-icon">${c.i}</div><div><div class="career-name">${c.n}</div><div class="career-reason">${c.r}</div></div>`;
     careersEl.appendChild(div);
   });
 
-  // Strengths
+  // strengths
   const sg = document.getElementById('strengths-grid');
-  sg.innerHTML = `
-    <div class="strength-box green">
-      <div class="strength-tag">${u.strengthLbl}</div>
-      <div class="strength-text">${profile.strength}</div>
-    </div>
-    <div class="strength-box amber">
-      <div class="strength-tag">${u.devLbl}</div>
-      <div class="strength-text">${profile.dev}</div>
-    </div>`;
+  sg.innerHTML = `<div class="strength-box green"><div class="strength-tag">${u.strengthLbl}</div><div class="strength-text">${profile.strength}</div></div>
+    <div class="strength-box amber"><div class="strength-tag">${u.devLbl}</div><div class="strength-text">${profile.dev}</div></div>`;
 
-  // Draw radar
   drawRadar(scores, u.radarLabels);
+
+  // handwerk invite
+  if (!hwCompleted && !hwSkipped) {
+    document.getElementById('handwerk-module-invite').style.display = 'block';
+  } else {
+    document.getElementById('handwerk-module-invite').style.display = 'none';
+  }
+  // ensure handwerk card is shown if already completed
+  if (hwCompleted && hwScore >= 3.5) showHandwerkCard();
+
   show('result-screen');
 }
 
-// ══════════════════════════════════════════════════════════
-// RADAR CHART
-// ══════════════════════════════════════════════════════════
 function drawRadar(scores, labels) {
   const canvas = document.getElementById('radarChart');
   const ctx = canvas.getContext('2d');
@@ -1338,10 +1693,8 @@ function drawRadar(scores, labels) {
   const cats = ['A','B','C','D'];
   const vals = cats.map(c => scores[c]/5);
   const angles = cats.map((_,i) => (i/cats.length)*2*Math.PI - Math.PI/2);
-
   ctx.clearRect(0,0,W,H);
-
-  // Grid
+  // grid
   for (let level=1; level<=5; level++) {
     ctx.beginPath();
     angles.forEach((a,i) => {
@@ -1354,18 +1707,15 @@ function drawRadar(scores, labels) {
     ctx.lineWidth = 1;
     ctx.stroke();
   }
-
-  // Axes
+  // axes
   angles.forEach(a => {
     ctx.beginPath();
     ctx.moveTo(cx,cy);
     ctx.lineTo(cx+r*Math.cos(a), cy+r*Math.sin(a));
     ctx.strokeStyle = '#DDD';
-    ctx.lineWidth = 1;
     ctx.stroke();
   });
-
-  // Data
+  // data
   ctx.beginPath();
   vals.forEach((v,i) => {
     const x = cx + r*v*Math.cos(angles[i]);
@@ -1378,8 +1728,7 @@ function drawRadar(scores, labels) {
   ctx.strokeStyle = '#F6B45F';
   ctx.lineWidth = 2.5;
   ctx.stroke();
-
-  // Points
+  // points
   vals.forEach((v,i) => {
     const x = cx + r*v*Math.cos(angles[i]);
     const y = cy + r*v*Math.sin(angles[i]);
@@ -1388,8 +1737,7 @@ function drawRadar(scores, labels) {
     ctx.fillStyle = '#04162E';
     ctx.fill();
   });
-
-  // Labels (using provided custom labels)
+  // labels
   ctx.font = 'bold 11px DM Sans, sans-serif';
   ctx.fillStyle = '#04162E';
   ctx.textAlign = 'center';
@@ -1401,6 +1749,5 @@ function drawRadar(scores, labels) {
   });
 }
 </script>
-
 </body>
 </html>
