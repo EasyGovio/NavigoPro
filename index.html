@@ -1,24 +1,18 @@
 <!DOCTYPE html>
+
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>NavigoPro | PACDI Kariyer Değerlendirme</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             background: #f4f7fc;
             font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             padding: 24px 20px;
             color: #1a2c3e;
         }
-
-        /* ana container */
         .app-container {
             max-width: 900px;
             margin: 0 auto;
@@ -26,593 +20,505 @@
             border-radius: 40px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.08);
             overflow: hidden;
-            transition: all 0.2s;
         }
-
-        /* header */
         .brand {
             background: #04162E;
             padding: 18px 28px;
             color: white;
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
+            align-items: center;
             flex-wrap: wrap;
             gap: 10px;
         }
-        .brand h1 {
-            font-weight: 600;
-            font-size: 1.6rem;
-            letter-spacing: -0.3px;
-        }
-        .brand h1 span {
-            color: #F6B45F;
-        }
+        .brand h1 { font-weight: 600; font-size: 1.6rem; letter-spacing: -0.3px; }
+        .brand h1 span { color: #F6B45F; }
         .badge {
             font-size: 0.8rem;
-            background: #F6B45F20;
+            background: rgba(246,180,95,0.15);
             padding: 6px 12px;
             border-radius: 60px;
             color: #F6B45F;
         }
-
-        /* content */
-        .view {
-            padding: 28px 32px;
-        }
-
-        /* dil seçimi / giriş */
-        .lang-selector {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-            margin-bottom: 28px;
-        }
+        .view { padding: 28px 32px; }
+        .lang-selector { display: flex; gap: 12px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
         .lang-btn {
-            background: #eef2f5;
-            border: none;
-            padding: 8px 24px;
-            border-radius: 60px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 1rem;
+            background: #eef2f5; border: none; padding: 8px 24px;
+            border-radius: 60px; font-weight: 600; cursor: pointer;
+            transition: 0.2s; font-size: 1rem;
         }
-        .lang-btn.active {
-            background: #04162E;
-            color: white;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
+        .lang-btn.active { background: #04162E; color: white; }
         .start-card {
-            text-align: center;
-            background: #ffffff;
-            border-radius: 32px;
-            padding: 32px 20px;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.02);
+            text-align: center; background: #ffffff;
+            border-radius: 32px; padding: 32px 20px;
             border: 1px solid #e2edf2;
         }
-        .start-card h2 {
-            font-size: 1.9rem;
-            margin-bottom: 16px;
-            color: #04162E;
-        }
-        .start-card p {
-            margin: 12px 0;
-            color: #2c4b66;
-        }
+        .start-card h2 { font-size: 1.9rem; margin-bottom: 16px; color: #04162E; }
+        .start-card p { margin: 12px 0; color: #2c4b66; line-height: 1.6; }
         .btn-primary {
-            background: #04162E;
-            color: white;
-            border: none;
-            padding: 14px 32px;
-            border-radius: 60px;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-top: 20px;
-            cursor: pointer;
-            transition: 0.2s;
+            background: #04162E; color: white; border: none;
+            padding: 14px 32px; border-radius: 60px; font-weight: 600;
+            font-size: 1rem; margin-top: 20px; cursor: pointer; transition: 0.2s;
         }
-        .btn-primary:hover {
-            background: #0a2a4a;
-            transform: scale(0.98);
-        }
-        .btn-secondary {
-            background: #eef2f5;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        /* modül başlık */
+        .btn-primary:hover { background: #0a2a4a; }
         .module-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 24px;
-            flex-wrap: wrap;
-            justify-content: space-between;
+            display: flex; align-items: center; gap: 14px;
+            margin-bottom: 24px; flex-wrap: wrap; justify-content: space-between;
         }
-        .module-icon {
-            font-size: 2.6rem;
-        }
-        .module-title {
-            font-size: 1.7rem;
-            font-weight: 700;
-        }
+        .module-icon { font-size: 2.2rem; }
+        .module-title { font-size: 1.5rem; font-weight: 700; }
         .progress-area {
-            background: #e9edf2;
-            border-radius: 40px;
-            height: 8px;
-            width: 100%;
-            margin: 16px 0 8px;
+            background: #e9edf2; border-radius: 40px;
+            height: 8px; width: 100%; margin: 16px 0 8px;
         }
         .progress-fill {
-            background: #F6B45F;
-            width: 0%;
-            height: 8px;
-            border-radius: 40px;
-            transition: width 0.25s ease;
+            background: #F6B45F; width: 0%; height: 8px;
+            border-radius: 40px; transition: width 0.25s ease;
         }
-        .q-counter {
-            font-size: 0.85rem;
-            color: #5b7a97;
-            margin-bottom: 24px;
-        }
+        .q-counter { font-size: 0.85rem; color: #5b7a97; margin-bottom: 24px; }
         .question-text {
-            font-size: 1.35rem;
-            font-weight: 500;
-            line-height: 1.4;
-            margin: 28px 0 24px;
-            background: #f9fbfd;
-            padding: 20px;
-            border-radius: 28px;
-            border-left: 5px solid #F6B45F;
+            font-size: 1.25rem; font-weight: 500; line-height: 1.5;
+            margin: 24px 0; background: #f9fbfd; padding: 20px;
+            border-radius: 20px; border-left: 5px solid #F6B45F;
         }
-        .options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 20px 0 28px;
-        }
+        .options { display: flex; flex-direction: column; gap: 10px; margin: 20px 0 28px; }
         .option {
-            background: #f0f4f9;
-            padding: 10px 18px;
-            border-radius: 100px;
-            cursor: pointer;
-            transition: 0.1s;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid transparent;
+            background: #f0f4f9; padding: 12px 20px; border-radius: 12px;
+            cursor: pointer; transition: 0.15s; font-size: 0.95rem;
+            font-weight: 500; border: 2px solid transparent; text-align: left;
         }
-        .option.selected {
-            background: #04162E;
-            color: white;
-            border-color: #F6B45F;
-        }
-        .nav-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+        .option:hover { border-color: #F6B45F; background: #fef9f0; }
+        .option.selected { background: #04162E; color: white; border-color: #F6B45F; }
+        .nav-buttons { display: flex; justify-content: space-between; margin-top: 20px; gap: 12px; }
         .btn-nav {
-            background: transparent;
-            border: 1px solid #cad2db;
-            padding: 10px 24px;
-            border-radius: 40px;
-            font-weight: 600;
-            cursor: pointer;
+            background: transparent; border: 2px solid #cad2db;
+            padding: 12px 28px; border-radius: 40px; font-weight: 600;
+            cursor: pointer; transition: 0.15s; font-size: 0.95rem;
         }
-        .btn-next {
-            background: #04162E;
-            color: white;
-            border: none;
-        }
-
-        /* ara ekran */
-        .inter-card {
-            text-align: center;
-            padding: 20px 0;
-        }
+        .btn-nav:hover { border-color: #04162E; }
+        .btn-nav:disabled { opacity: 0.4; cursor: not-allowed; }
+        .btn-next { background: #04162E; color: white; border-color: #04162E; }
+        .btn-next:hover { background: #0a2a4a; }
+        .warning { color: #c0392b; font-size: 0.85rem; margin-top: 10px; min-height: 20px; }
+        .inter-card { text-align: center; padding: 20px 0; }
+        .inter-card h3 { font-size: 1.4rem; margin-bottom: 8px; color: #04162E; }
         .score-circle {
-            font-size: 3.2rem;
-            font-weight: 800;
-            background: #f0f3f8;
-            width: 140px;
-            height: 140px;
-            line-height: 140px;
-            border-radius: 50%;
-            margin: 20px auto;
-            color: #04162E;
+            font-size: 3rem; font-weight: 800; background: #f0f3f8;
+            width: 130px; height: 130px; line-height: 130px;
+            border-radius: 50%; margin: 20px auto; color: #04162E;
         }
-        .motivation {
-            font-style: italic;
-            margin: 20px 0;
-        }
-
-        /* rapor */
-        .report-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 28px;
-        }
-        .bars-container {
-            background: #f8fafc;
-            border-radius: 28px;
-            padding: 20px;
-        }
-        .bar-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin: 12px 0;
-        }
-        .bar-label {
-            width: 130px;
-            font-weight: 600;
-        }
-        .bar-bg {
-            flex: 1;
-            background: #e2e8f0;
-            border-radius: 20px;
-            height: 28px;
-            overflow: hidden;
-        }
+        .motivation { font-style: italic; margin: 20px 0; color: #2c4b66; font-size: 1.1rem; }
+        .report-grid { display: flex; flex-direction: column; gap: 24px; }
+        .bars-container { background: #f8fafc; border-radius: 24px; padding: 20px; }
+        .bars-container h3 { margin-bottom: 16px; color: #04162E; }
+        .bar-item { display: flex; align-items: center; gap: 10px; margin: 10px 0; }
+        .bar-label { width: 140px; font-weight: 600; font-size: 0.85rem; line-height: 1.3; }
+        .bar-bg { flex: 1; background: #e2e8f0; border-radius: 20px; height: 24px; overflow: hidden; }
         .bar-fill {
-            height: 28px;
-            width: 0%;
-            background: #04162E;
-            border-radius: 20px;
-            transition: width 0.8s ease-out;
+            height: 24px; width: 0%; background: #04162E;
+            border-radius: 20px; transition: width 0.8s ease-out;
         }
-        .radar-container {
-            background: #ffffff;
-            border-radius: 28px;
-            padding: 20px;
-            text-align: center;
-        }
-        canvas {
-            max-width: 100%;
-            background: #fefefe;
-            border-radius: 24px;
-            margin: 10px 0;
-        }
+        .bar-score { font-weight: 700; font-size: 0.9rem; width: 36px; text-align: right; }
+        .radar-container { background: #fff; border-radius: 24px; padding: 20px; text-align: center; }
+        .radar-container h3 { margin-bottom: 12px; color: #04162E; }
+        canvas { max-width: 100%; border-radius: 16px; }
         .profile-card {
-            background: #04162E0c;
-            padding: 20px;
-            border-radius: 28px;
-            border-left: 6px solid #F6B45F;
+            background: rgba(4,22,46,0.05); padding: 24px;
+            border-radius: 24px; border-left: 6px solid #F6B45F;
         }
+        .profile-card h3 { margin-bottom: 12px; color: #04162E; }
+        .profile-name { font-size: 1.4rem; font-weight: 700; color: #04162E; margin-bottom: 8px; }
+        .profile-score { color: #5b7a97; margin-bottom: 16px; }
+        .special-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
         .special-badge {
-            display: inline-block;
-            background: #F6B45F;
-            padding: 8px 16px;
-            border-radius: 60px;
-            font-weight: bold;
-            margin: 8px 4px;
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #F6B45F; color: #04162E; padding: 8px 16px;
+            border-radius: 60px; font-weight: 700; font-size: 0.9rem;
         }
+        .career-list { list-style: none; margin-top: 12px; }
+        .career-list li {
+            padding: 10px 14px; background: white; border-radius: 10px;
+            margin: 6px 0; border-left: 3px solid #F6B45F; font-size: 0.9rem;
+        }
+        .feedback-section { text-align: center; margin-top: 16px; }
+        .feedback-section a { color: #04162E; font-weight: 600; }
         .footer-note {
-            font-size: 0.7rem;
-            text-align: center;
-            margin-top: 24px;
-            color: #5f7f9a;
-            border-top: 1px solid #e2edf2;
-            padding-top: 20px;
+            font-size: 0.7rem; text-align: center; margin-top: 24px;
+            color: #5f7f9a; border-top: 1px solid #e2edf2; padding-top: 20px;
         }
         @media (max-width: 620px) {
-            .view { padding: 20px; }
-            .question-text { font-size: 1.1rem; }
-            .options { gap: 8px; }
-        }
-        .warning {
-            color: #b33;
-            font-size: 0.8rem;
-            margin-top: 8px;
+            body { padding: 12px; }
+            .view { padding: 20px 16px; }
+            .question-text { font-size: 1.1rem; padding: 16px; }
+            .bar-label { width: 100px; font-size: 0.78rem; }
+            .module-title { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
-<div class="app-container" id="appRoot">
+<div class="app-container">
     <div class="brand">
         <h1>Navigo<span>Pro</span> · PACDI</h1>
         <div class="badge">™ TÜRKPATENT | kariyer pusulası</div>
     </div>
-    <div id="dynamicView" class="view"><!-- dinamik içerik --></div>
+    <div id="dynamicView" class="view"></div>
 </div>
 <script>
-    // --------------------------------------------------------------
-    // 1. SORU BANKALARI (TR / EN / DE) 6 MODÜL x 15
-    // --------------------------------------------------------------
-    const MODULE_NAMES = {
-        tr: ["Karakter & Değerler", "Bilişsel Yetkinlik", "Mesleki Tutku & Eğilim", "Sosyal Adalet & Etik", "Handwerk & Zanaat", "Kişisel Refah & Sağlık"],
-        en: ["Character & Values", "Cognitive Competence", "Professional Passion & Tendency", "Social Justice & Ethics", "Craft & Handwerk", "Personal Wellbeing & Health"],
-        de: ["Charakter & Werte", "Kognitive Kompetenz", "Berufliche Leidenschaft & Neigung", "Soziale Gerechtigkeit & Ethik", "Handwerk & Zunft", "Persönliches Wohlbefinden & Gesundheit"]
-    };
-    const MODULE_ICONS = ["🧭", "🧠", "🎯", "⚖️", "🔧", "🌿"];
-    const MODULE_COLORS = ["#04162E", "#1565C0", "#2E7D32", "#6A1B9A", "#E65100", "#00695C"];
+// ══════════════════════════════════════════════════
+// VERİ
+// ══════════════════════════════════════════════════
+const MODULE_NAMES = {
+    tr: ["Karakter & Değerler","Bilişsel Yetkinlik","Mesleki Tutku & Eğilim","Sosyal Adalet & Etik","Handwerk & Zanaat","Kişisel Refah & Sağlık"],
+    en: ["Character & Values","Cognitive Competence","Professional Passion","Social Justice & Ethics","Craft & Handwerk","Personal Wellbeing & Health"],
+    de: ["Charakter & Werte","Kognitive Kompetenz","Berufliche Leidenschaft","Soziale Gerechtigkeit & Ethik","Handwerk & Zunft","Persönliches Wohlbefinden"]
+};
+const MODULE_ICONS = ["🧭","🧠","🎯","⚖️","🔧","🌿"];
+const MODULE_COLORS = ["#04162E","#1565C0","#2E7D32","#6A1B9A","#E65100","#00695C"];
 
-    // Türkçe sorular (verilen)
-    const TR_QUESTIONS = [
-        [ // M1
-            "Bir işin sonucunda büyük kazanç varsa bile etik değerlerinle çatışıyorsa vazgeçersin.",
-            "Çalışma hayatında maddi kazanç ne kadar cazip olursa olsun kişisel değerlerinden ödün vermezsin.",
-            "Adaletsiz bir terfi süreci gördüğünde sessiz kalmak yerine hakkı savunursun.",
-            "Yalan söyleyerek elde edilen bir başarı seni tatmin etmez.",
-            "Kendi hatanı kabul etmek başkasını suçlamaktan daha doğal gelir sana.",
-            "Güven duygusu bir iş ilişkisinde maaştan daha belirleyicidir.",
-            "Bir yöneticinin yanlış kararını yüzüne söyleyebilirsin.",
-            "İş hayatında 'herkes yapıyor' gerekçesi seni etik dışı davranışa yönlendirmez.",
-            "Çalıştığın kurumun değerleri senin kişisel değerlerinle örtüşmek zorundadır.",
-            "Bir hatayı örtbas etmek yerine açıkça paylaşmak tercihine uyar.",
-            "Başkasının hakkını korumak için kendi çıkarından vazgeçebilirsin.",
-            "Şeffaflık uzun vadede her zaman gizlilikten daha iyi sonuç verir.",
-            "Toplumsal baskı altında bile kendi değerlerinle çelişen kararlar almazsın.",
-            "Bir karar alırken 'bu doğru mu?' sorusunu 'bu kazandırır mı?' sorusundan önce sorarsın.",
-            "Onurlu bir yaşam için daha az kazanmayı kabul edebilirsin."
-        ],
-        [ // M2
-            "Karmaşık bir problemi çözerken önce parçalara ayırırsın.",
-            "Bir kriz anında hızlı ve isabetli karar verebilirsin.",
-            "Sayısal verilerle çalışmak sana yük değil bulmaca gibi gelir.",
-            "Teknolojik değişimlere hızla uyum sağlarsın.",
-            "Uzun vadeli sonuçları kısa vadeli kazançların önünde tutarsın.",
-            "Eleştirel düşünme becerin günlük hayatında da aktif olarak çalışır.",
-            "Belirsizlik içeren durumlarda mantıklı tahminler yaparak ilerlersin.",
-            "Zaman baskısı altında bile sistemli düşünme alışkanlığını korursun.",
-            "Karmaşık bir konuyu başkasına sade bir dille anlatabilirsin.",
-            "Kalıpların dışında düşünmek sana zor değil keyifli gelir.",
-            "Geri bildirim aldığında bunu kişisel saldırı olarak değil gelişim fırsatı olarak görürsün.",
-            "Büyük hedefleri küçük adımlara bölmek senin güçlü yönlerindendir.",
-            "Farklı disiplinlerden bilgileri bir araya getirerek yeni çözümler üretebilirsin.",
-            "Hata yaptığında nedenini analiz etmek seni rahatsız etmez aksine meraklandırır.",
-            "Öğrendiğin bilgiyi uygulamaya koymadan önce zihinsel olarak test edersin."
-        ],
-        [ // M3
-            "Zamanın nasıl geçtiğini unutacak kadar kendini kaptırdığın bir iş alanı var.",
-            "Bir projeyi bitirdiğinde aldığın takdirden çok yarattığın fayda seni tatmin eder.",
-            "Rutin işler yerine her gün farklı bir şeyler öğrendiğin işleri tercih edersin.",
-            "Ürettiğin bir şeyin somut bir fayda yaratması seni motive eder.",
-            "İnsanları yönlendirmek ve ilham vermek sana doğal gelir.",
-            "Araştırma yapmak ve yeni bilgi keşfetmek seni mesleki olarak tatmin eder.",
-            "Girişimcilik ve yeni bir şey kurma fikri seni heyecanlandırır.",
-            "Sağlık ve insan refahıyla ilgili alanlarda çalışmayı anlamlı bulursun.",
-            "Teknoloji geliştirmek veya yazılım üretmek ilgi alanların arasındadır.",
-            "Eğitim ve bilgi aktarımı odaklı işler sana anlam verir.",
-            "Liderlik pozisyonları sorumluluk değil fırsat gibi hissettirır.",
-            "Mesleki tatminin için yaptığın işin toplumdaki yansımasını görmen gerekir.",
-            "Bir alanda uzman olmak her şeyi biraz bilmekten daha çekici gelir.",
-            "Başkalarının gelişimine katkı sağlamak seni mesleki olarak tatmin eder.",
-            "Elindeki imkânlar sınırsız olsa yarın sabah yapmak istediğin iş aklına net gelir."
-        ],
-        [ // M4
-            "Hak etmediğini düşündüğün bir ödül sana verilse rahatsızlık duyarsın.",
-            "Bir işe alımda liyakat tecrübeden daha belirleyici olmalıdır.",
-            "Toplumun dezavantajlı kesimlerine yönelik projeler seni heyecanlandırır.",
-            "Fırsat eşitsizliğini azaltmak için aktif çaba sarf etmek senin sorumluluk alanındadır.",
-            "Çalıştığın sektörün topluma katkısı senin için iş seçiminde belirleyicidir.",
-            "Eşit fırsat olmadan performans değerlendirmesinin anlamlı olmadığına inanırsın.",
-            "Bir sistemin adaletsiz işlediğini gördüğünde değiştirmek için adım atarsın.",
-            "İklim değişikliği ve çevre sorunları mesleki kararlarını etkiler.",
-            "Göç ve entegrasyon süreçleri seni hem kişisel hem mesleki olarak ilgilendirir.",
-            "Dijital uçurum çözülmesi gereken bir sorun olarak görürsün.",
-            "Bir şirketin çalışan refahı hissedar getirisinden önce gelmeli.",
-            "Sosyal girişimcilik geleneksel girişimcilikten daha anlamlı gelir sana.",
-            "Gelir dağılımındaki adaletsizlik seni hem kişisel hem mesleki olarak rahatsız eder.",
-            "Ölçülebilir toplumsal fayda yaratmak kariyerinin temel motivasyon kaynağıdır.",
-            "Toplumsal fayda sağlamayan ama çok kazandıran bir meslek sana uygun değildir."
-        ],
-        [ // M5
-            "Bir şeyi kendi ellerinle yapıp bitirdiğinde derin bir tatmin duyarsın.",
-            "Bozuk bir şeyi tamir etmek sana meydan okuma gibi gelir.",
-            "Mobilya kurulumu tamirat gibi işleri yapmaktan keyif alırsın.",
-            "Bir aletin nasıl çalıştığını anlamak için kurcalamayı seversin.",
-            "Bilgisayar başında oturmaktansa fiziksel bir şey üretmeyi tercih edersin.",
-            "Makinelerin nasıl çalıştığını anlamak için kılavuz okumaktan çok elle denersin.",
-            "Marangozluk elektrik veya benzeri zanaat dersleri ilgini çeker.",
-            "Kendi işinin patronu olma fikri seni heyecanlandırır.",
-            "Bir zanaat dalında usta olup kendi atölyeni açmak istersin.",
-            "Yeni bir alet veya makine öğrenmek beni heyecanlandırır.",
-            "Usta-çırak ilişkisinde öğrenmek benim için idealdir.",
-            "Yaptığım işte en küçük detaya kadar özen gösteririm.",
-            "Kalite benim için hızdan daha önemlidir.",
-            "Bir ürünün dayanıklılığı için ekstra çaba harcarım.",
-            "İşimi gururla imzalayabileceğim kalitede yapmak isterim."
-        ],
-        [ // M6
-            "Stresli dönemlerde bile uyku düzenini korumaya özen gösterirsin.",
-            "Fiziksel aktivite senin için bir zorunluluk değil bir ihtiyaçtır.",
-            "İş-yaşam dengesi senin için müzakere edilemez bir sınırdır.",
-            "Duygusal durumunun iş performansını doğrudan etkilediğinin farkındasın.",
-            "Beslenme alışkanlıklarının uzun vadeli sağlığını şekillendirdiğine inanırsın.",
-            "Yüksek stres altında vücudunun verdiği sinyalleri fark edebilirsin.",
-            "Zihinsel sağlık fiziksel sağlık kadar önemlidir.",
-            "Düzenli sağlık kontrolü yaptırmak bir önceliğindir.",
-            "Kronik hastalıkların büyük çoğunluğunun yaşam tarzıyla ilişkili olduğuna inanırsın.",
-            "Dijital ekranlardan uzak zaman geçirmek sana iyi gelir.",
-            "Sosyal bağların güçlü olması ruh sağlığı için kritiktir.",
-            "Mesleki başarı için sağlıklı olmak temel bir önkoşuldur.",
-            "Bir gün içinde kısa molalar verimliliğini artırır.",
-            "Kendi sağlığına yatırım yapmak en karlı yatırımdır.",
-            "Sağlık okuryazarlığı herkesin sahip olması gereken temel bir beceridir."
-        ]
-    ];
+const QUESTIONS = {
+tr: [
+[“Bir işin sonucunda büyük kazanç varsa bile etik değerlerinle çatışıyorsa vazgeçersin.”,“Çalışma hayatında maddi kazanç ne kadar cazip olursa olsun kişisel değerlerinden ödün vermezsin.”,“Adaletsiz bir terfi süreci gördüğünde sessiz kalmak yerine hakkı savunursun.”,“Yalan söyleyerek elde edilen bir başarı seni tatmin etmez.”,“Kendi hatanı kabul etmek başkasını suçlamaktan daha doğal gelir sana.”,“Güven duygusu bir iş ilişkisinde maaştan daha belirleyicidir.”,“Bir yöneticinin yanlış kararını yüzüne söyleyebilirsin.”,“İş hayatında ‘herkes yapıyor’ gerekçesi seni etik dışı davranışa yönlendirmez.”,“Çalıştığın kurumun değerleri senin kişisel değerlerinle örtüşmek zorundadır.”,“Bir hatayı örtbas etmek yerine açıkça paylaşmak tercihine uyar.”,“Başkasının hakkını korumak için kendi çıkarından vazgeçebilirsin.”,“Şeffaflık uzun vadede her zaman gizlilikten daha iyi sonuç verir.”,“Toplumsal baskı altında bile kendi değerlerinle çelişen kararlar almazsın.”,“Bir karar alırken ‘bu doğru mu?’ sorusunu ‘bu kazandırır mı?’ sorusundan önce sorarsın.”,“Onurlu bir yaşam için daha az kazanmayı kabul edebilirsin.”],
+[“Karmaşık bir problemi çözerken önce parçalara ayırırsın.”,“Bir kriz anında hızlı ve isabetli karar verebilirsin.”,“Sayısal verilerle çalışmak sana yük değil bulmaca gibi gelir.”,“Teknolojik değişimlere hızla uyum sağlarsın.”,“Uzun vadeli sonuçları kısa vadeli kazançların önünde tutarsın.”,“Eleştirel düşünme becerin günlük hayatında da aktif olarak çalışır.”,“Belirsizlik içeren durumlarda mantıklı tahminler yaparak ilerlersin.”,“Zaman baskısı altında bile sistemli düşünme alışkanlığını korursun.”,“Karmaşık bir konuyu başkasına sade bir dille anlatabilirsin.”,“Kalıpların dışında düşünmek sana zor değil keyifli gelir.”,“Geri bildirim aldığında bunu kişisel saldırı olarak değil gelişim fırsatı olarak görürsün.”,“Büyük hedefleri küçük adımlara bölmek senin güçlü yönlerindendir.”,“Farklı disiplinlerden bilgileri bir araya getirerek yeni çözümler üretebilirsin.”,“Hata yaptığında nedenini analiz etmek seni rahatsız etmez aksine meraklandırır.”,“Öğrendiğin bilgiyi uygulamaya koymadan önce zihinsel olarak test edersin.”],
+[“Zamanın nasıl geçtiğini unutacak kadar kendini kaptırdığın bir iş alanı var.”,“Bir projeyi bitirdiğinde aldığın takdirden çok yarattığın fayda seni tatmin eder.”,“Rutin işler yerine her gün farklı bir şeyler öğrendiğin işleri tercih edersin.”,“Ürettiğin bir şeyin somut bir fayda yaratması seni motive eder.”,“İnsanları yönlendirmek ve ilham vermek sana doğal gelir.”,“Araştırma yapmak ve yeni bilgi keşfetmek seni mesleki olarak tatmin eder.”,“Girişimcilik ve yeni bir şey kurma fikri seni heyecanlandırır.”,“Sağlık ve insan refahıyla ilgili alanlarda çalışmayı anlamlı bulursun.”,“Teknoloji geliştirmek veya yazılım üretmek ilgi alanların arasındadır.”,“Eğitim ve bilgi aktarımı odaklı işler sana anlam verir.”,“Liderlik pozisyonları sorumluluk değil fırsat gibi hissettirir.”,“Mesleki tatminin için yaptığın işin toplumdaki yansımasını görmen gerekir.”,“Bir alanda uzman olmak her şeyi biraz bilmekten daha çekici gelir.”,“Başkalarının gelişimine katkı sağlamak seni mesleki olarak tatmin eder.”,“Elindeki imkânlar sınırsız olsa yarın sabah yapmak istediğin iş aklına net gelir.”],
+[“Hak etmediğini düşündüğün bir ödül sana verilse rahatsızlık duyarsın.”,“Bir işe alımda liyakat tecrübeden daha belirleyici olmalıdır.”,“Toplumun dezavantajlı kesimlerine yönelik projeler seni heyecanlandırır.”,“Fırsat eşitsizliğini azaltmak için aktif çaba sarf etmek senin sorumluluk alanındadır.”,“Çalıştığın sektörün topluma katkısı senin için iş seçiminde belirleyicidir.”,“Eşit fırsat olmadan performans değerlendirmesinin anlamlı olmadığına inanırsın.”,“Bir sistemin adaletsiz işlediğini gördüğünde değiştirmek için adım atarsın.”,“İklim değişikliği ve çevre sorunları mesleki kararlarını etkiler.”,“Göç ve entegrasyon süreçleri seni hem kişisel hem mesleki olarak ilgilendirir.”,“Dijital uçurum çözülmesi gereken bir sorun olarak görürsün.”,“Bir şirketin çalışan refahı hissedar getirisinden önce gelmeli.”,“Sosyal girişimcilik geleneksel girişimcilikten daha anlamlı gelir sana.”,“Gelir dağılımındaki adaletsizlik seni hem kişisel hem mesleki olarak rahatsız eder.”,“Ölçülebilir toplumsal fayda yaratmak kariyerinin temel motivasyon kaynağıdır.”,“Toplumsal fayda sağlamayan ama çok kazandıran bir meslek sana uygun değildir.”],
+[“Bir şeyi kendi ellerinle yapıp bitirdiğinde derin bir tatmin duyarsın.”,“Bozuk bir şeyi tamir etmek sana meydan okuma gibi gelir.”,“Mobilya kurulumu tamirat gibi işleri yapmaktan keyif alırsın.”,“Bir aletin nasıl çalıştığını anlamak için kurcalamayı seversin.”,“Bilgisayar başında oturmaktansa fiziksel bir şey üretmeyi tercih edersin.”,“Makinelerin nasıl çalıştığını anlamak için kılavuz okumaktan çok elle denersin.”,“Marangozluk elektrik veya benzeri zanaat dersleri ilgini çeker.”,“Kendi işinin patronu olma fikri seni heyecanlandırır.”,“Bir zanaat dalında usta olup kendi atölyeni açmak istersin.”,“Yeni bir alet veya makine öğrenmek seni heyecanlandırır.”,“Usta-çırak ilişkisinde öğrenmek senin için idealdir.”,“Yaptığın işte en küçük detaya kadar özen gösterirsin.”,“Kalite senin için hızdan daha önemlidir.”,“Bir ürünün dayanıklılığı için ekstra çaba harcarsın.”,“İşini gururla imzalayabileceğin kalitede yapmak istersin.”],
+[“Stresli dönemlerde bile uyku düzenini korumaya özen gösterirsin.”,“Fiziksel aktivite senin için bir zorunluluk değil bir ihtiyaçtır.”,“İş-yaşam dengesi senin için müzakere edilemez bir sınırdır.”,“Duygusal durumunun iş performansını doğrudan etkilediğinin farkındasın.”,“Beslenme alışkanlıklarının uzun vadeli sağlığını şekillendirdiğine inanırsın.”,“Yüksek stres altında vücudunun verdiği sinyalleri fark edebilirsin.”,“Zihinsel sağlık fiziksel sağlık kadar önemlidir.”,“Düzenli sağlık kontrolü yaptırmak bir önceliğindir.”,“Kronik hastalıkların büyük çoğunluğunun yaşam tarzıyla ilişkili olduğuna inanırsın.”,“Dijital ekranlardan uzak zaman geçirmek sana iyi gelir.”,“Sosyal bağların güçlü olması ruh sağlığı için kritiktir.”,“Mesleki başarı için sağlıklı olmak temel bir önkoşuldur.”,“Bir gün içinde kısa molalar verimliliğini artırır.”,“Kendi sağlığına yatırım yapmak en karlı yatırımdır.”,“Sağlık okuryazarlığı herkesin sahip olması gereken temel bir beceridir.”]
+],
+en: [
+[“If a job yields huge profit but conflicts with your ethics, you give it up.”,“No matter how tempting the financial gain, you don’t compromise your values in work life.”,“When you see an unfair promotion, you stand up for justice instead of staying silent.”,“Success achieved through lies never satisfies you.”,“Admitting your own mistake feels more natural than blaming others.”,“Trust is more decisive than salary in a business relationship.”,“You can speak up about a manager’s wrong decision to their face.”,“The excuse ‘everyone does it’ doesn’t lead you to unethical behavior.”,“Your organization’s values must align with your personal values.”,“You prefer to openly share a mistake rather than cover it up.”,“You can give up your own benefit to protect someone else’s right.”,“Transparency always yields better results than secrecy in the long run.”,“Even under social pressure, you don’t make decisions against your values.”,“When deciding, you ask ‘is this right?’ before ‘does this profit me?’.”,“You can accept earning less for an honorable life.”],
+[“When solving complex problems, you break them down first.”,“In a crisis, you can make quick and accurate decisions.”,“Working with numerical data feels like a puzzle, not a burden.”,“You adapt quickly to technological changes.”,“You prioritize long-term results over short-term gains.”,“Your critical thinking skills actively work in daily life.”,“In uncertain situations, you move forward with logical estimates.”,“Even under time pressure, you maintain systematic thinking.”,“You can explain complex topics simply to others.”,“Thinking outside the box feels enjoyable, not difficult.”,“When receiving feedback, you see it as a growth opportunity, not a personal attack.”,“Breaking big goals into small steps is one of your strengths.”,“You can combine knowledge from different disciplines to create new solutions.”,“Analyzing why you made a mistake intrigues rather than bothers you.”,“You mentally test learned knowledge before applying it.”],
+[“There is a work field you immerse in so deeply that you lose track of time.”,“When you finish a project, the benefit you create satisfies you more than praise.”,“You prefer jobs where you learn something new daily over routine tasks.”,“Producing something that creates tangible benefit motivates you.”,“Guiding and inspiring people feels natural to you.”,“Researching and discovering new knowledge gives you professional satisfaction.”,“Entrepreneurship and starting something new excites you.”,“You find working in health and human welfare fields meaningful.”,“Developing technology or software is among your interests.”,“Education and knowledge transfer oriented work gives you meaning.”,“Leadership positions feel like opportunities, not burdens.”,“To feel professional satisfaction, you need to see your work’s impact on society.”,“Becoming an expert in one field is more appealing than knowing a little about everything.”,“Contributing to others’ development gives you professional fulfillment.”,“If resources were unlimited, you clearly know what you would do tomorrow morning.”],
+[“If you receive an award you feel you don’t deserve, you feel uncomfortable.”,“In recruitment, merit should be more decisive than experience.”,“Projects for disadvantaged groups excite you.”,“Actively working to reduce inequality of opportunity is your responsibility.”,“Your industry’s contribution to society is decisive in your career choice.”,“You believe performance evaluation is meaningless without equal opportunity.”,“When you see an unfair system, you take steps to change it.”,“Climate change and environmental issues affect your career decisions.”,“Migration and integration processes interest you both personally and professionally.”,“You see the digital divide as a problem that needs solving.”,“Employee well-being should come before shareholder returns.”,“Social entrepreneurship feels more meaningful than traditional entrepreneurship.”,“Income inequality disturbs you both personally and professionally.”,“Creating measurable social benefit is a core motivation of your career.”,“A profession that earns a lot but provides no social benefit is not suitable for you.”],
+[“When you finish something with your own hands, you feel deep satisfaction.”,“Fixing something broken feels like a challenge to you.”,“You enjoy tasks like furniture assembly and repairs.”,“You love tinkering to understand how a tool works.”,“You prefer producing something physical over sitting at a computer.”,“To understand how machines work, you try hands-on rather than reading manuals.”,“Carpentry, electrical or similar craft courses interest you.”,“The idea of being your own boss excites you.”,“You would like to master a craft and open your own workshop.”,“Learning a new tool or machine excites you.”,“Learning in a master-apprentice relationship is ideal for you.”,“You pay attention to every detail in your work.”,“Quality is more important to you than speed.”,“You put extra effort into ensuring product durability.”,“You want to do your work with a quality you can proudly sign.”],
+[“Even in stressful times, you take care to maintain your sleep routine.”,“Physical activity is a need, not an obligation for you.”,“Work-life balance is a non-negotiable boundary for you.”,“You are aware that your emotional state directly affects your work performance.”,“You believe eating habits shape your long-term health.”,“Under high stress, you can notice the signals your body gives.”,“Mental health is as important as physical health.”,“Getting regular health check-ups is a priority for you.”,“You believe the majority of chronic diseases are related to lifestyle.”,“Spending time away from digital screens makes you feel good.”,“Strong social connections are critical for mental health.”,“Being healthy is a fundamental prerequisite for professional success.”,“Short breaks during the day increase your productivity.”,“Investing in your own health is the most profitable investment.”,“Health literacy is a basic skill everyone should have.”]
+],
+de: [
+[“Wenn ein Job großen Gewinn bringt, aber mit Ihren Werten kollidiert, verzichten Sie.”,“Im Berufsleben geben Sie persönliche Werte nicht auf, egal wie verlockend der Gewinn.”,“Bei unfairen Beförderungsprozessen setzen Sie sich für Gerechtigkeit ein.”,“Erfolg durch Lügen befriedigt Sie nicht.”,“Eigene Fehler einzugestehen fällt Ihnen leichter als andere zu beschuldigen.”,“Vertrauen ist in einer Arbeitsbeziehung entscheidender als Gehalt.”,“Sie sprechen eine falsche Entscheidung einer Führungskraft direkt an.”,“Die Ausrede ‘das macht doch jeder’ führt nicht zu unethischem Verhalten.”,“Die Werte Ihrer Organisation müssen mit Ihren persönlichen Werten übereinstimmen.”,“Sie teilen einen Fehler lieber offen, als ihn zu vertuschen.”,“Sie können auf eigenen Vorteil verzichten, um das Recht anderer zu schützen.”,“Transparenz führt langfristig immer zu besseren Ergebnissen als Geheimhaltung.”,“Auch unter sozialem Druck treffen Sie keine Entscheidungen gegen Ihre Werte.”,“Bei Entscheidungen fragen Sie ‘ist das richtig?’ vor ‘bringt das Gewinn?’.”,“Für ein ehrenhaftes Leben akzeptieren Sie weniger Verdienst.”],
+[“Bei komplexen Problemen zerlegen Sie sie zuerst in Teile.”,“In Krisensituationen treffen Sie schnelle und präzise Entscheidungen.”,“Arbeiten mit Zahlen fühlt sich an wie Rätsel lösen, nicht wie Last.”,“Sie passen sich schnell an technologische Veränderungen an.”,“Langfristige Ergebnisse sind Ihnen wichtiger als kurzfristige Gewinne.”,“Kritisches Denken nutzen Sie aktiv im Alltag.”,“In unsicheren Situationen bewegen Sie sich mit logischen Schätzungen voran.”,“Auch unter Zeitdruck behalten Sie systematisches Denken bei.”,“Sie können komplexe Themen einfach erklären.”,“Außerhalb der Box zu denken macht Ihnen Freude.”,“Feedback sehen Sie als Entwicklungschance, nicht als persönlichen Angriff.”,“Große Ziele in kleine Schritte zu unterteilen ist eine Ihrer Stärken.”,“Sie kombinieren Wissen aus verschiedenen Disziplinen für neue Lösungen.”,“Fehleranalyse macht Sie neugierig, statt unangenehm zu sein.”,“Sie testen Gelerntes gedanklich, bevor Sie es anwenden.”],
+[“Es gibt ein Arbeitsfeld, bei dem Sie die Zeit vergessen.”,“Bei abgeschlossenen Projekten motiviert Sie der Nutzen mehr als Lob.”,“Sie bevorzugen Arbeit, bei der Sie täglich Neues lernen.”,“Konkreten Nutzen zu schaffen motiviert Sie.”,“Menschen zu führen und zu inspirieren fällt Ihnen leicht.”,“Forschen und neue Erkenntnisse entdecken gibt berufliche Erfüllung.”,“Unternehmertum und etwas Neues gründen begeistert Sie.”,“Arbeit im Gesundheits- und Wohlfahrtsbereich finden Sie sinnvoll.”,“Technologieentwicklung oder Software zählen zu Ihren Interessen.”,“Bildung und Wissensvermittlung gibt Ihnen Sinn.”,“Führungspositionen fühlen sich wie Chance an, nicht Last.”,“Für berufliche Erfüllung müssen Sie gesellschaftliche Wirkung sehen.”,“Experte in einem Bereich zu sein ist reizvoller als vieles oberflächlich zu wissen.”,“Zur Entwicklung anderer beizutragen erfüllt Sie beruflich.”,“Wenn Mittel unbegrenzt wären, wissen Sie genau, was Sie morgen früh tun würden.”],
+[“Wenn Sie eine Auszeichnung erhalten, die Sie nicht verdient haben, fühlen Sie sich unwohl.”,“Bei Einstellungen sollte Leistung entscheidender sein als Erfahrung.”,“Projekte für benachteiligte Gruppen begeistern Sie.”,“Aktiv Ungleichheit zu reduzieren ist Ihre Verantwortung.”,“Der gesellschaftliche Beitrag Ihrer Branche ist für Berufswahl entscheidend.”,“Leistungsbewertung ohne Chancengleichheit ist für Sie sinnlos.”,“Bei Ungerechtigkeit ergreifen Sie Maßnahmen zur Veränderung.”,“Klimawandel und Umwelt beeinflussen Ihre Berufsentscheidungen.”,“Migration und Integration interessieren Sie persönlich und beruflich.”,“Digitale Spaltung ist ein Problem, das gelöst werden muss.”,“Mitarbeiterwohl sollte vor Aktionärsrendite kommen.”,“Sozialunternehmertum ist sinnvoller als traditionelles Unternehmertum.”,“Einkommensungleichheit beunruhigt Sie persönlich und beruflich.”,“Messbaren sozialen Nutzen zu schaffen ist Kernmotivation Ihrer Karriere.”,“Ein Beruf, der viel verdient aber keinen gesellschaftlichen Nutzen bringt, ist nicht geeignet.”],
+[“Wenn Sie etwas mit eigenen Händen fertigstellen, empfinden Sie tiefe Zufriedenheit.”,“Etwas Defektes zu reparieren ist eine Herausforderung für Sie.”,“Möbelaufbau und Reparaturen machen Ihnen Freude.”,“Sie lieben es, ein Werkzeug zu verstehen, indem Sie es ausprobieren.”,“Sie produzieren lieber physisch, als am Computer zu sitzen.”,“Um Maschinen zu verstehen, probieren Sie lieber praktisch als Handbuch zu lesen.”,“Schreinerei, Elektrik oder handwerkliche Kurse interessieren Sie.”,“Die Idee, eigener Chef zu sein, begeistert Sie.”,“Sie möchten ein Handwerk meistern und eine eigene Werkstatt eröffnen.”,“Ein neues Werkzeug oder eine Maschine zu lernen begeistert Sie.”,“Lernen in der Meister-Lehrling-Beziehung ist ideal für Sie.”,“Sie achten auf kleinste Details bei Ihrer Arbeit.”,“Qualität ist Ihnen wichtiger als Geschwindigkeit.”,“Für die Langlebigkeit eines Produkts geben Sie extra Mühe.”,“Sie möchten Arbeit in einer Qualität abliefern, die Sie stolz unterschreiben können.”],
+[“Selbst in stressigen Zeiten achten Sie auf Ihren Schlafrhythmus.”,“Bewegung ist für Sie Bedürfnis, keine Pflicht.”,“Work-Life-Balance ist eine nicht verhandelbare Grenze für Sie.”,“Ihnen ist bewusst, dass emotionale Verfassung die Arbeitsleistung beeinflusst.”,“Ernährungsgewohnheiten prägen Ihre langfristige Gesundheit, das glauben Sie.”,“Bei starkem Stress nehmen Sie die Signale Ihres Körpers wahr.”,“Psychische Gesundheit ist genauso wichtig wie physische.”,“Regelmäßige Gesundheitschecks sind für Sie Priorität.”,“Sie glauben, dass chronische Krankheiten mit dem Lebensstil zusammenhängen.”,“Zeit ohne digitale Bildschirme tut Ihnen gut.”,“Starke soziale Bindungen sind für psychische Gesundheit wichtig.”,“Gesund zu sein ist Grundvoraussetzung für beruflichen Erfolg.”,“Kurze Pausen während des Tages steigern Ihre Produktivität.”,“In Ihre Gesundheit zu investieren ist die beste Investition.”,“Gesundheitskompetenz ist eine grundlegende Fähigkeit, die jeder haben sollte.”]
+]
+};
 
-    // İngilizce & Almanca çeviriler (kısa ve doğru anlam)
-    function buildLangQuestions() {
-        const EN = [], DE = [];
-        const tr = TR_QUESTIONS;
-        // çeviriler (manuel tutarlı)
-        const enMap = [
-            ["If a job yields huge profit but conflicts with your ethics, you give it up.", "In work life, no matter how tempting the financial gain, you don't compromise your values.", "When you see an unfair promotion, you stand up for justice instead of staying silent.", "Success achieved through lies never satisfies you.", "Admitting your own mistake feels more natural than blaming others.", "Trust is more decisive than salary in a business relationship.", "You can speak up about a manager's wrong decision to their face.", "The excuse 'everyone does it' doesn't lead you to unethical behavior.", "Your organization's values must align with your personal values.", "You prefer to openly share a mistake rather than cover it up.", "You can give up your own benefit to protect someone else's right.", "Transparency always yields better results than secrecy in the long run.", "Even under social pressure, you don't make decisions against your values.", "When deciding, you ask 'is this right?' before 'does this profit me?'.", "You can accept earning less for an honorable life."],
-            ["When solving complex problems, you break them down first.", "In a crisis, you can make quick and accurate decisions.", "Working with numerical data feels like a puzzle, not a burden.", "You adapt quickly to technological changes.", "You prioritize long-term results over short-term gains.", "Your critical thinking skills actively work in daily life.", "In uncertain situations, you move forward with logical estimates.", "Even under time pressure, you maintain systematic thinking.", "You can explain complex topics simply to others.", "Thinking outside the box feels enjoyable, not difficult.", "When receiving feedback, you see it as growth opportunity, not personal attack.", "Breaking big goals into small steps is one of your strengths.", "You can combine knowledge from different disciplines to create new solutions.", "Analyzing why you made a mistake intrigues rather than bothers you.", "You mentally test learned knowledge before applying it."],
-            ["There is a work field you immerse in so deeply that you lose track of time.", "When you finish a project, the benefit you create satisfies you more than praise.", "You prefer jobs where you learn something new daily over routine tasks.", "Producing something that creates tangible benefit motivates you.", "Guiding and inspiring people feels natural to you.", "Researching and discovering new knowledge gives you professional satisfaction.", "Entrepreneurship and starting something new excites you.", "You find working in health and human welfare fields meaningful.", "Developing technology or software is among your interests.", "Education and knowledge transfer oriented work gives you meaning.", "Leadership positions feel like opportunities, not burdens.", "To feel professional satisfaction, you need to see your work's impact on society.", "Becoming an expert in one field is more appealing than knowing a little about everything.", "Contributing to others' development gives you professional fulfillment.", "If resources were unlimited, you clearly know what you would do tomorrow morning."],
-            ["If you receive an award you feel you don't deserve, you feel uncomfortable.", "In recruitment, merit should be more decisive than experience.", "Projects for disadvantaged groups excite you.", "Actively working to reduce inequality of opportunity is your responsibility.", "Your industry's contribution to society is decisive in your career choice.", "You believe performance evaluation is meaningless without equal opportunity.", "When you see an unfair system, you take steps to change it.", "Climate change and environmental issues affect your career decisions.", "Migration and integration processes interest you both personally and professionally.", "You see the digital divide as a problem that needs solving.", "Employee well-being should come before shareholder returns.", "Social entrepreneurship feels more meaningful to you than traditional entrepreneurship.", "Income inequality disturbs you both personally and professionally.", "Creating measurable social benefit is a core motivation of your career.", "A profession that earns a lot but provides no social benefit is not suitable for you."],
-            ["When you make or finish something with your own hands, you feel deep satisfaction.", "Fixing something broken feels like a challenge to you.", "You enjoy tasks like furniture assembly and repairs.", "You love tinkering to understand how a tool works.", "You prefer producing something physical over sitting at a computer.", "To understand how machines work, you try hands-on rather than reading manuals.", "Carpentry, electrical or similar craft courses interest you.", "The idea of being your own boss excites you.", "You would like to master a craft and open your own workshop.", "Learning a new tool or machine excites me.", "Learning in a master-apprentice relationship is ideal for me.", "I pay attention to the smallest detail in my work.", "Quality is more important to me than speed.", "I put extra effort into product durability.", "I want to do my work with a quality I can proudly sign."],
-            ["Even in stressful times, you take care to maintain your sleep routine.", "Physical activity is a need, not an obligation for you.", "Work-life balance is a non-negotiable boundary for you.", "You are aware that your emotional state directly affects your work performance.", "You believe eating habits shape your long-term health.", "Under high stress, you can notice the signals your body gives.", "Mental health is as important as physical health.", "Getting regular health check-ups is a priority for you.", "You believe the majority of chronic diseases are related to lifestyle.", "Spending time away from digital screens makes you feel good.", "Strong social connections are critical for mental health.", "Being healthy is a fundamental prerequisite for professional success.", "Short breaks during the day increase your productivity.", "Investing in your own health is the most profitable investment.", "Health literacy is a basic skill everyone should have."]
-        ];
-        const deMap = [
-            ["Wenn ein Job großen Gewinn bringt, aber mit Ihren ethischen Werten kollidiert, verzichten Sie.", "Im Berufsleben geben Sie persönliche Werte nicht auf, egal wie verlockend der finanzielle Gewinn ist.", "Bei unfairen Beförderungsprozessen setzen Sie sich für Gerechtigkeit ein.", "Erfolg durch Lügen befriedigt Sie nicht.", "Eigenen Fehler einzugestehen fällt Ihnen leichter als andere zu beschuldigen.", "Vertrauen ist in einer Arbeitsbeziehung entscheidender als Gehalt.", "Sie sprechen eine falsche Entscheidung einer Führungskraft direkt an.", "Die Ausrede 'das macht doch jeder' führt nicht zu unethischem Verhalten.", "Die Werte Ihrer Organisation müssen mit Ihren persönlichen Werten übereinstimmen.", "Sie teilen einen Fehler lieber offen, als ihn zu vertuschen.", "Sie können auf eigenen Vorteil verzichten, um das Recht anderer zu schützen.", "Transparenz führt langfristig immer zu besseren Ergebnissen als Geheimhaltung.", "Auch unter sozialem Druck treffen Sie keine Entscheidungen gegen Ihre Werte.", "Bei Entscheidungen fragen Sie 'ist das richtig?' vor 'bringt das Gewinn?'.", "Für ein ehrenhaftes Leben akzeptieren Sie weniger Verdienst."],
-            ["Bei komplexen Problemen zerlegen Sie sie zuerst in Teile.", "In Krisensituationen treffen Sie schnelle und präzise Entscheidungen.", "Arbeiten mit Zahlen fühlt sich an wie Rätsel lösen, nicht wie Last.", "Sie passen sich schnell an technologische Veränderungen an.", "Langfristige Ergebnisse sind Ihnen wichtiger als kurzfristige Gewinne.", "Kritisches Denken nutzen Sie aktiv im Alltag.", "In unsicheren Situationen bewegen Sie sich mit logischen Schätzungen voran.", "Auch unter Zeitdruck behalten Sie systematisches Denken bei.", "Sie können komplexe Themen einfach erklären.", "Außerhalb der Box zu denken macht Ihnen Freude.", "Feedback sehen Sie als Entwicklungschance, nicht als persönlichen Angriff.", "Große Ziele in kleine Schritte zu unterteilen ist eine Ihrer Stärken.", "Sie kombinieren Wissen aus verschiedenen Disziplinen für neue Lösungen.", "Fehleranalyse macht Sie neugierig, statt unangenehm zu sein.", "Sie testen Gelerntes gedanklich, bevor Sie es anwenden."],
-            ["Es gibt ein Arbeitsfeld, bei dem Sie die Zeit vergessen.", "Bei abgeschlossenen Projekten motiviert Sie der geschaffene Nutzen mehr als Lob.", "Sie bevorzugen Arbeit, bei der Sie täglich Neues lernen.", "Konkreten Nutzen zu schaffen motiviert Sie.", "Menschen zu führen und zu inspirieren fällt Ihnen leicht.", "Forschen und neue Erkenntnisse entdecken gibt berufliche Erfüllung.", "Unternehmertum und etwas Neues gründen begeistert Sie.", "Arbeit im Gesundheits- und Wohlfahrtsbereich finden Sie sinnvoll.", "Technologieentwicklung oder Software zählen zu Ihren Interessen.", "Bildung und Wissensvermittlung gibt Ihnen Sinn.", "Führungspositionen fühlen sich wie Chance an, nicht Last.", "Für berufliche Erfüllung müssen Sie gesellschaftliche Wirkung sehen.", "Experte in einem Bereich zu sein ist reizvoller als vieles oberflächlich zu wissen.", "Zur Entwicklung anderer beizutragen erfüllt Sie beruflich.", "Wenn Mittel unbegrenzt wären, wissen Sie genau, was Sie morgen früh tun würden."],
-            ["Wenn Sie eine Auszeichnung erhalten, die Sie nicht verdient haben, fühlen Sie sich unwohl.", "Bei Einstellungen sollte Leistung entscheidender sein als Erfahrung.", "Projekte für benachteiligte Gruppen begeistern Sie.", "Aktiv Ungleichheit zu reduzieren ist Ihre Verantwortung.", "Der gesellschaftliche Beitrag Ihrer Branche ist für Berufswahl entscheidend.", "Leistungsbewertung ohne Chancengleichheit ist für Sie sinnlos.", "Bei Ungerechtigkeit ergreifen Sie Maßnahmen zur Veränderung.", "Klimawandel und Umwelt beeinflussen Ihre Berufsentscheidungen.", "Migration und Integration interessieren Sie persönlich und beruflich.", "Digitale Spaltung ist ein Problem, das gelöst werden muss.", "Mitarbeiterwohl sollte vor Aktionärsrendite kommen.", "Sozialunternehmertum ist sinnvoller als traditionelles Unternehmertum.", "Einkommensungleichheit beunruhigt Sie persönlich und beruflich.", "Messbaren sozialen Nutzen zu schaffen ist Kernmotivation Ihrer Karriere.", "Ein Beruf, der viel verdient aber keinen gesellschaftlichen Nutzen bringt, ist nicht geeignet."],
-            ["Wenn Sie etwas mit eigenen Händen fertigstellen, empfinden Sie tiefe Zufriedenheit.", "Etwas Defektes zu reparieren ist eine Herausforderung.", "Möbelaufbau und Reparaturen machen Ihnen Freude.", "Sie lieben es, ein Werkzeug zu verstehen, indem Sie es ausprobieren.", "Sie produzieren lieber physisch, als am Computer zu sitzen.", "Um Maschinen zu verstehen, probieren Sie lieber praktisch als Handbuch zu lesen.", "Schreinerei, Elektrik oder handwerkliche Kurse interessieren Sie.", "Die Idee, eigener Chef zu sein, begeistert Sie.", "Sie möchten ein Handwerk meistern und eigene Werkstatt eröffnen.", "Ein neues Werkzeug oder Maschine zu lernen begeistert mich.", "Lernen in Meister-Lehre ist ideal für mich.", "Ich achte auf kleinste Details bei meiner Arbeit.", "Qualität ist mir wichtiger als Geschwindigkeit.", "Für Langlebigkeit eines Produkts gebe ich extra Mühe.", "Ich möchte Arbeit mit stolz unterschreibbarer Qualität abliefern."],
-            ["Selbst in stressigen Zeiten achten Sie auf Ihren Schlafrhythmus.", "Bewegung ist für Sie Bedürfnis, keine Pflicht.", "Work-Life-Balance ist eine nicht verhandelbare Grenze.", "Ihnen ist bewusst, dass emotionale Verfassung die Arbeitsleistung beeinflusst.", "Ernährungsgewohnheiten prägen Ihre langfristige Gesundheit.", "Bei starkem Stress nehmen Sie Körpersignale wahr.", "Psychische Gesundheit ist genauso wichtig wie physische.", "Regelmäßige Gesundheitschecks sind Priorität.", "Sie glauben, dass chronische Krankheiten mit Lebensstil zusammenhängen.", "Zeit ohne digitale Bildschirme tut Ihnen gut.", "Starke soziale Bindungen sind für psychische Gesundheit wichtig.", "Gesund zu sein ist Grundvoraussetzung für beruflichen Erfolg.", "Kurze Pausen steigern Ihre Produktivität.", "In Ihre Gesundheit zu investieren ist die beste Investition.", "Gesundheitskompetenz ist eine grundlegende Fähigkeit."]
-        ];
-        for(let i=0;i<6;i++){
-            EN.push(enMap[i]);
-            DE.push(deMap[i]);
-        }
-        return {tr:TR_QUESTIONS, en:EN, de:DE};
-    }
-    const QUESTIONS = buildLangQuestions();
+const LIKERT_LABELS = {
+tr: [“Kesinlikle Katılmıyorum”,“Katılmıyorum”,“Kararsızım”,“Katılıyorum”,“Kesinlikle Katılıyorum”],
+en: [“Strongly Disagree”,“Disagree”,“Neutral”,“Agree”,“Strongly Agree”],
+de: [“Stimme gar nicht zu”,“Stimme nicht zu”,“Unentschieden”,“Stimme zu”,“Stimme voll zu”]
+};
+const LIKERT_VALUES = [0, 1.25, 2.5, 3.75, 5];
 
-    // Likert seçenekleri (0-5 arası değerler)
-    const LIKERT_VALUES = [0, 1.25, 2.5, 3.75, 5];
-    const LIKERT_LABELS = {
-        tr: ["Kesinlikle Katılmıyorum", "Katılmıyorum", "Kararsızım", "Katılıyorum", "Kesinlikle Katılıyorum"],
-        en: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
-        de: ["Stimme gar nicht zu", "Stimme nicht zu", "Unentschieden", "Stimme zu", "Stimme voll zu"]
-    };
+// ══════════════════════════════════════════════════
+// DURUM
+// ══════════════════════════════════════════════════
+let lang = “tr”;
+let state = “lang”;
+let modAnswers = [[],[],[],[],[],[]];
+let curMod = 0;
+let curQ = 0;
+let modScores = [0,0,0,0,0,0];
 
-    // Uygulama durumu
-    let currentLang = "tr";
-    let appState = "language"; // language, entry, module, inter, report
-    let moduleAnswers = [[],[],[],[],[],[]]; // her modül için cevap değerleri (0-5)
-    let currentModule = 0;      // 0-5
-    let currentQuestion = 0;
-    let moduleScores = [0,0,0,0,0,0]; // her modülün ortalaması
+function getView() { return document.getElementById(“dynamicView”); }
 
-    const ui = document.getElementById("dynamicView");
-    function render() {
-        if(appState === "language") renderLanguageScreen();
-        else if(appState === "entry") renderEntryScreen();
-        else if(appState === "module") renderModuleScreen();
-        else if(appState === "inter") renderInterScreen();
-        else if(appState === "report") renderReportScreen();
+// ══════════════════════════════════════════════════
+// ANA RENDER
+// ══════════════════════════════════════════════════
+function render() {
+const v = getView();
+if (!v) return;
+if (state === “lang”) renderLang(v);
+else if (state === “entry”) renderEntry(v);
+else if (state === “module”) renderModule(v);
+else if (state === “inter”) renderInter(v);
+else if (state === “report”) renderReport(v);
+window.scrollTo(0, 0);
+}
+
+// ══ DİL SEÇİMİ ══
+function renderLang(v) {
+const t = lang === “tr” ? “6 modül, 90 soru ile kariyer profilinizi keşfedin.” :
+lang === “de” ? “Entdecken Sie Ihr Karriereprofil mit 6 Modulen, 90 Fragen.” :
+“Discover your career profile with 6 modules, 90 questions.”;
+const btn = lang === “tr” ? “Başla” : lang === “de” ? “Starten” : “Start”;
+v.innerHTML = ` <div class="lang-selector"> <button class="lang-btn ${lang==='tr'?'active':''}" onclick="setLang('tr')">🇹🇷 TÜRKÇE</button> <button class="lang-btn ${lang==='de'?'active':''}" onclick="setLang('de')">🇩🇪 DEUTSCH</button> <button class="lang-btn ${lang==='en'?'active':''}" onclick="setLang('en')">🇬🇧 ENGLISH</button> </div> <div class="start-card"> <h2>🧭 NavigoPro | PACDI</h2> <p>${t}</p> <button class="btn-primary" onclick="goEntry()">${btn}</button> </div>`;
+}
+function setLang(l) { lang = l; render(); }
+function goEntry() { state = “entry”; render(); }
+
+// ══ GİRİŞ ══
+function renderEntry(v) {
+const title = lang===“tr” ? “Kariyer Değerlendirmesine Hoş Geldiniz” :
+lang===“de” ? “Willkommen zur Karrierebewertung” : “Welcome to Career Assessment”;
+const desc = lang===“tr” ? “6 modül, her biri 15 soru. Geri dönüp cevapları değiştirebilirsiniz.” :
+lang===“de” ? “6 Module, je 15 Fragen. Sie können zurück und Antworten ändern.” :
+“6 modules, 15 questions each. You can go back and change answers.”;
+const btn = lang===“tr” ? “Modül 1’e Başla” : lang===“de” ? “Modul 1 starten” : “Start Module 1”;
+v.innerHTML = `<div class="start-card"><h2>📋 ${title}</h2><p>${desc}</p> <button class="btn-primary" onclick="goModule()">${btn}</button></div>`;
+}
+function goModule() { curMod = 0; curQ = 0; modAnswers = [[],[],[],[],[],[]]; state = “module”; render(); }
+
+// ══ MODÜL QUIZ ══
+function renderModule(v) {
+const qText = QUESTIONS[lang][curMod][curQ];
+const selVal = modAnswers[curMod][curQ];
+const pct = (curQ / 15) * 100;
+const modName = MODULE_NAMES[lang][curMod];
+const icon = MODULE_ICONS[curMod];
+const isLast = curQ === 14;
+const nextLbl = isLast ? (lang===“tr”?“Modülü Bitir”:lang===“de”?“Modul abschließen”:“Finish Module”) :
+(lang===“tr”?“İleri →”:lang===“de”?“Weiter →”:“Next →”);
+const backLbl = lang===“tr” ? “← Geri” : lang===“de” ? “← Zurück” : “← Back”;
+const modLbl = lang===“tr” ? `Modül ${curMod+1}/6` : `Module ${curMod+1}/6`;
+const qLbl = lang===“tr” ? `Soru ${curQ+1} / 15` : `Question ${curQ+1} / 15`;
+
+```
+const optsHtml = LIKERT_LABELS[lang].map((lbl, idx) => {
+    const val = LIKERT_VALUES[idx];
+    const sel = selVal !== undefined && Math.abs(selVal - val) < 0.01;
+    return `<div class="option${sel?' selected':''}" onclick="selectOpt(${val})">${lbl}</div>`;
+}).join('');
+
+v.innerHTML = `
+    <div class="module-header">
+        <div style="display:flex;align-items:center;gap:10px">
+            <span class="module-icon">${icon}</span>
+            <span class="module-title">${modName}</span>
+        </div>
+        <span style="color:#5b7a97;font-size:0.9rem">${modLbl}</span>
+    </div>
+    <div class="progress-area"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="q-counter">${qLbl}</div>
+    <div class="question-text">${qText}</div>
+    <div class="options">${optsHtml}</div>
+    <div class="nav-buttons">
+        <button class="btn-nav" onclick="goBack()" ${curQ===0?'disabled':''} style="${curQ===0?'opacity:0.4':''}">${backLbl}</button>
+        <button class="btn-nav btn-next" onclick="goNext()">${nextLbl}</button>
+    </div>
+    <div class="warning" id="warn"></div>`;
+```
+
+}
+function selectOpt(val) {
+modAnswers[curMod][curQ] = val;
+render();
+}
+function goBack() {
+if (curQ > 0) { curQ–; render(); }
+}
+function goNext() {
+if (modAnswers[curMod][curQ] === undefined) {
+const warn = document.getElementById(“warn”);
+if (warn) warn.textContent = lang===“tr” ? “Lütfen bir cevap seçin.” :
+lang===“de” ? “Bitte wählen Sie eine Antwort.” :
+“Please select an answer.”;
+return;
+}
+if (curQ === 14) {
+const sum = modAnswers[curMod].reduce((a, b) => a + b, 0);
+modScores[curMod] = sum / 15;
+state = “inter”;
+render();
+} else {
+curQ++;
+render();
+}
+}
+
+// ══ ARA EKRAN ══
+function renderInter(v) {
+const score = modScores[curMod];
+const msgs = {
+tr: [“Harika ilerliyorsun! 💪”,“Kendini tanımaya devam et 🌟”,“Güçlü yönlerin ortaya çıkıyor ✨”],
+de: [“Großartig! Weiter so 💪”,“Erkenne dich selbst 🌟”,“Deine Stärken werden sichtbar ✨”],
+en: [“Great progress! 💪”,“Keep discovering yourself 🌟”,“Your strengths are emerging ✨”]
+};
+const msg = msgs[lang][Math.floor(Math.random() * 3)];
+const title = lang===“tr” ? `Modül ${curMod+1} Tamamlandı ✅` :
+lang===“de” ? `Modul ${curMod+1} abgeschlossen ✅` :
+`Module ${curMod+1} Completed ✅`;
+const nextBtn = curMod < 5 ?
+(lang===“tr” ? `Modül ${curMod+2}'ye Geç →` : lang===“de” ? `Modul ${curMod+2} starten →` : `Start Module ${curMod+2} →`) :
+(lang===“tr” ? “Raporu Görüntüle →” : lang===“de” ? “Bericht anzeigen →” : “View Report →”);
+
+```
+v.innerHTML = `<div class="inter-card">
+    <h3>${title}</h3>
+    <div class="score-circle" id="animScore">0.0</div>
+    <p class="motivation">${msg}</p>
+    <button class="btn-primary" onclick="goNextMod()">${nextBtn}</button>
+</div>`;
+
+let animVal = 0;
+const interval = setInterval(() => {
+    const el = document.getElementById("animScore");
+    if (!el) { clearInterval(interval); return; }
+    if (animVal + 0.15 >= score) {
+        el.textContent = score.toFixed(1);
+        clearInterval(interval);
+    } else {
+        animVal += 0.15;
+        el.textContent = animVal.toFixed(1);
     }
-    function renderLanguageScreen() {
-        ui.innerHTML = `
-            <div class="lang-selector">
-                <button class="lang-btn ${currentLang==='tr'?'active':''}" data-lang="tr">TÜRKÇE</button>
-                <button class="lang-btn ${currentLang==='de'?'active':''}" data-lang="de">DEUTSCH</button>
-                <button class="lang-btn ${currentLang==='en'?'active':''}" data-lang="en">ENGLISH</button>
-            </div>
-            <div class="start-card">
-                <h2>🧭 NavigoPro | PACDI</h2>
-                <p>${currentLang==='tr'?'6 modül, 90 soru ile kariyer profilinizi keşfedin.':currentLang==='de'?'Entdecken Sie Ihr Karriereprofil mit 6 Modulen, 90 Fragen.':'Discover your career profile with 6 modules, 90 questions.'}</p>
-                <button id="startBtn" class="btn-primary">${currentLang==='tr'?'Başla':currentLang==='de'?'Start':'Start'}</button>
-            </div>
-        `;
-        document.querySelectorAll(".lang-btn").forEach(btn => btn.addEventListener("click", (e)=>{
-            currentLang = btn.dataset.lang;
-            renderLanguageScreen();
-        }));
-        document.getElementById("startBtn")?.addEventListener("click",()=>{ appState="entry"; render(); });
-    }
-    function renderEntryScreen(){
-        ui.innerHTML = `<div class="start-card"><h2>📋 ${currentLang==='tr'?'Kariyer Değerlendirmesine Hoş Geldiniz':currentLang==='de'?'Willkommen zur Karrierebewertung':'Welcome to Career Assessment'}</h2><p>${currentLang==='tr'?'6 modül, her biri 15 soru. Cevaplarınızı kaydedip ilerleyin. Geri dönüp cevapları değiştirebilirsiniz.':'6 Module, je 15 Fragen. Sie können zurück und Antworten ändern.':'6 modules, 15 questions each. You can go back and change answers.'}</p><button id="startModules" class="btn-primary">${currentLang==='tr'?'Modül 1\'e Başla':currentLang==='de'?'Start Modul 1':'Start Module 1'}</button></div>`;
-        document.getElementById("startModules")?.addEventListener("click",()=>{ currentModule=0; currentQuestion=0; appState="module"; render(); });
-    }
-    function renderModuleScreen(){
-        const qText = QUESTIONS[currentLang][currentModule][currentQuestion];
-        const selectedVal = moduleAnswers[currentModule][currentQuestion];
-        const optionsHtml = LIKERT_LABELS[currentLang].map((label,idx)=>{
-            const val = LIKERT_VALUES[idx];
-            const isSelected = (selectedVal !== undefined && Math.abs(selectedVal-val)<0.01);
-            return `<div class="option ${isSelected?'selected':''}" data-val="${val}">${label}</div>`;
-        }).join('');
-        const progressPercent = ((currentQuestion)/15)*100;
-        const modName = MODULE_NAMES[currentLang][currentModule];
-        const icon = MODULE_ICONS[currentModule];
-        ui.innerHTML = `
-            <div class="module-header"><div><span class="module-icon">${icon}</span> <span class="module-title">${modName}</span></div><div>${currentLang==='tr'?`Modül ${currentModule+1}/6`:`Module ${currentModule+1}/6`}</div></div>
-            <div class="progress-area"><div class="progress-fill" style="width:${progressPercent}%"></div></div>
-            <div class="q-counter">${currentLang==='tr'?`Soru ${currentQuestion+1} / 15`:`Question ${currentQuestion+1} / 15`}</div>
-            <div class="question-text">${qText}</div>
-            <div class="options" id="optionsContainer">${optionsHtml}</div>
-            <div class="nav-buttons"><button id="backBtn" class="btn-nav" ${currentQuestion===0?'disabled style="opacity:0.5"':''}>${currentLang==='tr'?'← Geri':currentLang==='de'?'← Zurück':'← Back'}</button>
-            <button id="nextBtn" class="btn-nav btn-next">${currentLang==='tr'? (currentQuestion===14?'Modülü Bitir':'İleri →'):currentLang==='de'?(currentQuestion===14?'Modul abschließen':'Weiter →'):(currentQuestion===14?'Finish Module':'Next →')}</button></div>
-            <div id="warningMsg" class="warning"></div>
-        `;
-        document.querySelectorAll(".option").forEach(opt => {
-            opt.addEventListener("click",()=>{
-                const val = parseFloat(opt.dataset.val);
-                moduleAnswers[currentModule][currentQuestion] = val;
-                renderModuleScreen();
-            });
-        });
-        document.getElementById("backBtn")?.addEventListener("click",()=>{ if(currentQuestion>0){ currentQuestion--; renderModuleScreen(); } });
-        document.getElementById("nextBtn")?.addEventListener("click",()=>{
-            if(moduleAnswers[currentModule][currentQuestion] === undefined){
-                document.getElementById("warningMsg").innerText = currentLang==='tr'?'Lütfen bir cevap seçin':currentLang==='de'?'Bitte wählen Sie eine Antwort':'Please select an answer';
-                return;
-            }
-            if(currentQuestion === 14){
-                let sum = moduleAnswers[currentModule].reduce((a,b)=>a+b,0);
-                moduleScores[currentModule] = sum/15;
-                appState = "inter";
-                render();
-            } else { currentQuestion++; renderModuleScreen(); }
-        });
-    }
-    function renderInterScreen(){
-        const score = moduleScores[currentModule];
-        const motMsgs = {tr:["Harika ilerliyorsun!","Kendini tanımaya devam et","Güçlü yönlerin ortaya çıkıyor"], de:["Großartig!","Erkenne dich selbst","Stärken werden sichtbar"], en:["Great progress!","Keep discovering yourself","Your strengths emerge"]};
-        const msgIdx = Math.floor(Math.random()*3);
-        const msg = motMsgs[currentLang][msgIdx];
-        ui.innerHTML = `<div class="inter-card"><h3>✅ ${currentLang==='tr'?'Modül Tamamlandı':currentLang==='de'?'Modul abgeschlossen':'Module Completed'}</h3><div class="score-circle" id="animScore">0.0</div><p class="motivation">${msg}</p><button id="nextModuleBtn" class="btn-primary">${currentLang==='tr'?'Sonraki Modüle Geç →':currentLang==='de'?'Nächstes Modul →':'Next Module →'}</button></div>`;
-        let animVal = 0;
-        const target = score;
-        const interval = setInterval(()=>{ if(animVal+0.2>=target){ document.getElementById("animScore").innerText=target.toFixed(1); clearInterval(interval);} else { animVal+=0.2; document.getElementById("animScore").innerText=animVal.toFixed(1);} }, 25);
-        document.getElementById("nextModuleBtn")?.addEventListener("click",()=>{
-            if(currentModule+1<6){ currentModule++; currentQuestion=0; appState="module"; render();}
-            else { appState="report"; render();}
-        });
-    }
-    function renderReportScreen(){
-        const avgScore = moduleScores.reduce((a,b)=>a+b,0)/6;
-        const thresholds = [4.0,4.0,4.0,4.0,3.5,4.0];
-        const highModules = moduleScores.map((s,i)=> s>=thresholds[i] ? i : -1).filter(i=>i!==-1);
-        let profileName="";
-        if(highModules.length===1){
-            const names=["Etik Lider","Analitik Düşünür","Tutkulu Profesyonel","Sosyal Dönüştürücü","Usta Adayı","Bilinçli Yaşam Savunucusu"];
-            profileName=names[highModules[0]];
-        } else if(highModules.length>1){
-            const combo = highModules.map(i=>MODULE_NAMES[currentLang][i].split(" ")[0]).join("-");
-            profileName=`${combo} Bileşik Profili`;
-        } else profileName = currentLang==='tr'?"Gelişim Odaklı Profil":currentLang==='de'?"Entwicklungsorientiertes Profil":"Development Focused Profile";
-        let careerRec = [];
-        if(highModules.includes(0)) careerRec.push("Etik Kurul Danışmanlığı, Kurumsal Yönetişim");
-        if(highModules.includes(1)) careerRec.push("Veri Analisti, Stratejik Planlama");
-        if(highModules.includes(2)) careerRec.push("Girişimcilik, Yaratıcı Endüstriler");
-        if(highModules.includes(3)) careerRec.push("Sivil Toplum, Kamu Politikası, Sosyal Girişim");
-        if(highModules.includes(4)) careerRec.push("Ustalık Girişimciliği, Teknik Tasarım");
-        if(highModules.includes(5)) careerRec.push("Sağlık Yönetimi, Wellness Koçluğu");
-        while(careerRec.length<3) careerRec.push("Danışmanlık, Liderlik Gelişimi");
-        const top3 = careerRec.slice(0,3);
-        const barsHtml = moduleScores.map((s,i)=> `<div class="bar-item"><div class="bar-label">${MODULE_NAMES[currentLang][i]}</div><div class="bar-bg"><div class="bar-fill" data-score="${s/5*100}" style="width:0%"></div></div><div>${s.toFixed(1)}</div></div>`).join('');
-        ui.innerHTML = `<div class="report-grid"><div class="bars-container"><h3>📊 ${currentLang==='tr'?'Modül Skorları':currentLang==='de'?'Modul-Scores':'Module Scores'}</h3>${barsHtml}</div>
-        <div class="radar-container"><h3>🎯 PACDI Radar</h3><canvas id="radarCanvas" width="400" height="400" style="max-width:100%; height:auto"></canvas></div>
-        <div class="profile-card"><h3>🏆 ${currentLang==='tr'?'Ana Profiliniz':currentLang==='de'?'Ihr Hauptprofil':'Your Main Profile'}</h3><p><strong>${profileName}</strong> – ${currentLang==='tr'?'PACDI Genel Skor: '+avgScore.toFixed(2):currentLang==='de'?'PACDI Gesamtscore: '+avgScore.toFixed(2):'PACDI Overall Score: '+avgScore.toFixed(2)}</p>${moduleScores[4]>=3.5?`<div class="special-badge">🔧 ${currentLang==='tr'?'Usta Adayı Kartı':currentLang==='de'?'Meister-Anwärter Karte':'Master Candidate Card'}</div>`:''}${moduleScores[5]>=4.0?`<div class="special-badge">🌿 ${currentLang==='tr'?'Refah Kartı (Bilinçli Yaşam)':currentLang==='de'?'Wohlfühlkarte (Bewusstes Leben)':'Wellbeing Card'}</div>`:''}<h4>✨ ${currentLang==='tr'?'Önerilen 3 Kariyer Alanı':currentLang==='de'?'3 Empfohlene Karrierefelder':'3 Recommended Career Fields'}</h4><ul>${top3.map(t=>`<li>${t}</li>`).join('')}</ul><p>📧 Geri bildirim: <a href="mailto:info@navigopro.de">info@navigopro.de</a></p></div><div class="footer-note">© 2026 PACDI — navigopro.de · TÜRKPATENT Tescil · Lisanslı değerlendirme</div></div>`;
-        setTimeout(()=>{ document.querySelectorAll(".bar-fill").forEach(el=>{ const w=el.dataset.score; el.style.width=w+"%"; }); drawRadar(); },100);
-    }
-    function drawRadar(){
-        const canvas = document.getElementById("radarCanvas");
-        if(!canvas) return;
-        const ctx = canvas.getContext("2d");
-        const w=400, h=400;
-        canvas.width=w; canvas.height=h;
-        const centerX=w/2, centerY=h/2, radius=140;
-        const angles = [0,60,120,180,240,300].map(d=> d*Math.PI/180);
-        const scores = moduleScores.map(s=>s/5);
-        ctx.clearRect(0,0,w,h);
-        ctx.beginPath(); ctx.strokeStyle="#ccc"; ctx.fillStyle="#f0f3fa";
-        for(let i=0;i<=5;i++){ const r = radius*i/5; ctx.beginPath(); angles.forEach((ang,idx)=>{ let x=centerX+r*Math.cos(ang), y=centerY+r*Math.sin(ang); if(idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.closePath(); ctx.stroke(); }
-        ctx.beginPath(); angles.forEach((ang,idx)=>{ let val=scores[idx]; let r2 = radius*val; let x=centerX+r2*Math.cos(ang), y=centerY+r2*Math.sin(ang); if(idx===0) ctx.moveTo(x,y); else ctx.lineTo(x,y); }); ctx.closePath(); ctx.fillStyle="#04162Eaa"; ctx.fill(); ctx.strokeStyle="#F6B45F"; ctx.lineWidth=3; ctx.stroke();
-        angles.forEach((ang,i)=>{ let x=centerX+(radius+12)*Math.cos(ang), y=centerY+(radius+12)*Math.sin(ang); ctx.fillStyle="#04162E"; ctx.font="bold 12px system-ui"; ctx.fillText(MODULE_NAMES[currentLang][i].substring(0,2), x-8, y-4); });
-    }
-    render();
+}, 20);
+```
+
+}
+function goNextMod() {
+if (curMod < 5) { curMod++; curQ = 0; state = “module”; render(); }
+else { state = “report”; render(); }
+}
+
+// ══ RAPOR ══
+function renderReport(v) {
+const avg = modScores.reduce((a, b) => a + b, 0) / 6;
+const thr = [4.0, 4.0, 4.0, 4.0, 3.5, 4.0];
+const high = modScores.map((s, i) => s >= thr[i] ? i : -1).filter(i => i !== -1);
+
+```
+const profileNames = {
+    tr: ["Etik Lider","Analitik Düşünür","Tutkulu Profesyonel","Sosyal Dönüştürücü","Usta Adayı","Bilinçli Yaşam Savunucusu"],
+    en: ["Ethical Leader","Analytical Thinker","Passionate Professional","Social Transformer","Craft Master Candidate","Conscious Living Advocate"],
+    de: ["Ethische Führungskraft","Analytischer Denker","Leidenschaftlicher Profi","Sozialer Transformator","Meister-Anwärter","Bewusster Lebensadvokat"]
+};
+
+let profileName;
+if (high.length === 1) {
+    profileName = profileNames[lang][high[0]];
+} else if (high.length > 1) {
+    profileName = high.map(i => MODULE_NAMES[lang][i].split(" ")[0]).join(" + ") +
+        (lang==="tr" ? " Bileşik Profili" : lang==="de" ? " Kombiniertes Profil" : " Combined Profile");
+} else {
+    profileName = lang==="tr" ? "Gelişim Odaklı Profil" : lang==="de" ? "Entwicklungsorientiertes Profil" : "Growth-Oriented Profile";
+}
+
+const careerMap = {
+    tr: ["Etik Danışmanlık, Kurumsal Yönetişim","Veri Analizi, Stratejik Planlama","Girişimcilik, Yaratıcı Endüstriler","Sivil Toplum, Kamu Politikası","Ustalık Girişimciliği, Teknik Tasarım","Sağlık Yönetimi, Wellness Koçluğu"],
+    en: ["Ethics Consulting, Corporate Governance","Data Analysis, Strategic Planning","Entrepreneurship, Creative Industries","Civil Society, Public Policy","Craft Entrepreneurship, Technical Design","Health Management, Wellness Coaching"],
+    de: ["Ethikberatung, Corporate Governance","Datenanalyse, Strategische Planung","Unternehmertum, Kreativwirtschaft","Zivilgesellschaft, Öffentliche Politik","Handwerksunternehmertum, Technisches Design","Gesundheitsmanagement, Wellness-Coaching"]
+};
+
+let careers = high.length > 0 ? high.map(i => careerMap[lang][i]) : [careerMap[lang][0], careerMap[lang][1], careerMap[lang][2]];
+while (careers.length < 3) careers.push(lang==="tr" ? "Danışmanlık, Liderlik Gelişimi" : lang==="de" ? "Beratung, Führungsentwicklung" : "Consulting, Leadership Development");
+careers = careers.slice(0, 3);
+
+const barsHtml = modScores.map((s, i) => `
+    <div class="bar-item">
+        <div class="bar-label">${MODULE_ICONS[i]} ${MODULE_NAMES[lang][i]}</div>
+        <div class="bar-bg"><div class="bar-fill" data-w="${(s/5*100).toFixed(0)}" style="width:0%;background:${MODULE_COLORS[i]}"></div></div>
+        <div class="bar-score">${s.toFixed(1)}</div>
+    </div>`).join('');
+
+const hwBadge = modScores[4] >= 3.5 ? `<div class="special-badge">🔧 ${lang==="tr"?"Usta Adayı Kartı":lang==="de"?"Meister-Anwärter":"Master Candidate"}</div>` : '';
+const wbBadge = modScores[5] >= 4.0 ? `<div class="special-badge">🌿 ${lang==="tr"?"Bilinçli Yaşam Kartı":lang==="de"?"Bewusstes-Leben Karte":"Conscious Living Card"}</div>` : '';
+
+const labels = { tr:["Modül Skorları","PACDI Radar","Ana Profiliniz","PACDI Genel Skor","Önerilen Kariyer Alanları","Geri bildirim"],
+                 en:["Module Scores","PACDI Radar","Your Main Profile","PACDI Overall Score","Recommended Career Areas","Feedback"],
+                 de:["Modul-Scores","PACDI Radar","Ihr Hauptprofil","PACDI Gesamtscore","Empfohlene Karrierefelder","Feedback"] }[lang];
+
+v.innerHTML = `<div class="report-grid">
+    <div class="bars-container"><h3>📊 ${labels[0]}</h3>${barsHtml}</div>
+    <div class="radar-container"><h3>🎯 ${labels[1]}</h3><canvas id="radarC" width="360" height="360"></canvas></div>
+    <div class="profile-card">
+        <h3>🏆 ${labels[2]}</h3>
+        <div class="profile-name">${profileName}</div>
+        <div class="profile-score">${labels[3]}: <strong>${avg.toFixed(2)} / 5.0</strong></div>
+        <div class="special-badges">${hwBadge}${wbBadge}</div>
+        <h4>✨ ${labels[4]}</h4>
+        <ul class="career-list">${careers.map(c => `<li>🎯 ${c}</li>`).join('')}</ul>
+        <div class="feedback-section" style="margin-top:16px">
+            <p>📧 ${labels[5]}: <a href="mailto:info@navigopro.de">info@navigopro.de</a></p>
+        </div>
+    </div>
+    <div class="footer-note">© 2026 PACDI — navigopro.de · info@navigopro.de<br>TÜRKPATENT Tescil Başvurusu · Lisanslı Değerlendirme Aracı</div>
+</div>`;
+
+setTimeout(() => {
+    document.querySelectorAll(".bar-fill").forEach(el => { el.style.width = el.dataset.w + "%"; });
+    drawRadar();
+}, 100);
+```
+
+}
+
+function drawRadar() {
+const canvas = document.getElementById(“radarC”);
+if (!canvas) return;
+const ctx = canvas.getContext(“2d”);
+const W = 360, H = 360, cx = W/2, cy = H/2, R = 130;
+canvas.width = W; canvas.height = H;
+const angles = [0,60,120,180,240,300].map(d => d * Math.PI / 180 - Math.PI/2);
+const vals = modScores.map(s => s / 5);
+
+```
+ctx.clearRect(0, 0, W, H);
+
+// Grid
+for (let lv = 1; lv <= 5; lv++) {
+    ctx.beginPath();
+    angles.forEach((a, i) => {
+        const r = R * lv / 5;
+        const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    });
+    ctx.closePath();
+    ctx.strokeStyle = "#dde3ec";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+}
+
+// Axes
+angles.forEach(a => {
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+    ctx.strokeStyle = "#dde3ec";
+    ctx.stroke();
+});
+
+// Data
+ctx.beginPath();
+vals.forEach((v, i) => {
+    const x = cx + R * v * Math.cos(angles[i]);
+    const y = cy + R * v * Math.sin(angles[i]);
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+});
+ctx.closePath();
+ctx.fillStyle = "rgba(4,22,46,0.15)";
+ctx.fill();
+ctx.strokeStyle = "#F6B45F";
+ctx.lineWidth = 2.5;
+ctx.stroke();
+
+// Points
+vals.forEach((v, i) => {
+    const x = cx + R * v * Math.cos(angles[i]);
+    const y = cy + R * v * Math.sin(angles[i]);
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, 2 * Math.PI);
+    ctx.fillStyle = MODULE_COLORS[i];
+    ctx.fill();
+});
+
+// Labels
+ctx.font = "bold 11px system-ui";
+ctx.fillStyle = "#04162E";
+ctx.textAlign = "center";
+ctx.textBaseline = "middle";
+angles.forEach((a, i) => {
+    const lx = cx + (R + 20) * Math.cos(a);
+    const ly = cy + (R + 20) * Math.sin(a);
+    ctx.fillText(MODULE_ICONS[i], lx, ly);
+});
+```
+
+}
+
+// ══════════════════════════════════════════════════
+// BAŞLAT
+// ══════════════════════════════════════════════════
+document.addEventListener(“DOMContentLoaded”, render);
 </script>
+
 </body>
 </html>
