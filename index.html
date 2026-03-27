@@ -304,7 +304,7 @@ modAnswers[curMod][curQ] = val;
 render();
 }
 function goBack() {
-if (curQ > 0) { curQ–; render(); }
+if (curQ > 0) { curQ--; render(); }
 }
 function goNext() {
 if (modAnswers[curMod][curQ] === undefined) {
