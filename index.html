@@ -19,12 +19,12 @@
   --shadow: 0 4px 24px rgba(4,22,46,0.10);
 }
 
-- { box-sizing: border-box; margin: 0; padding: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
-background: var(–light);
-color: var(–navy);
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+background: var(--light);
+color: var(--navy);
 min-height: 100vh;
 }
 
@@ -35,13 +35,13 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-background: var(–navy);
+background: var(--navy);
 padding: 24px;
 position: relative;
 overflow: hidden;
 }
 #lang-screen::before {
-content: ‘’;
+content: '';
 position: absolute;
 width: 600px; height: 600px;
 border-radius: 50%;
@@ -50,14 +50,14 @@ top: -100px; right: -100px;
 pointer-events: none;
 }
 .lang-logo {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 2.2rem;
 font-weight: 900;
-color: var(–white);
+color: var(--white);
 letter-spacing: -1px;
 margin-bottom: 8px;
 }
-.lang-logo span { color: var(–gold); }
+.lang-logo span { color: var(--gold); }
 .lang-subtitle {
 font-size: 0.85rem;
 color: rgba(255,255,255,0.5);
@@ -66,9 +66,9 @@ letter-spacing: 2px;
 text-transform: uppercase;
 }
 .lang-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.6rem;
-color: var(–white);
+color: var(--white);
 margin-bottom: 8px;
 text-align: center;
 }
@@ -88,11 +88,11 @@ margin-bottom: 48px;
 .lang-btn {
 background: transparent;
 border: 1.5px solid rgba(246,180,95,0.4);
-color: var(–white);
+color: var(--white);
 padding: 16px 32px;
 border-radius: 4px;
 cursor: pointer;
-font-family: ‘DM Sans’, sans-serif;
+font-family: 'DM Sans', sans-serif;
 font-size: 1rem;
 font-weight: 500;
 transition: all 0.2s;
@@ -103,9 +103,9 @@ align-items: center;
 gap: 4px;
 }
 .lang-btn:hover {
-background: var(–gold);
-border-color: var(–gold);
-color: var(–navy);
+background: var(--gold);
+border-color: var(--gold);
+color: var(--navy);
 transform: translateY(-2px);
 }
 .lang-btn .flag { font-size: 1.5rem; }
@@ -125,7 +125,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 padding: 32px 24px;
-background: var(–navy);
+background: var(--navy);
 }
 .intro-card {
 background: rgba(255,255,255,0.05);
@@ -138,8 +138,8 @@ text-align: center;
 }
 .intro-badge {
 display: inline-block;
-background: var(–gold);
-color: var(–navy);
+background: var(--gold);
+color: var(--navy);
 font-size: 0.72rem;
 font-weight: 600;
 letter-spacing: 2px;
@@ -149,9 +149,9 @@ border-radius: 2px;
 margin-bottom: 20px;
 }
 .intro-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 2rem;
-color: var(–white);
+color: var(--white);
 margin-bottom: 16px;
 line-height: 1.2;
 }
@@ -169,9 +169,9 @@ margin-bottom: 32px;
 }
 .intro-stat { text-align: center; }
 .intro-stat .num {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.8rem;
-color: var(–gold);
+color: var(--gold);
 display: block;
 }
 .intro-stat .lbl {
@@ -179,12 +179,12 @@ font-size: 0.75rem;
 color: rgba(255,255,255,0.4);
 }
 .start-btn {
-background: var(–gold);
-color: var(–navy);
+background: var(--gold);
+color: var(--navy);
 border: none;
 padding: 16px 40px;
 border-radius: 4px;
-font-family: ‘DM Sans’, sans-serif;
+font-family: 'DM Sans', sans-serif;
 font-size: 1rem;
 font-weight: 600;
 cursor: pointer;
@@ -205,7 +205,7 @@ display: flex;
 flex-direction: column;
 }
 .quiz-header {
-background: var(–navy);
+background: var(--navy);
 padding: 16px 24px;
 display: flex;
 align-items: center;
@@ -215,12 +215,12 @@ top: 0;
 z-index: 10;
 }
 .quiz-logo-sm {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.1rem;
 font-weight: 700;
-color: var(–white);
+color: var(--white);
 }
-.quiz-logo-sm span { color: var(–gold); }
+.quiz-logo-sm span { color: var(--gold); }
 .quiz-progress-info {
 font-size: 0.8rem;
 color: rgba(255,255,255,0.5);
@@ -232,7 +232,7 @@ width: 100%;
 }
 .progress-bar-fill {
 height: 100%;
-background: var(–gold);
+background: var(--gold);
 transition: width 0.4s ease;
 }
 
@@ -249,8 +249,8 @@ width: 100%;
 
 .section-badge {
 display: inline-block;
-background: var(–gold-light);
-color: var(–navy);
+background: var(--gold-light);
+color: var(--navy);
 font-size: 0.7rem;
 font-weight: 600;
 letter-spacing: 2px;
@@ -262,14 +262,14 @@ margin-bottom: 16px;
 
 .question-num {
 font-size: 0.8rem;
-color: var(–grey);
+color: var(--grey);
 margin-bottom: 8px;
 }
 
 .question-text {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.3rem;
-color: var(–navy);
+color: var(--navy);
 line-height: 1.5;
 margin-bottom: 36px;
 text-align: center;
@@ -287,7 +287,7 @@ margin-bottom: 12px;
 }
 .scale-lbl {
 font-size: 0.72rem;
-color: var(–grey);
+color: var(--grey);
 max-width: 100px;
 text-align: center;
 line-height: 1.3;
@@ -303,7 +303,7 @@ height: 52px;
 border-radius: 50%;
 border: 2px solid #DDD;
 background: #FFFFFF;
-font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 font-size: 1rem;
 font-weight: 700;
 color: #555555;
@@ -318,21 +318,21 @@ outline: none;
 text-decoration: none;
 }
 .scale-btn:hover {
-border-color: var(–gold);
-color: var(–navy);
+border-color: var(--gold);
+color: var(--navy);
 transform: scale(1.1);
 }
 .scale-btn.selected {
-background: var(–navy);
-border-color: var(–navy);
-color: var(–white);
+background: var(--navy);
+border-color: var(--navy);
+color: var(--white);
 transform: scale(1.1);
 }
-.scale-btn[data-v=“5”].selected { background: var(–green); border-color: var(–green); }
-.scale-btn[data-v=“4”].selected { background: #558B2F; border-color: #558B2F; }
-.scale-btn[data-v=“3”].selected { background: var(–grey); border-color: var(–grey); }
-.scale-btn[data-v=“2”].selected { background: #E65100; border-color: #E65100; }
-.scale-btn[data-v=“1”].selected { background: var(–red); border-color: var(–red); }
+.scale-btn[data-v="5"].selected { background: var(--green); border-color: var(--green); }
+.scale-btn[data-v="4"].selected { background: #558B2F; border-color: #558B2F; }
+.scale-btn[data-v="3"].selected { background: var(--grey); border-color: var(--grey); }
+.scale-btn[data-v="2"].selected { background: #E65100; border-color: #E65100; }
+.scale-btn[data-v="1"].selected { background: var(--red); border-color: var(--red); }
 
 .quiz-nav {
 display: flex;
@@ -343,7 +343,7 @@ justify-content: center;
 .nav-btn {
 padding: 12px 28px;
 border-radius: 4px;
-font-family: -apple-system, BlinkMacSystemFont, ‘Segoe UI’, Helvetica, Arial, sans-serif;
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 font-size: 0.9rem;
 font-weight: 700;
 cursor: pointer;
@@ -355,12 +355,12 @@ appearance: none;
 .nav-back {
 background: transparent;
 border: 1.5px solid #DDD;
-color: var(–grey);
+color: var(--grey);
 }
-.nav-back:hover { border-color: var(–navy); color: var(–navy); }
+.nav-back:hover { border-color: var(--navy); color: var(--navy); }
 .nav-next {
-background: var(–navy);
-color: var(–white);
+background: var(--navy);
+color: var(--white);
 min-width: 120px;
 }
 .nav-next:hover { background: #0a2548; }
@@ -369,18 +369,18 @@ min-width: 120px;
 /* ── RESULT SCREEN ── */
 #result-screen {
 min-height: 100vh;
-background: var(–light);
+background: var(--light);
 padding: 0 0 60px;
 }
 .result-header {
-background: var(–navy);
+background: var(--navy);
 padding: 40px 24px;
 text-align: center;
 }
 .result-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 2rem;
-color: var(–white);
+color: var(--white);
 margin-bottom: 8px;
 }
 .result-subtitle {
@@ -394,18 +394,18 @@ padding: 32px 24px;
 }
 
 .result-card {
-background: var(–card-bg);
+background: var(--card-bg);
 border-radius: 8px;
 padding: 28px;
 margin-bottom: 20px;
-box-shadow: var(–shadow);
+box-shadow: var(--shadow);
 }
 .result-card-title {
 font-size: 0.72rem;
 font-weight: 600;
 letter-spacing: 2px;
 text-transform: uppercase;
-color: var(–gold);
+color: var(--gold);
 margin-bottom: 16px;
 }
 
@@ -428,10 +428,10 @@ display: flex;
 justify-content: space-between;
 margin-bottom: 6px;
 }
-.score-label { font-size: 0.85rem; font-weight: 600; color: var(–navy); }
-.score-val { font-size: 0.85rem; color: var(–grey); }
+.score-label { font-size: 0.85rem; font-weight: 600; color: var(--navy); }
+.score-val { font-size: 0.85rem; color: var(--grey); }
 .score-bar-bg {
-background: var(–light);
+background: var(--light);
 border-radius: 2px;
 height: 8px;
 overflow: hidden;
@@ -439,14 +439,14 @@ overflow: hidden;
 .score-bar-fill {
 height: 100%;
 border-radius: 2px;
-background: var(–gold);
+background: var(--gold);
 transition: width 1s ease;
 }
 
 .profile-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.6rem;
-color: var(–navy);
+color: var(--navy);
 margin-bottom: 8px;
 }
 .profile-desc {
@@ -465,13 +465,13 @@ display: flex;
 align-items: center;
 gap: 12px;
 padding: 12px 16px;
-background: var(–light);
+background: var(--light);
 border-radius: 4px;
-border-left: 3px solid var(–gold);
+border-left: 3px solid var(--gold);
 }
 .career-icon { font-size: 1.2rem; }
-.career-name { font-size: 0.9rem; font-weight: 600; color: var(–navy); }
-.career-reason { font-size: 0.78rem; color: var(–grey); }
+.career-name { font-size: 0.9rem; font-weight: 600; color: var(--navy); }
+.career-reason { font-size: 0.78rem; color: var(--grey); }
 
 .strengths-grid {
 display: grid;
@@ -481,31 +481,31 @@ gap: 12px;
 .strength-box {
 padding: 14px;
 border-radius: 4px;
-background: var(–light);
+background: var(--light);
 }
-.strength-box.green { border-left: 3px solid var(–green); }
-.strength-box.amber { border-left: 3px solid var(–gold); }
+.strength-box.green { border-left: 3px solid var(--green); }
+.strength-box.amber { border-left: 3px solid var(--gold); }
 .strength-tag {
 font-size: 0.68rem;
 font-weight: 600;
 letter-spacing: 1.5px;
 text-transform: uppercase;
-color: var(–grey);
+color: var(--grey);
 margin-bottom: 6px;
 }
-.strength-text { font-size: 0.85rem; color: var(–navy); line-height: 1.5; }
+.strength-text { font-size: 0.85rem; color: var(--navy); line-height: 1.5; }
 
 .feedback-card {
-background: var(–navy);
+background: var(--navy);
 border-radius: 8px;
 padding: 28px;
 text-align: center;
 margin-bottom: 20px;
 }
 .feedback-title {
-font-family: ‘Playfair Display’, serif;
+font-family: 'Playfair Display', serif;
 font-size: 1.2rem;
-color: var(–white);
+color: var(--white);
 margin-bottom: 8px;
 }
 .feedback-text {
@@ -515,12 +515,12 @@ margin-bottom: 20px;
 line-height: 1.6;
 }
 .feedback-btn {
-background: var(–gold);
-color: var(–navy);
+background: var(--gold);
+color: var(--navy);
 border: none;
 padding: 14px 32px;
 border-radius: 4px;
-font-family: ‘DM Sans’, sans-serif;
+font-family: 'DM Sans', sans-serif;
 font-size: 0.9rem;
 font-weight: 600;
 cursor: pointer;
@@ -534,7 +534,7 @@ transition: all 0.2s;
 text-align: center;
 padding: 20px;
 font-size: 0.72rem;
-color: var(–grey);
+color: var(--grey);
 line-height: 1.6;
 border-top: 1px solid #E0E0E0;
 margin-top: 20px;
@@ -651,63 +651,53 @@ margin-top: 20px;
 <div id="result-screen" class="hidden">
   <div class="result-header">
     <div class="result-title" id="result-title">Kariyer Profil Raporun</div>
-    <div class="result-subtitle" id="result-subtitle">D-V-F-A & RIASEC Analizi</div>
+    <div class="result-subtitle" id="result-subtitle">D-V-F-A Kariyer Profili</div>
   </div>
   <div class="result-body">
+    <div class="result-card">
+      <div class="result-card-title" id="rc-profile-lbl">KARİYER PROFİLİN</div>
+      <div class="profile-title" id="profile-type">Vizyoner Lider</div>
+      <div class="profile-desc" id="profile-desc">Açıklama yükleniyor...</div>
+    </div>
 
-```
-<!-- Profile -->
-<div class="result-card">
-  <div class="result-card-title" id="rc-profile-lbl">KARİYER PROFİLİN</div>
-  <div class="profile-title" id="profile-type">Vizyoner Lider</div>
-  <div class="profile-desc" id="profile-desc">Açıklama yükleniyor...</div>
-</div>
+    <div class="result-card">
+      <div class="result-card-title" id="rc-scores-lbl">D-V-F-A SKORLARI</div>
+      <div class="score-bars" id="score-bars"></div>
+    </div>
 
-<!-- Scores -->
-<div class="result-card">
-  <div class="result-card-title" id="rc-scores-lbl">D-V-F-A SKORLARI</div>
-  <div class="score-bars" id="score-bars"></div>
-</div>
+    <div class="result-card">
+      <div class="result-card-title" id="rc-radar-lbl">KATEGORİ ANALİZİ</div>
+      <div class="radar-wrap">
+        <canvas id="radarChart" width="280" height="280"></canvas>
+      </div>
+    </div>
 
-<!-- Radar -->
-<div class="result-card">
-  <div class="result-card-title" id="rc-radar-lbl">KATEGORİ ANALİZİ</div>
-  <div class="radar-wrap">
-    <canvas id="radarChart" width="280" height="280"></canvas>
-  </div>
-</div>
+    <div class="result-card">
+      <div class="result-card-title" id="rc-careers-lbl">ÖNERİLEN KARİYER ALANLARI</div>
+      <div class="careers-list" id="careers-list"></div>
+    </div>
 
-<!-- Careers -->
-<div class="result-card">
-  <div class="result-card-title" id="rc-careers-lbl">ÖNERİLEN KARİYER ALANLARI</div>
-  <div class="careers-list" id="careers-list"></div>
-</div>
+    <div class="result-card">
+      <div class="result-card-title" id="rc-strengths-lbl">GÜÇLÜ YÖN & GELİŞİM ALANI</div>
+      <div class="strengths-grid" id="strengths-grid"></div>
+    </div>
 
-<!-- Strengths -->
-<div class="result-card">
-  <div class="result-card-title" id="rc-strengths-lbl">GÜÇLÜ YÖN & GELİŞİM ALANI</div>
-  <div class="strengths-grid" id="strengths-grid"></div>
-</div>
+    <div class="feedback-card">
+      <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
+      <div class="feedback-text" id="fb-text">
+        Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli.
+        Deneyiminizi birkaç kelimeyle paylaşır mısınız?
+      </div>
+      <a class="feedback-btn" id="fb-btn" href="mailto:info@navigopro.de?subject=PusulaPro%20Geri%20Bildirim">
+        Geri Bildirim Gönder ✉
+      </a>
+    </div>
 
-<!-- Feedback -->
-<div class="feedback-card">
-  <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
-  <div class="feedback-text" id="fb-text">
-    Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli.
-    Deneyiminizi birkaç kelimeyle paylaşır mısınız?
-  </div>
-  <a class="feedback-btn" id="fb-btn" href="mailto:info@pacdi.de?subject=PusulaPro%20Geri%20Bildirim">
-    Geri Bildirim Gönder ✉
-  </a>
-</div>
-
-<div class="copyright-bar">
-  © 2026 PACDI — EasyGov.io | PusulaPro &amp; NavigoPro<br>
-  Bu değerlendirme aracı PACDI'ye aittir. İzinsiz kopyalanamaz, dağıtılamaz.<br>
-  TÜRKPATENT tescil başvurusu mevcut. · pacdi.de · info@pacdi.de
-</div>
-```
-
+    <div class="copyright-bar">
+      © 2026 PACDI — EasyGov.io | PusulaPro &amp; NavigoPro<br>
+      Bu değerlendirme aracı PACDI'ye aittir. İzinsiz kopyalanamaz, dağıtılamaz.<br>
+      TÜRKPATENT tescil başvurusu mevcut. · navigopro.de · info@navigopro.de
+    </div>
   </div>
 </div>
 
@@ -770,7 +760,7 @@ tr: [
   {s:'B',t:'Bir konuda uzmanlaşmak için düzenli pratik yapma disiplinine sahipsin.'},
   {s:'B',t:'Öğrendiğin bilgiyi uygulamaya koymadan önce zihinsel olarak test edersin.'},
   // C: Mesleki Tutku (51-75)
-  {s:'C',t:'Hangi işi yaparken zamanın nasıl geçtiğini tamamen unutuyorsun — o işi yapıyorsun.'},
+  {s:'C',t:'Zamanın nasıl geçtiğini unutacak kadar kendini kaptırdığın bir iş alanı var.'},
   {s:'C',t:'Bir projeyi bitirdiğinde aldığın takdirden çok yarattığın fayda seni tatmin eder.'},
   {s:'C',t:'Elindeki imkânlar sınırsız olsa yarın sabah yapmak istediğin iş aklına net gelir.'},
   {s:'C',t:'Tek başına çalışmak seni bir ekipte çalışmaktan daha verimli kılar.'},
@@ -798,7 +788,7 @@ tr: [
   // D: Sosyal Adalet (76-100)
   {s:'D',t:'Hak etmediğini düşündüğün bir ödül sana verilse rahatsızlık duyarsın.'},
   {s:'D',t:'Toplumsal fayda sağlamayan ama çok kazandıran bir meslek sana uygun değildir.'},
-  {s:'D',t:'Liyakat, tecrübeden önce gelir bir işe alımda.'},
+  {s:'D',t:'Bir işe alımda liyakat, tecrübeden daha belirleyici olmalıdır.'},
   {s:'D',t:'Toplumun dezavantajlı kesimlerine yönelik projeler seni mesleki olarak heyecanlandırır.'},
   {s:'D',t:'Vergi ve sosyal güvenlik sistemi adil işlediğinde topluma katkı olarak görürsün.'},
   {s:'D',t:'Fırsat eşitsizliğini azaltmak için aktif çaba sarf etmek senin sorumluluk alanındadır.'},
@@ -1045,10 +1035,11 @@ tr: {
   startBtn:'Başla →', backBtn:'← Geri', nextBtn:'İleri →', finishBtn:'Raporu Gör →',
   disagree:'Hiç katılmıyorum', agree:'Tamamen katılıyorum',
   sections:{A:'A — Karakter ve Onur',B:'B — Bilişsel Yetkinlikler',C:'C — Mesleki Tutku',D:'D — Sosyal Adalet'},
-  resultTitle:'Kariyer Profil Raporun', resultSub:'D-V-F-A Analizi · PACDI PusulaPro',
+  resultTitle:'Kariyer Profil Raporun', resultSub:'D-V-F-A Kariyer Profili',
   rcProfile:'KARİYER PROFİLİN', rcScores:'D-V-F-A SKORLARI', rcRadar:'KATEGORİ ANALİZİ',
   rcCareers:'ÖNERİLEN KARİYER ALANLARI', rcStrengths:'GÜÇLÜ YÖN & GELİŞİM ALANI',
   scoreNames:{A:'Karakter & Onur',B:'Bilişsel Yetkinlik',C:'Mesleki Tutku',D:'Sosyal Adalet'},
+  radarLabels:['Karakter','Bilişsel','Tutku','Adalet'],
   fbTitle:'Geri Bildiriminizi Paylaşın',
   fbText:'Bu değerlendirme hakkındaki düşünceleriniz bizim için çok değerli. Deneyiminizi kısaca paylaşır mısınız?',
   fbBtn:'Geri Bildirim Gönder ✉',
@@ -1063,10 +1054,11 @@ de: {
   startBtn:'Starten →', backBtn:'← Zurück', nextBtn:'Weiter →', finishBtn:'Bericht anzeigen →',
   disagree:'Stimme überhaupt nicht zu', agree:'Stimme vollständig zu',
   sections:{A:'A — Globale Anpassung & Werte',B:'B — Leistung & Effizienz',C:'C — Innovation & Zukunft',D:'D — Sozialwohl & Ethik'},
-  resultTitle:'Dein Karriereprofil-Bericht', resultSub:'D-V-F-A Analyse · PACDI NavigoPro',
+  resultTitle:'Dein Karriereprofil-Bericht', resultSub:'D-V-F-A Karriereprofil',
   rcProfile:'DEIN KARRIEREPROFIL', rcScores:'D-V-F-A SCORES', rcRadar:'KATEGORIENANALYSE',
   rcCareers:'EMPFOHLENE KARRIEREBEREICHE', rcStrengths:'STÄRKEN & ENTWICKLUNGSBEREICH',
   scoreNames:{A:'Globale Anpassung',B:'Leistung & Effizienz',C:'Innovation & Zukunft',D:'Sozialwohl & Ethik'},
+  radarLabels:['Anpassung','Leistung','Innovation','Ethik'],
   fbTitle:'Teile dein Feedback',
   fbText:'Deine Gedanken zu dieser Bewertung sind sehr wertvoll für uns. Möchtest du deine Erfahrungen kurz teilen?',
   fbBtn:'Feedback senden ✉',
@@ -1081,10 +1073,11 @@ en: {
   startBtn:'Start →', backBtn:'← Back', nextBtn:'Next →', finishBtn:'View Report →',
   disagree:'Strongly disagree', agree:'Strongly agree',
   sections:{A:'A — Global Adaptability & Values',B:'B — Performance & Efficiency',C:'C — Innovation & Future',D:'D — Social Welfare & Ethics'},
-  resultTitle:'Your Career Profile Report', resultSub:'D-V-F-A Analysis · PACDI NavigoPro',
+  resultTitle:'Your Career Profile Report', resultSub:'D-V-F-A Career Profile',
   rcProfile:'YOUR CAREER PROFILE', rcScores:'D-V-F-A SCORES', rcRadar:'CATEGORY ANALYSIS',
   rcCareers:'RECOMMENDED CAREER AREAS', rcStrengths:'STRENGTHS & DEVELOPMENT AREA',
   scoreNames:{A:'Global Adaptability',B:'Performance & Efficiency',C:'Innovation & Future',D:'Social Welfare & Ethics'},
+  radarLabels:['Values','Perform.','Innov.','Ethics'],
   fbTitle:'Share Your Feedback',
   fbText:'Your thoughts on this assessment are very valuable to us. Would you like to briefly share your experience?',
   fbBtn:'Send Feedback ✉',
@@ -1121,6 +1114,7 @@ en:[
 let lang = 'tr';
 let currentQ = 0;
 let answers = new Array(100).fill(null);
+let isProcessing = false; // for double-click prevention
 const questions = () => QUESTIONS[lang];
 const ui = () => UI[lang];
 
@@ -1178,11 +1172,15 @@ function renderQuestion() {
   document.getElementById('lbl-disagree').textContent = u.disagree;
   document.getElementById('lbl-agree').textContent = u.agree;
 
-  // Reset buttons
+  // Reset buttons selection
   document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
   if (answers[currentQ] !== null) {
     document.querySelector(`.scale-btn[data-v="${answers[currentQ]}"]`)?.classList.add('selected');
   }
+
+  // Re-enable scale buttons (they might have been disabled temporarily)
+  document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = false);
+  isProcessing = false;
 
   const nextBtn = document.getElementById('btn-next');
   const isLast = currentQ === total - 1;
@@ -1194,25 +1192,41 @@ function renderQuestion() {
 }
 
 function selectAnswer(v) {
+  if (isProcessing) return; // prevent double-click during processing
+  if (answers[currentQ] !== null) return; // already answered
+
+  isProcessing = true;
   answers[currentQ] = v;
+  // update UI
   document.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
   document.querySelector(`.scale-btn[data-v="${v}"]`).classList.add('selected');
+  // disable scale buttons temporarily to avoid repeated clicks
+  document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = true);
+  // enable next button
   document.getElementById('btn-next').disabled = false;
-  // Auto-advance after 400ms
+
+  // re-enable scale buttons after a short delay (allow time for animation)
   setTimeout(() => {
-    if (currentQ < 99) nextQuestion();
-    else showResults();
-  }, 400);
+    document.querySelectorAll('.scale-btn').forEach(btn => btn.disabled = false);
+    isProcessing = false;
+  }, 300);
 }
 
 function nextQuestion() {
   if (answers[currentQ] === null) return;
-  if (currentQ < 99) { currentQ++; renderQuestion(); }
-  else showResults();
+  if (currentQ < 99) {
+    currentQ++;
+    renderQuestion();
+  } else {
+    showResults();
+  }
 }
 
 function prevQuestion() {
-  if (currentQ > 0) { currentQ--; renderQuestion(); }
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+  }
 }
 
 // ══════════════════════════════════════════════════════════
@@ -1259,7 +1273,7 @@ function showResults() {
   document.getElementById('fb-title').textContent = u.fbTitle;
   document.getElementById('fb-text').textContent = u.fbText;
   document.getElementById('fb-btn').textContent = u.fbBtn;
-  document.getElementById('fb-btn').href = `mailto:info@pacdi.de?subject=${u.fbSubject}`;
+  document.getElementById('fb-btn').href = `mailto:info@navigopro.de?subject=${u.fbSubject}`;
 
   // Score bars
   const barsEl = document.getElementById('score-bars');
@@ -1308,14 +1322,14 @@ function showResults() {
     </div>`;
 
   // Draw radar
-  drawRadar(scores);
+  drawRadar(scores, u.radarLabels);
   show('result-screen');
 }
 
 // ══════════════════════════════════════════════════════════
 // RADAR CHART
 // ══════════════════════════════════════════════════════════
-function drawRadar(scores) {
+function drawRadar(scores, labels) {
   const canvas = document.getElementById('radarChart');
   const ctx = canvas.getContext('2d');
   const W = canvas.width, H = canvas.height;
@@ -1324,8 +1338,6 @@ function drawRadar(scores) {
   const cats = ['A','B','C','D'];
   const vals = cats.map(c => scores[c]/5);
   const angles = cats.map((_,i) => (i/cats.length)*2*Math.PI - Math.PI/2);
-  const u = ui();
-  const labels = cats.map(c => u.scoreNames[c].split(' ')[0]);
 
   ctx.clearRect(0,0,W,H);
 
@@ -1377,7 +1389,7 @@ function drawRadar(scores) {
     ctx.fill();
   });
 
-  // Labels
+  // Labels (using provided custom labels)
   ctx.font = 'bold 11px DM Sans, sans-serif';
   ctx.fillStyle = '#04162E';
   ctx.textAlign = 'center';
