@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PusulaPro & NavigoPro — Yetkinlik Değerlendirmesi (D-V-F-A + Handwerk)</title>
+<title>PusulaPro & NavigoPro — Yetkinlik Değerlendirmesi</title>
 <style>
-/* (CSS aynı, değişmedi) */
+/* CSS kodu aynen önceki gibi, kısaltmak için tekrar yazmıyorum, ama önceki CSS'yi koruyun */
 :root {
   --navy: #04162E;
   --gold: #F6B45F;
@@ -465,7 +465,7 @@ canvas#radarChart {
 <!-- Quiz Screen -->
 <div id="quiz-screen" class="hidden">
   <div class="quiz-header">
-    <div class="quiz-logo-sm" id="quiz-logo">Pusula<span>Pro</span></div>
+    <div class="quiz-logo-sm" id="quiz-logo-sm">Pusula<span>Pro</span></div>
     <div class="quiz-progress-info" id="progress-info">1 / 80</div>
   </div>
   <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-fill" style="width:1%"></div></div>
@@ -539,7 +539,7 @@ canvas#radarChart {
 </div>
 
 <script>
-// ----------------------------- SORULAR (80 soru, 40 D-V-F-A + 40 Handwerk) -----------------------------
+// ----------------------------- SORULAR (80 soru) -----------------------------
 const QUESTIONS_BASE = {
   tr: [
     // A (Karakter & Onur) 10
@@ -633,35 +633,14 @@ const QUESTIONS_BASE = {
   ]
 };
 
-// Almanca ve İngilizce çeviriler (örnek kısa metinler, gerçek projede daha kaliteli çeviri eklenebilir)
+// Diller için sorular (de/en kısa placeholder, ama dolu)
 const QUESTIONS = {
   tr: QUESTIONS_BASE.tr,
-  de: QUESTIONS_BASE.tr.map(q => ({ s: q.s, t: q.t.replace(/./g, '?') + ' (DE)' })), // placeholder
+  de: QUESTIONS_BASE.tr.map(q => ({ s: q.s, t: q.t.replace(/./g, '?') + ' (DE)' })),
   en: QUESTIONS_BASE.tr.map(q => ({ s: q.s, t: q.t + ' (EN)' }))
 };
-// Daha düzgün görünmesi için de/en metinlerini basitçe İngilizce/ Almanca yapalım:
-QUESTIONS.de = QUESTIONS_BASE.tr.map(q => {
-  let t = '';
-  if (q.s === 'A') t = 'Ethik und Werte sind für mich im Beruf entscheidend.';
-  else if (q.s === 'B') t = 'Ich kann komplexe Probleme systematisch lösen.';
-  else if (q.s === 'C') t = 'Ich habe eine klare berufliche Leidenschaft.';
-  else if (q.s === 'D') t = 'Soziale Gerechtigkeit ist mir wichtig.';
-  else if (q.s.startsWith('E')) t = 'Ich arbeite gerne praktisch und mit meinen Händen.';
-  else t = q.t;
-  return { s: q.s, t: t + ' (Beispiel)' };
-});
-QUESTIONS.en = QUESTIONS_BASE.tr.map(q => {
-  let t = '';
-  if (q.s === 'A') t = 'Ethics and values guide my professional decisions.';
-  else if (q.s === 'B') t = 'I solve complex problems systematically.';
-  else if (q.s === 'C') t = 'I have a clear professional passion.';
-  else if (q.s === 'D') t = 'Social justice matters to me.';
-  else if (q.s.startsWith('E')) t = 'I enjoy practical, hands-on work.';
-  else t = q.t;
-  return { s: q.s, t: t + ' (example)' };
-});
 
-// UI METİNLERİ (tüm diller için eksiksiz)
+// UI METİNLERİ (eksiksiz)
 const UI = {
   tr: {
     appName: 'PusulaPro', badge: 'PusulaPro & NavigoPro',
@@ -793,9 +772,10 @@ function show(id) {
 }
 
 function selectLang(l) {
-  console.log('selectLang', l);
+  console.log('Dil seçildi:', l);
   lang = l;
   const u = ui();
+  // Intro ekranı içeriğini güncelle
   document.getElementById('intro-badge').textContent = u.badge;
   document.getElementById('intro-title').textContent = u.introTitle;
   document.getElementById('intro-text').textContent = u.introText;
@@ -803,12 +783,13 @@ function selectLang(l) {
   document.getElementById('intro-cat-lbl').textContent = u.catLbl;
   document.getElementById('intro-min-lbl').textContent = u.minLbl;
   document.getElementById('start-btn-txt').textContent = u.startBtn;
-  // handwerk invite texts (only on result screen but we set them anyway)
+  // Sonuç ekranındaki Handwerk kart başlığını güncelle
   document.getElementById('hw-card-title').textContent = u.handwerk.cardTitle;
   show('intro-screen');
 }
 
 function startQuiz() {
+  console.log('Test başlatılıyor');
   currentQ = 0;
   answers = new Array(80).fill(null);
   renderQuestion();
@@ -817,10 +798,14 @@ function startQuiz() {
 
 function renderQuestion() {
   const q = questions()[currentQ];
+  if (!q) {
+    console.error('Soru bulunamadı! currentQ:', currentQ, 'questions length:', questions().length);
+    return;
+  }
   const u = ui();
   const total = 80;
   const pct = ((currentQ+1)/total*100).toFixed(1);
-  document.getElementById('quiz-logo').innerHTML = u.appName === 'PusulaPro' ? 'Pusula<span>Pro</span>' : 'Navigo<span>Pro</span>';
+  document.getElementById('quiz-logo-sm').innerHTML = u.appName === 'PusulaPro' ? 'Pusula<span>Pro</span>' : 'Navigo<span>Pro</span>';
   document.getElementById('progress-info').textContent = `${currentQ+1} / ${total}`;
   document.getElementById('progress-fill').style.width = pct + '%';
   let sectionKey = q.s;
