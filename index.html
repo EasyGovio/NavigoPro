@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PusulaPro & NavigoPro — Yetkinlik Değerlendirmesi (D-V-F-A + Handwerk)</title>
 <style>
+/* (CSS aynı, değişmedi) */
 :root {
   --navy: #04162E;
   --gold: #F6B45F;
@@ -493,29 +494,24 @@ canvas#radarChart {
     <div class="result-subtitle" id="result-subtitle">D-V-F-A + Handwerk Analizi</div>
   </div>
   <div class="result-body">
-    <!-- D-V-F-A Profil -->
     <div class="result-card">
       <div class="result-card-title" id="rc-profile-lbl">OFİS & YÖNETİM PROFİLİN (D-V-F-A)</div>
       <div class="profile-title" id="profile-type">Vizyoner Lider</div>
       <div class="profile-desc" id="profile-desc">Açıklama yükleniyor...</div>
     </div>
-    <!-- D-V-F-A Skorları -->
     <div class="result-card">
       <div class="result-card-title" id="rc-scores-lbl">D-V-F-A SKORLARI</div>
       <div class="score-bars" id="score-bars"></div>
     </div>
-    <!-- Radar -->
     <div class="result-card">
       <div class="result-card-title" id="rc-radar-lbl">KATEGORİ ANALİZİ</div>
       <div class="radar-wrap"><canvas id="radarChart" width="280" height="280"></canvas></div>
     </div>
-    <!-- Handwerk Kart (skor ≥3.5 ise göster) -->
     <div id="handwerk-result-card" class="result-card handwerk-card hidden">
       <div class="result-card-title" id="hw-card-title">Usta Profili Tespit Edildi 🔧</div>
       <div id="hw-card-content"></div>
       <div id="hw-jobs-list" class="handwerk-jobs"></div>
     </div>
-    <!-- Handwerk'in Değeri Bölümü (her zaman göster) -->
     <div class="result-card" style="background: #fef7e0;">
       <div class="result-card-title">🔨 Neden Zanaat / Handwerk?</div>
       <div style="font-size:0.9rem; line-height:1.6;">
@@ -525,17 +521,14 @@ canvas#radarChart {
         <p>🌍 <strong>Toplumsal değer.</strong> Üreten, inşa eden, tamir eden eller olmadan hiçbir ekonomi ayakta duramaz. Senin becerilerin toplumun temelidir.</p>
       </div>
     </div>
-    <!-- Kariyer Önerileri (her iki alan) -->
     <div class="result-card">
       <div class="result-card-title" id="rc-careers-lbl">ÖNERİLEN KARİYER ALANLARI</div>
       <div class="careers-list" id="careers-list"></div>
     </div>
-    <!-- Güçlü yönler (D-V-F-A) -->
     <div class="result-card">
       <div class="result-card-title" id="rc-strengths-lbl">GÜÇLÜ YÖN & GELİŞİM ALANI</div>
       <div class="strengths-grid" id="strengths-grid"></div>
     </div>
-    <!-- Geri bildirim -->
     <div class="feedback-card">
       <div class="feedback-title" id="fb-title">Geri Bildiriminizi Paylaşın</div>
       <div class="feedback-text" id="fb-text">Bu değerlendirme hakkındaki düşünceleriniz çok değerli.</div>
@@ -547,8 +540,7 @@ canvas#radarChart {
 
 <script>
 // ----------------------------- SORULAR (80 soru, 40 D-V-F-A + 40 Handwerk) -----------------------------
-// Kategoriler: A,B,C,D (10 soru) ve E1,E2,E3,E4 (10 soru)
-const QUESTIONS = {
+const QUESTIONS_BASE = {
   tr: [
     // A (Karakter & Onur) 10
     {s:'A',t:'Bir işin sonucunda büyük kazanç varsa bile etik değerlerinle çatışıyorsa vazgeçersin.'},
@@ -638,31 +630,59 @@ const QUESTIONS = {
     {s:'E4',t:'Başkalarının işimdeki titizliğimi takdir etmesi hoşuma gider.'},
     {s:'E4',t:'Kullandığım aletleri temiz ve düzenli tutarım.'},
     {s:'E4',t:'İşimi gururla imzalayabileceğim kalitede yapmak isterim.'}
-  ],
-  de: [],  // Aynı mantıkta Almanca sorular (kısaltmak için burada aynen tr'deki gibi olup çevrilmesi gerek, ama kod çalışırlığı için bu örnekte tr dışındakiler placeholder)
-  en: []
+  ]
 };
-// Basit çeviri placeholder (gerçek uygulamada tam metinler eklenmeli)
-for (let i = 0; i < QUESTIONS.tr.length; i++) {
-  QUESTIONS.de.push({ s: QUESTIONS.tr[i].s, t: QUESTIONS.tr[i].t + " (DE)" });
-  QUESTIONS.en.push({ s: QUESTIONS.tr[i].s, t: QUESTIONS.tr[i].t + " (EN)" });
-}
 
-// UI METİNLERİ (kısaltılmış)
+// Almanca ve İngilizce çeviriler (örnek kısa metinler, gerçek projede daha kaliteli çeviri eklenebilir)
+const QUESTIONS = {
+  tr: QUESTIONS_BASE.tr,
+  de: QUESTIONS_BASE.tr.map(q => ({ s: q.s, t: q.t.replace(/./g, '?') + ' (DE)' })), // placeholder
+  en: QUESTIONS_BASE.tr.map(q => ({ s: q.s, t: q.t + ' (EN)' }))
+};
+// Daha düzgün görünmesi için de/en metinlerini basitçe İngilizce/ Almanca yapalım:
+QUESTIONS.de = QUESTIONS_BASE.tr.map(q => {
+  let t = '';
+  if (q.s === 'A') t = 'Ethik und Werte sind für mich im Beruf entscheidend.';
+  else if (q.s === 'B') t = 'Ich kann komplexe Probleme systematisch lösen.';
+  else if (q.s === 'C') t = 'Ich habe eine klare berufliche Leidenschaft.';
+  else if (q.s === 'D') t = 'Soziale Gerechtigkeit ist mir wichtig.';
+  else if (q.s.startsWith('E')) t = 'Ich arbeite gerne praktisch und mit meinen Händen.';
+  else t = q.t;
+  return { s: q.s, t: t + ' (Beispiel)' };
+});
+QUESTIONS.en = QUESTIONS_BASE.tr.map(q => {
+  let t = '';
+  if (q.s === 'A') t = 'Ethics and values guide my professional decisions.';
+  else if (q.s === 'B') t = 'I solve complex problems systematically.';
+  else if (q.s === 'C') t = 'I have a clear professional passion.';
+  else if (q.s === 'D') t = 'Social justice matters to me.';
+  else if (q.s.startsWith('E')) t = 'I enjoy practical, hands-on work.';
+  else t = q.t;
+  return { s: q.s, t: t + ' (example)' };
+});
+
+// UI METİNLERİ (tüm diller için eksiksiz)
 const UI = {
   tr: {
-    appName:'PusulaPro', badge:'PusulaPro & NavigoPro',
-    introTitle:'Yetkinlik Değerlendirmesi', introText:'Bu test, hem ofis odaklı (D-V-F-A) hem de el becerisi / üretim odaklı (Handwerk) yetkinliklerini keşfetmek için tasarlandı. Doğru ya da yanlış cevap yoktur — içinden geleni işaretle.',
-    qLbl:'Soru', minLbl:'Dakika', catLbl:'Kategori', startBtn:'Başla →', backBtn:'← Geri', nextBtn:'İleri →', finishBtn:'Raporu Gör →',
-    disagree:'Hiç katılmıyorum', agree:'Tamamen katılıyorum',
-    sections:{A:'A — Karakter & Onur',B:'B — Bilişsel Yetkinlikler',C:'C — Mesleki Tutku',D:'D — Sosyal Adalet',E1:'E1 — Pratik Zeka & El Becerisi',E2:'E2 — Bağımsızlık & Girişimcilik',E3:'E3 — Teknik Merak & Öğrenme',E4:'E4 — Kalite & Titizlik'},
-    resultTitle:'Yetkinlik Raporun', resultSub:'D-V-F-A + Handwerk Analizi',
-    rcProfile:'OFİS & YÖNETİM PROFİLİN (D-V-F-A)', rcScores:'D-V-F-A SKORLARI', rcRadar:'KATEGORİ ANALİZİ',
-    rcCareers:'ÖNERİLEN KARİYER ALANLARI', rcStrengths:'GÜÇLÜ YÖN & GELİŞİM ALANI',
-    scoreNames:{A:'Karakter & Onur',B:'Bilişsel',C:'Tutku',D:'Sosyal Adalet'},
-    radarLabels:['Karakter','Bilişsel','Tutku','Adalet'],
-    fbTitle:'Geri Bildiriminizi Paylaşın', fbText:'Bu değerlendirme hakkındaki düşünceleriniz çok değerli.', fbBtn:'Geri Bildirim Gönder ✉', fbSubject:'Yetkinlik%20Degerlendirme',
-    strengthLbl:'GÜÇLÜ YÖN', devLbl:'GELİŞİM ALANI',
+    appName: 'PusulaPro', badge: 'PusulaPro & NavigoPro',
+    introTitle: 'Yetkinlik Değerlendirmesi',
+    introText: 'Bu test, hem ofis odaklı (D-V-F-A) hem de el becerisi / üretim odaklı (Handwerk) yetkinliklerini keşfetmek için tasarlandı. Doğru ya da yanlış cevap yoktur — içinden geleni işaretle.',
+    qLbl: 'Soru', minLbl: 'Dakika', catLbl: 'Kategori',
+    startBtn: 'Başla →', backBtn: '← Geri', nextBtn: 'İleri →', finishBtn: 'Raporu Gör →',
+    disagree: 'Hiç katılmıyorum', agree: 'Tamamen katılıyorum',
+    sections: {
+      A: 'A — Karakter & Onur', B: 'B — Bilişsel Yetkinlikler', C: 'C — Mesleki Tutku', D: 'D — Sosyal Adalet',
+      E1: 'E1 — Pratik Zeka & El Becerisi', E2: 'E2 — Bağımsızlık & Girişimcilik',
+      E3: 'E3 — Teknik Merak & Öğrenme', E4: 'E4 — Kalite & Titizlik'
+    },
+    resultTitle: 'Yetkinlik Raporun', resultSub: 'D-V-F-A + Handwerk Analizi',
+    rcProfile: 'OFİS & YÖNETİM PROFİLİN (D-V-F-A)', rcScores: 'D-V-F-A SKORLARI', rcRadar: 'KATEGORİ ANALİZİ',
+    rcCareers: 'ÖNERİLEN KARİYER ALANLARI', rcStrengths: 'GÜÇLÜ YÖN & GELİŞİM ALANI',
+    scoreNames: { A: 'Karakter & Onur', B: 'Bilişsel', C: 'Tutku', D: 'Sosyal Adalet' },
+    radarLabels: ['Karakter', 'Bilişsel', 'Tutku', 'Adalet'],
+    fbTitle: 'Geri Bildiriminizi Paylaşın', fbText: 'Bu değerlendirme hakkındaki düşünceleriniz çok değerli.',
+    fbBtn: 'Geri Bildirim Gönder ✉', fbSubject: 'Yetkinlik%20Degerlendirme',
+    strengthLbl: 'GÜÇLÜ YÖN', devLbl: 'GELİŞİM ALANI',
     handwerk: {
       cardTitle: 'Usta Profili Tespit Edildi 🔧',
       levels: [
@@ -673,24 +693,89 @@ const UI = {
       jobs: ['Elektrikçi', 'Tesisatçı', 'Marangoz', 'Kaynakçı', 'Oto Tamircisi', 'İnşaat Ustası', 'Fırıncı/Pastacı']
     }
   },
-  de: { ...UI.tr, appName:'NavigoPro', handwerk: { cardTitle: 'Handwerker-Profil erkannt 🔧', levels: [], jobs: ['Elektriker','Klempner','Tischler','Schweißer','Kfz-Mechatroniker','Bäcker/Konditor'] } },
-  en: { ...UI.tr, appName:'NavigoPro', handwerk: { cardTitle: 'Craft Profile Detected 🔧', levels: [], jobs: ['Electrician','Plumber','Carpenter','Welder','Auto Mechanic','Baker/Pastry Chef'] } }
+  de: {
+    appName: 'NavigoPro', badge: 'NavigoPro & PusulaPro',
+    introTitle: 'Kompetenz-Check',
+    introText: 'Dieser Test bewertet sowohl büroorientierte (D-V-F-A) als auch handwerkliche Kompetenzen. Es gibt keine richtigen oder falschen Antworten.',
+    qLbl: 'Frage', minLbl: 'Minuten', catLbl: 'Kategorien',
+    startBtn: 'Starten →', backBtn: '← Zurück', nextBtn: 'Weiter →', finishBtn: 'Bericht anzeigen →',
+    disagree: 'Stimme gar nicht zu', agree: 'Stimme voll zu',
+    sections: {
+      A: 'A — Charakter & Werte', B: 'B — Kognitive Fähigkeiten', C: 'C — Berufliche Leidenschaft', D: 'D — Soziale Gerechtigkeit',
+      E1: 'E1 — Praktische Intelligenz & Geschick', E2: 'E2 — Selbstständigkeit & Unternehmertum',
+      E3: 'E3 — Technische Neugier & Lernen', E4: 'E4 — Qualität & Sorgfalt'
+    },
+    resultTitle: 'Dein Kompetenzprofil', resultSub: 'D-V-F-A + Handwerk Analyse',
+    rcProfile: 'BÜRO & MANAGEMENT-PROFIL (D-V-F-A)', rcScores: 'D-V-F-A PUNKTE', rcRadar: 'KATEGORIEN-ANALYSE',
+    rcCareers: 'EMPFEHLUNGEN', rcStrengths: 'STÄRKEN & ENTWICKLUNGSBEREICH',
+    scoreNames: { A: 'Charakter & Werte', B: 'Kognitiv', C: 'Leidenschaft', D: 'Soziale Gerechtigkeit' },
+    radarLabels: ['Charakter', 'Kognitiv', 'Leidenschaft', 'Gerechtigkeit'],
+    fbTitle: 'Feedback teilen', fbText: 'Deine Meinung ist uns wichtig.',
+    fbBtn: 'Feedback senden ✉', fbSubject: 'Kompetenz%20Check%20Feedback',
+    strengthLbl: 'STÄRKE', devLbl: 'ENTWICKLUNGSBEREICH',
+    handwerk: {
+      cardTitle: 'Handwerker-Profil erkannt 🔧',
+      levels: [
+        { min: 3.5, max: 4.0, title: 'Handwerkspotenzial', desc: 'Du hast eine Neigung zur praktischen Arbeit. Mit der richtigen Förderung kannst du eine starke Karriere aufbauen.' },
+        { min: 4.0, max: 4.5, title: 'Gesellen-Talent', desc: 'Deine praktische Intelligenz und Leidenschaft heben dich hervor. Der Ausbildungsweg steht dir offen.' },
+        { min: 4.5, max: 5.0, title: 'Meister-Geist', desc: 'Du bist zum Machen geboren. Ein guter Handwerker in Deutschland ist unabhängig und immer gefragt.' }
+      ],
+      jobs: ['Elektriker', 'Klempner', 'Tischler', 'Schweißer', 'Kfz-Mechatroniker', 'Bäcker/Konditor']
+    }
+  },
+  en: {
+    appName: 'NavigoPro', badge: 'NavigoPro & PusulaPro',
+    introTitle: 'Competency Assessment',
+    introText: 'This assessment evaluates both office-oriented (D-V-F-A) and craft-oriented (Handwerk) competencies. There are no right or wrong answers.',
+    qLbl: 'Question', minLbl: 'Minutes', catLbl: 'Categories',
+    startBtn: 'Start →', backBtn: '← Back', nextBtn: 'Next →', finishBtn: 'View Report →',
+    disagree: 'Strongly disagree', agree: 'Strongly agree',
+    sections: {
+      A: 'A — Character & Values', B: 'B — Cognitive Skills', C: 'C — Professional Passion', D: 'D — Social Justice',
+      E1: 'E1 — Practical Skills & Dexterity', E2: 'E2 — Independence & Entrepreneurship',
+      E3: 'E3 — Technical Curiosity & Learning', E4: 'E4 — Quality & Precision'
+    },
+    resultTitle: 'Your Competency Report', resultSub: 'D-V-F-A + Handwerk Analysis',
+    rcProfile: 'OFFICE & MANAGEMENT PROFILE (D-V-F-A)', rcScores: 'D-V-F-A SCORES', rcRadar: 'CATEGORY ANALYSIS',
+    rcCareers: 'RECOMMENDED CAREER AREAS', rcStrengths: 'STRENGTHS & DEVELOPMENT AREA',
+    scoreNames: { A: 'Character & Values', B: 'Cognitive', C: 'Passion', D: 'Social Justice' },
+    radarLabels: ['Character', 'Cognitive', 'Passion', 'Justice'],
+    fbTitle: 'Share Your Feedback', fbText: 'Your thoughts are valuable.',
+    fbBtn: 'Send Feedback ✉', fbSubject: 'Competency%20Assessment%20Feedback',
+    strengthLbl: 'STRENGTH', devLbl: 'DEVELOPMENT AREA',
+    handwerk: {
+      cardTitle: 'Craft Profile Detected 🔧',
+      levels: [
+        { min: 3.5, max: 4.0, title: 'Craft Potential', desc: 'You have an aptitude for hands-on work. With proper guidance, you can build a strong career.' },
+        { min: 4.0, max: 4.5, title: 'Journeyman Potential', desc: 'Your practical intelligence and passion set you apart. The apprenticeship path is open to you.' },
+        { min: 4.5, max: 5.0, title: 'Master Spirit', desc: 'You were born to create. A skilled craftsman in Germany is independent and always in demand.' }
+      ],
+      jobs: ['Electrician', 'Plumber', 'Carpenter', 'Welder', 'Auto Mechanic', 'Baker/Pastry Chef']
+    }
+  }
 };
-UI.de.handwerk.levels = UI.tr.handwerk.levels.map(l => ({ ...l, title: l.title==='Zanaat Potansiyeli'?'Handwerkspotenzial':l.title==='Usta Adayı'?'Gesellen-Talent':'Meister-Geist', desc: l.desc }));
-UI.en.handwerk.levels = UI.tr.handwerk.levels.map(l => ({ ...l, title: l.title==='Zanaat Potansiyeli'?'Craft Potential':l.title==='Usta Adayı'?'Journeyman Potential':'Master Spirit', desc: l.desc }));
 
 // PROFİLLER (D-V-F-A)
 const PROFILES = {
-  tr:[
+  tr: [
     {min:0, name:'Dengeli Gezgin', desc:'Her kategoride dengeli profil. Esneklik en büyük avantajın.', careers:[{i:'🎯',n:'Proje Yöneticisi',r:'Çok yönlü yetkinlik'},{i:'📊',n:'Danışman',r:'Analitik ve sosyal denge'},{i:'🌍',n:'Sosyal Girişimci',r:'Değer odaklı duruş'}], strength:'Esneklik', dev:'Derinleşme'},
     {min:300, name:'Etik Lider', desc:'Karakter değerlerin ve sosyal adalet duyarlılığın seni lider yapar.', careers:[{i:'👥',n:'İK Direktörü',r:'Değer odaklı liderlik'},{i:'⚖️',n:'Hukuk & Adalet',r:'Adalet bağlılığı'},{i:'🏛️',n:'Kamu Yönetimi',r:'Şeffaflık'}], strength:'Etik liderlik', dev:'Stratejik düşünme'},
     {min:350, name:'Analitik Vizyoner', desc:'Analitik zekâ ve uzun vadeli vizyon.', careers:[{i:'📈',n:'Stratejik Planlama',r:'Analitik vizyon'},{i:'🔬',n:'Ar-Ge',r:'Merak sistematiği'},{i:'💡',n:'Ürün Geliştirme',r:'Veri + yaratıcılık'}], strength:'Analitik düşünme', dev:'Hızlı karar'},
     {min:400, name:'Sosyal İnovatör', desc:'Yenilikçi düşünce ve toplumsal fayda.', careers:[{i:'🚀',n:'Sosyal Girişimci',r:'Değer+inovasyon'},{i:'🌱',n:'Sürdürülebilirlik',r:'Uzun vadeli düşünme'},{i:'🎓',n:'Eğitim & Kalkınma',r:'Geliştirme motivasyonu'}], strength:'Sosyal inovasyon', dev:'Finansal okuryazarlık'},
   ],
-  de:[], en:[]
+  de: [
+    {min:0, name:'Ausgewogener Entdecker', desc:'Ausgeglichenes Profil. Flexibilität ist dein Vorteil.', careers:[{i:'🎯',n:'Projektmanager',r:'Vielseitigkeit'},{i:'📊',n:'Berater',r:'Analytisches & soziales Gleichgewicht'},{i:'🌍',n:'Sozialunternehmer',r:'Werteorientierung'}], strength:'Flexibilität', dev:'Vertiefung'},
+    {min:300, name:'Ethische Führungskraft', desc:'Charakterstärke und soziale Gerechtigkeit machen dich zur Führungspersönlichkeit.', careers:[{i:'👥',n:'HR-Direktor',r:'Werteorientierte Führung'},{i:'⚖️',n:'Recht & Justiz',r:'Gerechtigkeit'},{i:'🏛️',n:'Öffentliche Verwaltung',r:'Transparenz'}], strength:'Ethische Führung', dev:'Strategisches Denken'},
+    {min:350, name:'Analytischer Visionär', desc:'Analytische Intelligenz und langfristige Vision.', careers:[{i:'📈',n:'Strategische Planung',r:'Analytische Vision'},{i:'🔬',n:'Forschung & Entwicklung',r:'Neugier & Systematik'},{i:'💡',n:'Produktentwicklung',r:'Daten + Kreativität'}], strength:'Analytisches Denken', dev:'Schnelle Entscheidungen'},
+    {min:400, name:'Sozialer Innovator', desc:'Innovatives Denken und gesellschaftlicher Nutzen.', careers:[{i:'🚀',n:'Sozialunternehmer',r:'Werte+Innovation'},{i:'🌱',n:'Nachhaltigkeit',r:'Langfristiges Denken'},{i:'🎓',n:'Bildung & Entwicklung',r:'Entwicklungsmotivation'}], strength:'Soziale Innovation', dev:'Finanzkompetenz'},
+  ],
+  en: [
+    {min:0, name:'Balanced Explorer', desc:'Balanced profile. Flexibility is your strength.', careers:[{i:'🎯',n:'Project Manager',r:'Versatility'},{i:'📊',n:'Consultant',r:'Analytical & social balance'},{i:'🌍',n:'Social Entrepreneur',r:'Value-driven'}], strength:'Flexibility', dev:'Deepening expertise'},
+    {min:300, name:'Ethical Leader', desc:'Strong character and social justice awareness make you a natural leader.', careers:[{i:'👥',n:'HR Director',r:'Value-based leadership'},{i:'⚖️',n:'Law & Justice',r:'Commitment to fairness'},{i:'🏛️',n:'Public Administration',r:'Transparency'}], strength:'Ethical leadership', dev:'Strategic thinking'},
+    {min:350, name:'Analytical Visionary', desc:'Analytical intelligence and long-term vision.', careers:[{i:'📈',n:'Strategic Planning',r:'Analytical vision'},{i:'🔬',n:'R&D',r:'Curiosity & systematics'},{i:'💡',n:'Product Development',r:'Data + creativity'}], strength:'Analytical thinking', dev:'Quick decision-making'},
+    {min:400, name:'Social Innovator', desc:'Innovative mindset and social benefit focus.', careers:[{i:'🚀',n:'Social Entrepreneur',r:'Value+innovation'},{i:'🌱',n:'Sustainability',r:'Long-term thinking'},{i:'🎓',n:'Education & Development',r:'Development motivation'}], strength:'Social innovation', dev:'Financial literacy'},
+  ]
 };
-PROFILES.de = PROFILES.tr.map(p => ({ ...p, name:'Ausgewogener Entdecker' }));
-PROFILES.en = PROFILES.tr.map(p => ({ ...p, name:'Balanced Explorer' }));
 
 // ----------------------------- UYGULAMA -----------------------------
 let lang = 'tr';
@@ -702,12 +787,13 @@ function ui() { return UI[lang]; }
 function questions() { return QUESTIONS[lang]; }
 
 function show(id) {
-  ['lang-screen','intro-screen','quiz-screen','result-screen'].forEach(s => document.getElementById(s).classList.add('hidden'));
+  document.querySelectorAll('#lang-screen, #intro-screen, #quiz-screen, #result-screen').forEach(el => el.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   window.scrollTo(0,0);
 }
 
 function selectLang(l) {
+  console.log('selectLang', l);
   lang = l;
   const u = ui();
   document.getElementById('intro-badge').textContent = u.badge;
@@ -717,6 +803,8 @@ function selectLang(l) {
   document.getElementById('intro-cat-lbl').textContent = u.catLbl;
   document.getElementById('intro-min-lbl').textContent = u.minLbl;
   document.getElementById('start-btn-txt').textContent = u.startBtn;
+  // handwerk invite texts (only on result screen but we set them anyway)
+  document.getElementById('hw-card-title').textContent = u.handwerk.cardTitle;
   show('intro-screen');
 }
 
@@ -856,7 +944,7 @@ function showResults() {
     const level = u.handwerk.levels.find(l => scores.handwerk >= l.min && scores.handwerk <= l.max);
     if (level) {
       document.getElementById('hw-card-title').textContent = u.handwerk.cardTitle;
-      document.getElementById('hw-card-content').innerHTML = `<div style="font-size:1.3rem; font-weight:bold;">${level.title}</div><div class="profile-desc">${level.desc}</div><div style="margin-top:8px;"><strong>Handwerk Skoru:</strong> ${scores.handwerk.toFixed(1)} / 5</div>`;
+      document.getElementById('hw-card-content').innerHTML = `<div style="font-size:1.3rem; font-weight:bold;">${level.title}</div><div class="profile-desc">${level.desc}</div><div style="margin-top:8px;"><strong>Handwerk Score:</strong> ${scores.handwerk.toFixed(1)} / 5</div>`;
       const jobsContainer = document.getElementById('hw-jobs-list');
       jobsContainer.innerHTML = '';
       u.handwerk.jobs.forEach(job => {
@@ -866,6 +954,8 @@ function showResults() {
         jobsContainer.appendChild(badge);
       });
       card.classList.remove('hidden');
+    } else {
+      card.classList.add('hidden');
     }
   } else {
     document.getElementById('handwerk-result-card').classList.add('hidden');
