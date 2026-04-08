@@ -1,1 +1,459 @@
+<!DOCTYPE html>
 
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NavigoPro | Kariyer Pusulan</title>
+    <!-- Open Graph Meta Tags (mevcut NavigoPro stiliyle uyumlu) -->
+    <meta property="og:title" content="NavigoPro – Kariyer Pusulan">
+    <meta property="og:description" content="20 soruda kariyer rotanı keşfet. Sosyal girişimci, idari yönetici, teknik uzman veya bağımsız profesyonel profilinle tanış.">
+    <meta property="og:image" content="https://navigopro.de/og-image.jpg">
+    <meta property="og:url" content="https://navigopro.de">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="tr_TR">
+    <meta name="description" content="NavigoPro – Kişisel kariyer değerlendirme testi. 20 soru, 4 bölüm, sonuçta sana özel profil ve meslek önerileri.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        background-color: #04162E;
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        color: #E6EDF5;
+        padding: 1.5rem;
+        line-height: 1.4;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    /* header – solid renk, gradient kaldırıldı (Safari güvenli) */
+    .header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    .header h1 {
+        font-size: 1.9rem;
+        font-weight: 700;
+        color: #F6B45F; /* solid altın rengi */
+        letter-spacing: -0.3px;
+        margin-bottom: 0.25rem;
+    }
+    .header p {
+        font-size: 0.85rem;
+        color: #9AAEC5;
+    }
+
+    /* card */
+    .card {
+        background: #0B1D32;
+        border-radius: 28px;
+        padding: 1.5rem;
+        border: 1px solid #1F354C;
+        margin-bottom: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: #F6B45F;
+        border-left: 4px solid #F6B45F;
+        padding-left: 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .question-item {
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+        padding-bottom: 1rem;
+    }
+    .question-text {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        font-size: 0.95rem;
+    }
+    .radio-group {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .radio-option {
+        text-align: center;
+        background: #0F1D38;
+        border-radius: 40px;
+        padding: 0.4rem 0.7rem;
+        min-width: 48px;
+        cursor: pointer;
+        transition: all 0.1s;
+        border: 1px solid #2A3F5E;
+        font-size: 0.85rem;
+    }
+    .radio-option.selected {
+        background: #F6B45F;
+        color: #04162E;
+        border-color: #F6B45F;
+        font-weight: 600;
+    }
+    input[type="radio"] {
+        display: none;
+    }
+    .nav-buttons {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-top: 1.8rem;
+    }
+    button {
+        background: #1F354C;
+        border: none;
+        padding: 0.7rem 1.5rem;
+        border-radius: 60px;
+        color: white;
+        font-weight: 600;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.2s;
+        flex: 1;
+    }
+    button.primary {
+        background: #F6B45F;
+        color: #04162E;
+    }
+    button:hover {
+        background: #E67E22;
+        color: white;
+    }
+    .progress {
+        margin-top: 1rem;
+        font-size: 0.8rem;
+        text-align: center;
+        color: #9AAEC5;
+    }
+    .result-box {
+        background: #0B1D32;
+        border-radius: 28px;
+        padding: 1.8rem;
+        text-align: center;
+        border: 1px solid #F6B45F;
+    }
+    .profile-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #F6B45F;
+        margin-bottom: 0.5rem;
+    }
+    .hook-text {
+        background: #0F1D38;
+        padding: 1rem;
+        border-radius: 20px;
+        margin: 1rem 0;
+        font-style: italic;
+        border-left: 3px solid #F6B45F;
+    }
+    .button-group {
+        display: flex;
+        gap: 1rem;
+        margin: 1.5rem 0 1rem;
+        flex-wrap: wrap;
+    }
+    .rec-box {
+        background: #04162E;
+        padding: 0.8rem;
+        border-radius: 20px;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    .footer-note {
+        font-size: 0.7rem;
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #5A6F8F;
+    }
+    hr {
+        border-color: #1F354C;
+        margin: 0.5rem 0;
+    }
+    @media (max-width: 550px) {
+        body { padding: 1rem; }
+        .radio-group { gap: 0.3rem; }
+        .radio-option { padding: 0.3rem 0.5rem; min-width: 40px; font-size: 0.75rem; }
+    }
+</style>
+```
+
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>⚡ NAVIGOPRO</h1>
+        <p>„Dein Weg beginnt mit Selbstkenntnis.“ — 20 soruda kariyer rotanı keşfet</p>
+    </div>
+
+```
+<!-- SORU ALANI (dinamik) -->
+<div id="quizContainer" class="card">
+    <div id="sectionHeader" class="section-title"></div>
+    <div id="questionsArea"></div>
+    <div class="nav-buttons">
+        <button id="prevBtn" class="secondary" style="background:#1F354C;">◀ Geri</button>
+        <button id="nextBtn" class="primary">İleri ▶</button>
+    </div>
+    <div id="progressText" class="progress"></div>
+</div>
+
+<!-- SONUÇ ALANI (başlangıçta gizli) -->
+<div id="resultContainer" style="display: none;"></div>
+```
+
+</div>
+
+<script>
+    // ES5 compatible — no let/const, no arrow functions
+    var questions = [
+        // Section 1 (1-5)
+        "İnsanlara haklarını anlatmak ve onlara yol göstermek beni tatmin eder.",
+        "Sahada insanlarla iletişim kurmayı tercih ederim.",
+        "Karmaşık sosyal problemleri analiz etmek benim için hobiye dönüşür.",
+        "Ortak bir amaca hizmet eden ekibin parçası olmayı tercih ederim.",
+        "Belirsiz durumlar beni motive eder, çözüm üretirim.",
+        // Section 2 (6-10)
+        "Sistemlerin nasıl çalıştığını en ince ayrıntısına kadar anlamaya meraklıyım.",
+        "Sayılarla aram iyidir, bütçe analizi yapmakta zorlanmam.",
+        "Kurallar ve prosedürler benim için güven verici rehberlerdir.",
+        "Projenin planlama aşamasında yer almak daha heyecan verici.",
+        "Teknolojik yenilikleri iş süreçlerine entegre etmek konusunda hevesliyim.",
+        // Section 3 (11-15)
+        "Performansa dayalı, ucu açık gelir modelini tercih ederim.",
+        "Toplumsal sorunu kazançlı iş modeline dönüştürme fikri mantıklı geliyor.",
+        "Kendi işimin patronu olmak için gereken riskleri alabilirim.",
+        "Başkalarının görmediği fırsatları fark etmekte iyiyim.",
+        "Bir işte sadece yapmak için değil, en iyisi olmak için çalışırım.",
+        // Section 4 (16-20)
+        "Türkiye'deki yerel dinamikleri ve bürokrasiyi yönetmekte kendimi güvenli hissediyorum.",
+        "Avrupa standartlarında kariyer inşa etmek ana hedefimdir.",
+        "Yabancı dil profesyonel hayatta benim için bir araçtır.",
+        "Sosyal hizmetlerin işleyişine dair temel merakım var.",
+        "Kariyerimi insanlık onuruna hizmet etmek üzerine kurmak istiyorum."
+    ];
+
+    var sectionNames = ["Çalışma Ortamı & Sosyal Tercihler", "Teknik & İdari Yatkınlık", "Girişimcilik & Vizyon", "Küresel & Yerel Yönelim"];
+    var sectionRanges = [[0,4], [5,9], [10,14], [15,19]]; // 0-index inclusive
+    var answers = []; // length 20, values 1-5, initially null
+    for (var i = 0; i < 20; i++) { answers[i] = null; }
+
+    var currentSection = 0;      // 0-3
+    var totalSections = 4;
+
+    // DOM elements
+    var quizContainer = document.getElementById('quizContainer');
+    var resultContainer = document.getElementById('resultContainer');
+    var sectionHeader = document.getElementById('sectionHeader');
+    var questionsArea = document.getElementById('questionsArea');
+    var prevBtn = document.getElementById('prevBtn');
+    var nextBtn = document.getElementById('nextBtn');
+    var progressText = document.getElementById('progressText');
+
+    // Helper: render current section
+    function renderSection() {
+        var startIdx = sectionRanges[currentSection][0];
+        var endIdx = sectionRanges[currentSection][1];
+        var html = '';
+        for (var idx = startIdx; idx <= endIdx; idx++) {
+            var qNum = idx + 1;
+            var savedVal = answers[idx];
+            html += '<div class="question-item">';
+            html += '<div class="question-text">' + qNum + '. ' + questions[idx] + '</div>';
+            html += '<div class="radio-group" data-qidx="' + idx + '">';
+            for (var val = 1; val <= 5; val++) {
+                var checkedAttr = (savedVal === val) ? ' checked' : '';
+                var selectedClass = (savedVal === val) ? ' selected' : '';
+                html += '<label class="radio-option' + selectedClass + '">';
+                html += '<input type="radio" name="q' + idx + '" value="' + val + '"' + checkedAttr + '>';
+                html += val + '</label>';
+            }
+            html += '</div></div>';
+        }
+        questionsArea.innerHTML = html;
+        sectionHeader.innerText = sectionNames[currentSection] + ' (5 soru)';
+        progressText.innerText = 'Bölüm ' + (currentSection+1) + ' / ' + totalSections;
+
+        // attach event listeners to radio groups (delegation via questionsArea)
+        attachRadioEvents();
+        updateNavButtons();
+    }
+
+    function attachRadioEvents() {
+        var groups = document.querySelectorAll('.radio-group');
+        for (var g = 0; g < groups.length; g++) {
+            var group = groups[g];
+            var radios = group.querySelectorAll('input[type="radio"]');
+            for (var r = 0; r < radios.length; r++) {
+                var radio = radios[r];
+                // remove old listener to avoid duplicates, but simple replace via new handler
+                radio.onclick = (function(input, groupElement) {
+                    return function(e) {
+                        var qidx = parseInt(groupElement.getAttribute('data-qidx'));
+                        var selectedVal = parseInt(input.value);
+                        answers[qidx] = selectedVal;
+                        // update visual style: remove 'selected' from all labels in this group
+                        var labels = groupElement.querySelectorAll('.radio-option');
+                        for (var l = 0; l < labels.length; l++) {
+                            labels[l].classList.remove('selected');
+                        }
+                        input.parentElement.classList.add('selected');
+                    };
+                })(radio, group);
+            }
+        }
+    }
+
+    function updateNavButtons() {
+        if (currentSection === 0) {
+            prevBtn.style.visibility = 'hidden';
+        } else {
+            prevBtn.style.visibility = 'visible';
+        }
+        if (currentSection === totalSections - 1) {
+            nextBtn.innerText = 'Sonuçları Göster ✅';
+        } else {
+            nextBtn.innerText = 'İleri ▶';
+        }
+    }
+
+    function validateCurrentSection() {
+        var start = sectionRanges[currentSection][0];
+        var end = sectionRanges[currentSection][1];
+        for (var i = start; i <= end; i++) {
+            if (answers[i] === null || answers[i] === undefined) {
+                alert('Lütfen bu bölümdeki tüm soruları cevaplayın (1-5 arası).');
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function goToNext() {
+        if (!validateCurrentSection()) return;
+        if (currentSection === totalSections - 1) {
+            // tüm cevaplar kontrol edildi mi? (önceki bölümler zaten doğrulandı)
+            if (allQuestionsAnswered()) {
+                computeAndShowResult();
+            } else {
+                alert('Tüm soruları cevapladığınızdan emin olun.');
+            }
+        } else {
+            currentSection++;
+            renderSection();
+        }
+    }
+
+    function goToPrev() {
+        if (currentSection > 0) {
+            currentSection--;
+            renderSection();
+        }
+    }
+
+    function allQuestionsAnswered() {
+        for (var i = 0; i < 20; i++) {
+            if (answers[i] === null) return false;
+        }
+        return true;
+    }
+
+    // Hesaplama ve sonuç gösterimi
+    function computeAndShowResult() {
+        var totalScore = 0;
+        for (var i = 0; i < 20; i++) {
+            totalScore += answers[i];
+        }
+        // totalScore min 20 max 100
+        var profile = '';
+        if (totalScore >= 80 && totalScore <= 100) profile = 'Sosyal Girişimci';
+        else if (totalScore >= 60 && totalScore <= 79) profile = 'İdari Yönetici';
+        else if (totalScore >= 40 && totalScore <= 59) profile = 'Teknik Uzman';
+        else profile = 'Bağımsız Profesyonel';
+
+        // Section 4 routing: Q16 (index 15) ve Q17 (index 16) karşılaştır
+        var q16Score = answers[15];
+        var q17Score = answers[16];
+        var appRec = '';
+        if (q16Score > q17Score) {
+            appRec = 'PusulaPro (yerel odaklı kariyer rehberi) önerilir.';
+        } else if (q17Score > q16Score) {
+            appRec = 'NavigoPro / CompassPro (uluslararası kariyer ve yetenek yönetimi) önerilir.';
+        } else {
+            appRec = 'PusulaPro ve NavigoPro birlikte değerlendirilebilir.';
+        }
+
+        // hook text
+        var hookText = 'Asgari ücret katsayısına göre welfare seviyeni ve sana en uygun 3 mesleği merak ediyor musun?';
+
+        // result HTML
+        var resultHtml = '<div class="result-box">';
+        resultHtml += '<div class="profile-title">' + profile + '</div>';
+        resultHtml += '<div class="hook-text">✨ ' + hookText + ' ✨</div>';
+        resultHtml += '<div class="button-group">';
+        resultHtml += '<button id="freeContinueBtn" class="primary" style="background:#2A5F7A;">Ücretsiz Devam</button>';
+        resultHtml += '<button id="paywallBtn" class="primary" style="background:#F6B45F; color:#04162E;">Detaylı Rapor — 9,90 €</button>';
+        resultHtml += '</div>';
+        resultHtml += '<div class="rec-box">🔍 <strong>Öneri:</strong> ' + appRec + '</div>';
+        resultHtml += '<div style="margin-top:1rem; font-size:0.8rem;">📊 Puan aralığın: ' + totalScore + '/100 (' + profile + ')</div>';
+        resultHtml += '<hr><button id="restartBtn" style="background:#1F354C; margin-top:0.5rem;">Testi Baştan Başlat ↺</button>';
+        resultHtml += '</div>';
+
+        // quiz kısmını gizle, sonucu göster
+        quizContainer.style.display = 'none';
+        resultContainer.innerHTML = resultHtml;
+        resultContainer.style.display = 'block';
+
+        // buton olayları (ES5)
+        var freeBtn = document.getElementById('freeContinueBtn');
+        var payBtn = document.getElementById('paywallBtn');
+        var restartBtn = document.getElementById('restartBtn');
+
+        if (freeBtn) {
+            freeBtn.onclick = function() {
+                alert('Temel sonucunuz yukarıda gösterilmiştir. Detaylı rapor için ücretli seçeneği değerlendirebilirsiniz.');
+            };
+        }
+        if (payBtn) {
+            payBtn.onclick = function() {
+                window.location.href = '#'; // ödeme sayfası için placeholder
+                alert('Ödeme entegrasyonu yakında! Detaylı rapor 9,90 €.');
+            };
+        }
+        if (restartBtn) {
+            restartBtn.onclick = function() {
+                resetQuiz();
+            };
+        }
+    }
+
+    function resetQuiz() {
+        // sıfırla
+        for (var i = 0; i < 20; i++) { answers[i] = null; }
+        currentSection = 0;
+        quizContainer.style.display = 'block';
+        resultContainer.style.display = 'none';
+        renderSection();
+    }
+
+    // Buton dinleyiciler
+    prevBtn.onclick = function() { goToPrev(); };
+    nextBtn.onclick = function() { goToNext(); };
+
+    // İlk render
+    renderSection();
+</script>
+
+</body>
+</html>
